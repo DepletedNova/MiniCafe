@@ -13,12 +13,8 @@
         public override bool IsSpecificFranchiseTier => false;
         public override float SelectionBias => 0;
 
-        public override List<Unlock> HardcodedBlockers => new()
-        {
-            GetGDO<Unlock>(DishReferences.CoffeeDessert)
-        };
-
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Coffee Icon");
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Big Espresso");
         public override DishType Type => DishType.Base;
         public override bool IsAvailableAsLobbyOption => true;
         public override bool DestroyAfterModUninstall => false;
@@ -47,14 +43,14 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take a large or small mug and fill with coffee. After it is completed it is ready to be served as is!" }
+            { Locale.English, "Take cup, fill with coffee, and then serve." }
         };
         public override LocalisationObject<UnlockInfo> Info => CreateUnlockLocalisation(
-                (Locale.English, "Espresso", "Adds Espresso as a Main", "That's a weird main course!")
+                (Locale.English, "Espresso", "Adds espresso as a main dish", "That's a weird main course!")
             );
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, BigMug>()
+            GetCastedGDO<Item, SmallMug>()
         };
         public override List<string> StartingNameSet => new()
         {
@@ -75,25 +71,7 @@
             base.AttachDependentProperties(gameData, gdo);
             gdo.name = "Espresso Dish";
 
-            (gdo as Dish).UnlocksMenuItems = new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, BigEspresso>(),
-                    Phase = MenuPhase.Main,
-                    Weight = 1,
-                    DynamicMenuIngredient = null,
-                    DynamicMenuType = DynamicMenuType.Static
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, SmallEspresso>(),
-                    Phase = MenuPhase.Main,
-                    Weight = 1,
-                    DynamicMenuIngredient = null,
-                    DynamicMenuType = DynamicMenuType.Static
-                }
-            };
+            (gdo as Dish).UnlocksMenuItems = ResultingMenuItems;
         }
 
         public override void OnRegister(GameDataObject gdo)

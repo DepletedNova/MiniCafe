@@ -13,6 +13,7 @@ global using Kitchen;
 
 global using IngredientLib;
 global using IngredientLib.Util;
+global using IngredientLib.Ingredient.Items;
 global using static IngredientLib.Util.Helper;
 global using static IngredientLib.Util.VisualEffectHelper;
 
@@ -33,8 +34,6 @@ global using MiniCafe.Items;
 global using MiniCafe.Dishes;
 global using static MiniCafe.MaterialHelper;
 global using static MiniCafe.Utilities;
-
-using IngredientLib.Ingredient.Items;
 
 namespace MiniCafe
 {
@@ -61,27 +60,35 @@ namespace MiniCafe
             AddGameDataObject<BigMugDirty>();
             AddGameDataObject<BigEspresso>();
             AddGameDataObject<BigCappuccino>();
+            AddGameDataObject<BigAmericano>();
 
             AddGameDataObject<SmallMug>();
             AddGameDataObject<SmallMugDirty>();
             AddGameDataObject<SmallEspresso>();
             AddGameDataObject<SmallCappuccino>();
+            AddGameDataObject<SmallAmericano>();
 
             AddGameDataObject<SteamedMilk>();
 
             // Dishes
             AddGameDataObject<EspressoDish>();
-            AddGameDataObject<CappuccinoDish>();
+            cappuccino = AddGameDataObject<CappuccinoDish>();
+            americano = AddGameDataObject<AmericanoDish>();
+
+
         }
 
         internal void AddMaterials()
         {
             AddMaterial(CreateTransparent("Glass", 0xF6FEFF, 0.6f));
 
+            AddMaterial(CreateFlat("Light Coffee Cup", 0xDAC7AB));
+
             // Coffee
             AddMaterial(CreateFlat("Coffee Blend", 0xAF8967));
             AddMaterial(CreateFlat("Coffee Foam", 0xE0C2A8));
-            AddMaterial(CreateFlat("Light Coffee Cup", 0xDAC7AB));
+
+            AddMaterial(CreateFlat("Americano", 0x895238));
         }
 
         private void UpdateCoffee()
@@ -149,6 +156,14 @@ namespace MiniCafe
 
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };
+        }
+
+        static CustomDish cappuccino;
+        static CustomDish americano;
+        protected override void OnUpdate()
+        {
+            (cappuccino.GameDataObject as Unlock).BlockedBy = new();
+            (americano.GameDataObject as Unlock).BlockedBy = new();
         }
     }
 }

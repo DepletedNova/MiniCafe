@@ -1,8 +1,8 @@
 ﻿namespace MiniCafe.Dishes
 {
-    public class CappuccinoDish : CustomDish
+    public class AmericanoDish : CustomDish
     {
-        public override string UniqueNameID => "cappuccino_dish";
+        public override string UniqueNameID => "americano_dish";
 
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
@@ -20,7 +20,7 @@
         {
             new()
             {
-                Item = GetCastedGDO<Item, BigCappuccino>(),
+                Item = GetCastedGDO<Item, BigAmericano>(),
                 Phase = MenuPhase.Main,
                 Weight = 1,
                 DynamicMenuIngredient = null,
@@ -28,7 +28,7 @@
             },
             new()
             {
-                Item = GetCastedGDO<Item, SmallCappuccino>(),
+                Item = GetCastedGDO<Item, SmallAmericano>(),
                 Phase = MenuPhase.Main,
                 Weight = 1,
                 DynamicMenuIngredient = null,
@@ -41,23 +41,21 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Steam milk in any coffee machine, combine with espresso, and then serve." }
+            { Locale.English, "Add water to espresso and serve." }
         };
         public override LocalisationObject<UnlockInfo> Info => CreateUnlockLocalisation(
-                (Locale.English, "Cappuccino", "Adds cappuccino as a main dish", "Espresso with a few extra steps!")
+                (Locale.English, "Americano", "Adds americano as a main dish", "Espresso with a touch of water!")
             );
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetCastedGDO<Item, SmallMug>(),
-            GetCastedGDO<Item, Milk>(),
+            GetGDO<Item>(ItemReferences.Water)
         };
 
         public override void AttachDependentProperties(GameData gameData, GameDataObject gdo)
         {
             base.AttachDependentProperties(gameData, gdo);
-            gdo.name = "Cappuccino Dish";
-
-            (gdo as Dish).BlockedBy = new();
+            gdo.name = "Americano Dish";
         }
     }
 }

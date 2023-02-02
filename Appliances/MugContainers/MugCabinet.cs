@@ -19,6 +19,14 @@ namespace MiniCafe.Appliances
         public override List<IApplianceProperty> Properties => new()
         {
             GetCItemProvider(SmallMug.ItemID, 6, 6, false, false, false, false, true, true, false),
+            new CDualLimitedProvider()
+            {
+                Current = 1,
+                Provide1 = SmallMug.ItemID,
+                Available1 = 6,
+                Provide2 = BigMug.ItemID,
+                Available2 = 6,
+            }
         };
 
         public override void AttachDependentProperties(GameData gameData, GameDataObject gdo)
@@ -82,6 +90,33 @@ namespace MiniCafe.Appliances
     }
 
     // Systems
+    public class DualLimitedNightReset : GenericSystemBase, IModSystem
+    {
+        private EntityQuery Query;
+        protected override void Initialise()
+        {
+            base.Initialise();
+            Query = GetEntityQuery(new QueryHelper().All(typeof(CDualLimitedProvider), typeof(CItemProvider)));
+        }
+
+        protected override void OnUpdate()
+        {
+            if (HasSingleton<SIsNightFirstUpdate>())
+            {
+                using var providers = Query.ToEntityArray(Allocator.TempJob);
+                foreach (var provider in providers)
+                {
+                    var limitedProvider = EntityManager.GetComponentData<CDualLimitedProvider>(provider);
+                    limitedProvider.Current = 1;
+                    limitedProvider.Available1 = 6;
+                    limitedProvider.Available2 = 6;
+                    EntityManager.SetComponentData(provider, limitedProvider);
+                }
+            }
+        }
+    }
+
+    [UpdateInGroup(typeof(InteractionGroup))]
     public class DualLimitedProviderSwitch : ItemInteractionSystem, IModSystem
     {
         protected override bool IsPossible(ref InteractionData data) => Require(data.Target, out LimitedProvider) && Require(data.Target, out ItemProvider);
@@ -105,36 +140,6 @@ namespace MiniCafe.Appliances
         private CDualLimitedProvider LimitedProvider;
         private CItemProvider ItemProvider;
     }
-    public class DualLimitedProviderRegistry : GenericSystemBase, IModSystem
-    {
-        private EntityQuery Query;
-        protected override void Initialise()
-        {
-            base.Initialise();
-            Query = GetEntityQuery(new QueryHelper().All(typeof(CAppliance), typeof(CItemProvider)).None(typeof(CDualLimitedProvider)));
-        }
-
-        protected override void OnUpdate()
-        {
-            using var appliances = Query.ToEntityArray(Allocator.TempJob);
-            foreach (var appliance in appliances)
-            {
-                int id = EntityManager.GetComponentData<CAppliance>(appliance).ID;
-                if (id == MugCabinet.ApplianceID)
-                {
-                    EntityManager.AddComponentData(appliance, new CDualLimitedProvider()
-                    {
-                        Current = 1,
-                        Provide1 = SmallMug.ItemID,
-                        Available1 = 6,
-                        Provide2 = BigMug.ItemID,
-                        Available2 = 6,
-                    });
-                }
-            }
-        }
-
-    }
 
     // View
     public class DualLimitedSourceView : UpdatableObjectView<DualLimitedSourceView.ViewData>
@@ -151,13 +156,11 @@ namespace MiniCafe.Appliances
 
         private void UpdateAmount(int amount, ref int displayed, ref List<GameObject> items)
         {
-            Debug.Log(amount + " : " + displayed);
             if (amount == displayed)
                 return;
             for (int i = 0; i < items.Count; i++)
             {
                 items[i].SetActive(i < amount);
-                Debug.Log(items[i].name);
             }
             displayed = amount;
         }

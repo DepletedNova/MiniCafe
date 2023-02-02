@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\IngredientLib\bin\Release\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Kitchen.Common">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Kitchen.Common.dll</HintPath>
     </Reference>
@@ -55,6 +58,10 @@
     <Reference Include="MessagePack.Annotations, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\MessagePack.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="ShapesRuntime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\ShapesRuntime.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Sirenix.Serialization.dll</HintPath>
@@ -89,12 +96,16 @@
   <ItemGroup>
     <Compile Include="Appliances\BaristaMachine.cs" />
     <Compile Include="Appliances\MugContainers\MugCabinet.cs" />
+    <Compile Include="CustomPropertyRegistration.cs" />
+    <Compile Include="Dishes\AmericanoDish.cs" />
     <Compile Include="Dishes\CappuccinoDish.cs" />
     <Compile Include="Dishes\EspressoDish.cs" />
+    <Compile Include="Items\Big Mug\BigAmericano.cs" />
     <Compile Include="Items\Big Mug\BigCappuccino.cs" />
     <Compile Include="Items\Big Mug\BigEspresso.cs" />
     <Compile Include="Items\Big Mug\BigMugDirty.cs" />
     <Compile Include="Items\Big Mug\BigMug.cs" />
+    <Compile Include="Items\Small Mug\SmallAmericano.cs" />
     <Compile Include="Items\Small Mug\SmallCappuccino.cs" />
     <Compile Include="Items\Small Mug\SmallEspresso.cs" />
     <Compile Include="Items\Small Mug\SmallMugDirty.cs" />

@@ -2,24 +2,25 @@
 
 namespace MiniCafe.Items
 {
-    public class SmallCappuccino : CustomItemGroup
+    public class SmallAmericano : CustomItemGroup
     {
-        public override string UniqueNameID => "small_cappuccino";
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Small Cappuccino");
+        public override string UniqueNameID => "small_americano";
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Small Americano");
         public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemValue ItemValue => ItemValue.Small;
         public override Item DirtiesTo => GetCastedGDO<Item, SmallMugDirty>();
-        public override string ColourBlindTag => "SCa";
+        public override string ColourBlindTag => "SAm";
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, SteamedMilk>(),
-                    GetCastedGDO<Item, SmallEspresso>()
+                    GetCastedGDO<Item, SmallEspresso>(),
+                    GetGDO<Item>(ItemReferences.Water)
+
                 },
                 Min = 2,
                 Max = 2,
@@ -31,10 +32,10 @@ namespace MiniCafe.Items
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Small Cappuccino";
+            gdo.name = "Small Americano";
 
             SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("fill", "Coffee Blend", "Coffee Foam");
+            Prefab.ApplyMaterialToChild("fill", "Americano", "Coffee - Black");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
         }
     }
