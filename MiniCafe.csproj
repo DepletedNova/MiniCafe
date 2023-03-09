@@ -96,26 +96,30 @@
   <ItemGroup>
     <Compile Include="Appliances\BaristaMachine.cs" />
     <Compile Include="Appliances\MugContainers\MugCabinet.cs" />
+    <Compile Include="Appliances\WhippedCreamProvider.cs" />
     <Compile Include="CustomPropertyRegistration.cs" />
+    <Compile Include="Dishes\MochaDish.cs" />
     <Compile Include="Dishes\AmericanoDish.cs" />
     <Compile Include="Dishes\CappuccinoDish.cs" />
     <Compile Include="Dishes\EspressoDish.cs" />
     <Compile Include="Items\Big Mug\BigAmericano.cs" />
+    <Compile Include="Items\Big Mug\BigMocha.cs" />
     <Compile Include="Items\Big Mug\BigCappuccino.cs" />
     <Compile Include="Items\Big Mug\BigEspresso.cs" />
     <Compile Include="Items\Big Mug\BigMugDirty.cs" />
     <Compile Include="Items\Big Mug\BigMug.cs" />
+    <Compile Include="Items\Small Mug\SmallMocha.cs" />
     <Compile Include="Items\Small Mug\SmallAmericano.cs" />
     <Compile Include="Items\Small Mug\SmallCappuccino.cs" />
     <Compile Include="Items\Small Mug\SmallEspresso.cs" />
     <Compile Include="Items\Small Mug\SmallMugDirty.cs" />
     <Compile Include="Items\Small Mug\SmallMug.cs" />
+    <Compile Include="Items\CannedWhippedCream.cs" />
     <Compile Include="Items\SteamedMilk.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MaterialHelper.cs" />
     <Compile Include="Misc\SteamProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Patches\" />

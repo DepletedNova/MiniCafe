@@ -7,7 +7,7 @@
         public override Item DisposesTo => GetCastedGDO<Item, BigMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemValue ItemValue => ItemValue.Small;
+        public override ItemValue ItemValue => ItemValue.MediumLarge;
         public override Item DirtiesTo => GetCastedGDO<Item, BigMugDirty>();
         public override string ColourBlindTag => "BCa";
         public override List<ItemGroup.ItemSet> Sets => new()

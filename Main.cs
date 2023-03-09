@@ -28,19 +28,20 @@ global using Unity.Collections;
 
 global using MessagePack;
 
+global using TMPro;
+
 global using MiniCafe.Appliances;
 global using MiniCafe.Misc;
 global using MiniCafe.Items;
 global using MiniCafe.Dishes;
 global using static MiniCafe.MaterialHelper;
-global using static MiniCafe.Utilities;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "0.0.1";
+        public const string VERSION = "1.0.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -53,6 +54,7 @@ namespace MiniCafe
 
             // Appliances
             AddGameDataObject<MugCabinet>();
+            AddGameDataObject<WhippedCreamProvider>();
             AddGameDataObject<BaristaMachine>();
 
             // Items
@@ -61,20 +63,23 @@ namespace MiniCafe
             AddGameDataObject<BigEspresso>();
             AddGameDataObject<BigCappuccino>();
             AddGameDataObject<BigAmericano>();
+            AddGameDataObject<BigMocha>();
 
             AddGameDataObject<SmallMug>();
             AddGameDataObject<SmallMugDirty>();
             AddGameDataObject<SmallEspresso>();
             AddGameDataObject<SmallCappuccino>();
             AddGameDataObject<SmallAmericano>();
+            AddGameDataObject<SmallMocha>();
 
             AddGameDataObject<SteamedMilk>();
+            AddGameDataObject<CannedWhippedCream>();
 
             // Dishes
             AddGameDataObject<EspressoDish>();
-            cappuccino = AddGameDataObject<CappuccinoDish>();
-            americano = AddGameDataObject<AmericanoDish>();
-
+            cappuccino = AddGameDataObject<CappuccinoDish>().GameDataObject as Unlock;
+            americano = AddGameDataObject<AmericanoDish>().GameDataObject as Unlock;
+            mocha = AddGameDataObject<MochaDish>().GameDataObject as Unlock;
 
         }
 
@@ -91,25 +96,31 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Americano", 0x895238));
         }
 
-        private void UpdateCoffee()
+        private void UpdateRewards()
+        {
+            GetCastedGDO<Item, SmallEspresso>().Reward = 4;
+            GetCastedGDO<Item, SmallAmericano>().Reward = 4;
+        }
+
+        private void UpdateCoffeeMachine()
         {
             // Coffee Machine
             var coffeeMachine = GetExistingGDO(ApplianceReferences.CoffeeMachine) as Appliance;
-            coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, BaristaMachine>());
+            //coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, BaristaMachine>());
             coffeeMachine.Processes = new()
             {
                 new()
                 {
                     IsAutomatic = true,
                     Process = GetExistingGDO(ProcessReferences.FillCoffee) as Process,
-                    Speed = 0.75f,
+                    Speed = 1f,
                     Validity = ProcessValidity.Generic
                 },
                 new()
                 {
                     IsAutomatic = true,
                     Process = GetCastedGDO<Process, SteamProcess>(),
-                    Speed = 0.75f,
+                    Speed = 1f,
                     Validity = ProcessValidity.Generic
                 }
             };
@@ -119,29 +130,30 @@ namespace MiniCafe
                 GetCastedGDO<Process, SteamProcess>()
             };
             coffeeMachine.ShoppingTags = ShoppingTags.Cooking | ShoppingTags.Basic;
-            coffeeMachine.SellOnlyAsDuplicate = false;
-
-            // Dish
-            var blackCoffee = GetExistingGDO(DishReferences.CoffeeDessert) as Dish;
-            blackCoffee.BlockedBy.Add(GetCastedGDO<Unlock, EspressoDish>());
-            blackCoffee.RequiredProcesses = new()
-            {
-                GetExistingGDO(ProcessReferences.FillCoffee) as Process,
-                GetCastedGDO<Process, SteamProcess>()
-            };
         }
 
         private void UpdateMilk()
         {
             GetCastedGDO<Item, MilkIngredient>().DerivedProcesses.Add(new()
             {
-                Duration = 2.5f,
+                Duration = 1.3f,
                 Process = GetCastedGDO<Process, SteamProcess>(),
                 Result = GetCastedGDO<Item, SteamedMilk>()
             });;
         }
 
-        public override void PostActivate(Mod mod)
+        private void AddIcons()
+        {
+            Bundle.LoadAllAssets<Texture2D>();
+            Bundle.LoadAllAssets<Sprite>();
+
+            var icons = Bundle.LoadAsset<TMP_SpriteAsset>("Icon Asset");
+            TMP_Settings.defaultSpriteAsset.fallbackSpriteAssets.Add(icons);
+            icons.material = Object.Instantiate(TMP_Settings.defaultSpriteAsset.material);
+            icons.material.mainTexture = Bundle.LoadAsset<Texture2D>("Icon Texture");
+        }
+
+        protected override void OnPostActivate(Mod mod)
         {
             Bundle = mod.GetPacks<AssetBundleModPack>().SelectMany(e => e.AssetBundles).ToList()[0];
 
@@ -149,21 +161,28 @@ namespace MiniCafe
 
             AddMaterials();
 
+            AddIcons();
+
             Events.BuildGameDataEvent += (s, args) =>
             {
-                UpdateCoffee();
+                UpdateRewards();
+                UpdateCoffeeMachine();
                 UpdateMilk();
 
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };
         }
 
-        static CustomDish cappuccino;
-        static CustomDish americano;
+        static Unlock cappuccino;
+        static Unlock americano;
+        static Unlock mocha;
         protected override void OnUpdate()
         {
-            (cappuccino.GameDataObject as Unlock).BlockedBy = new();
-            (americano.GameDataObject as Unlock).BlockedBy = new();
+            if (mocha == null)
+                return;
+            cappuccino.BlockedBy.Clear();
+            americano.BlockedBy.Clear();
+            mocha.BlockedBy.Clear();
         }
     }
 }

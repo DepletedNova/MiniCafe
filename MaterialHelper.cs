@@ -2,6 +2,8 @@
 {
     internal static class MaterialHelper
     {
+        private const string ModName = "Mini Cafe";
+
         public static void ApplyMaterial<T>(this GameObject gameObject, Material[] materials) where T : Renderer
         {
             var comp = gameObject.GetComponent<T>();
@@ -56,12 +58,18 @@
             List<Material> materialList = new List<Material>();
             foreach (string matName in materials)
             {
-                string formatted = $"Mini Cafe - \"{matName}\"";
-                bool flag = CustomMaterials.CustomMaterialsIndex.ContainsKey(formatted);
-                if (flag)
+                string formatted = $"{ModName} - \"{matName}\"";
+                string formatted2 = $"IngredientLib - \"{matName}\"";
+                if (CustomMaterials.CustomMaterialsIndex.ContainsKey(formatted))
                 {
                     materialList.Add(CustomMaterials.CustomMaterialsIndex[formatted]);
-                } else {
+                }
+                else if (CustomMaterials.CustomMaterialsIndex.ContainsKey(formatted2))
+                {
+                    materialList.Add(CustomMaterials.CustomMaterialsIndex[formatted2]);
+                }
+                else
+                {
                     materialList.Add(MaterialUtils.GetExistingMaterial(matName));
                 }
             }
@@ -72,7 +80,7 @@
         public static Material CreateFlat(string name, Color color, float shininess = 0, float overlayScale = 10)
         {
             Material mat = new Material(Shader.Find("Simple Flat"));
-            mat.name = $"Mini Cafe - \"{name}\"";
+            mat.name = $"{ModName} - \"{name}\"";
             mat.SetColor("_Color0", color);
             mat.SetFloat("_Shininess", shininess);
             mat.SetFloat("_OverlayScale", overlayScale);
@@ -86,7 +94,7 @@
         public static Material CreateTransparent(string name, Color color)
         {
             Material mat = new Material(Shader.Find("Simple Transparent"));
-            mat.name = $"Mini Cafe - \"{name}\"";
+            mat.name = $"{ModName} - \"{name}\"";
             mat.SetColor("_Color", color);
             return mat;
         }

@@ -7,7 +7,7 @@
         public override Item DisposesTo => GetCastedGDO<Item, BigMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemValue ItemValue => ItemValue.Small;
+        public override ItemValue ItemValue => ItemValue.Medium;
         public override Item DirtiesTo => GetCastedGDO<Item, BigMugDirty>();
         public override string ColourBlindTag => "BAm";
         public override List<ItemGroup.ItemSet> Sets => new()
@@ -22,8 +22,6 @@
                 Min = 2,
                 Max = 2,
                 IsMandatory = true,
-                OrderingOnly = false,
-                RequiresUnlock = false,
             },
         };
 

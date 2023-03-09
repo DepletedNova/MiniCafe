@@ -10,7 +10,10 @@ namespace MiniCafe.Appliances
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Mug Cabinet");
 
         public override string UniqueNameID => "mug_provider";
-        public override string Name => "Mugs";
+        public override List<(Locale, ApplianceInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Mugs", "Provides both large and small mugs", new(), new()))
+        };
         public override bool IsPurchasable => true;
         public override bool SellOnlyAsDuplicate => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
@@ -107,7 +110,6 @@ namespace MiniCafe.Appliances
                 foreach (var provider in providers)
                 {
                     var limitedProvider = EntityManager.GetComponentData<CDualLimitedProvider>(provider);
-                    limitedProvider.Current = 1;
                     limitedProvider.Available1 = 6;
                     limitedProvider.Available2 = 6;
                     EntityManager.SetComponentData(provider, limitedProvider);

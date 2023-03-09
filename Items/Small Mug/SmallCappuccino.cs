@@ -9,7 +9,7 @@ namespace MiniCafe.Items
         public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemValue ItemValue => ItemValue.Small;
+        public override ItemValue ItemValue => ItemValue.Medium;
         public override Item DirtiesTo => GetCastedGDO<Item, SmallMugDirty>();
         public override string ColourBlindTag => "SCa";
         public override List<ItemGroup.ItemSet> Sets => new()

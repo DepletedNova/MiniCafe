@@ -39,15 +39,17 @@
         };
         public override HashSet<Process> RequiredProcesses => new()
         {
+            GetCastedGDO<Process, SteamProcess>(),
             GetGDO<Process>(ProcessReferences.FillCoffee)
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Take cup, fill with coffee, and then serve." }
         };
-        public override LocalisationObject<UnlockInfo> Info => CreateUnlockLocalisation(
-                (Locale.English, "Espresso", "Adds espresso as a main dish", "That's a weird main course!")
-            );
+        public override List<(Locale, UnlockInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Espresso", "Adds espresso as a main dish", "That's a weird main course!"))
+        };
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetCastedGDO<Item, SmallMug>()

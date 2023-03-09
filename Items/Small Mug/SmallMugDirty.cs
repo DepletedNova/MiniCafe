@@ -3,7 +3,7 @@
     public class SmallMugDirty : CustomItem
     {
         public override string UniqueNameID => "small_dirty_mug";
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Small Mug");
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Dirty Small Mug");
         public override bool IsIndisposable => true;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
@@ -20,6 +20,10 @@
         public override void OnRegister(GameDataObject gdo)
         {
             gdo.name = "Small Dirty Mug";
+
+            // Materials
+            SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
+            Prefab.ApplyMaterialToChild("dirty_mug", "Plate - Dirty Food");
         }
     }
 }

@@ -23,7 +23,6 @@
         public override void Convert(GameData gameData, out GameDataObject gdo)
         {
             base.Convert(gameData, out gdo);
-            Prefab.TryAddComponent<ItemGroupViewAccessed>().Setup();
             ItemID = gdo.ID;
         }
 
@@ -33,27 +32,8 @@
 
             // Materials
             ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("dirty_mug", "Plate - Dirty Food");
         }
 
-        private class ItemGroupViewAccessed : ItemGroupView
-        {
-            internal void Setup()
-            {
-                ComponentGroups = new()
-                {
-                    new ComponentGroup()
-                    {
-                        GameObject = gameObject.GetChild("dirty_mug"),
-                        Item = GetCastedGDO<Item, BigMugDirty>()
-                    }
-                };
-            }
-        }
-
-        public static void ApplyMugMaterials(GameObject mug)
-        {
-            mug.ApplyMaterial("Light Coffee Cup", "Coffee Cup");
-        }
+        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterial("Light Coffee Cup", "Coffee Cup");
     }
 }

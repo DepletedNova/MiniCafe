@@ -37,18 +37,19 @@
         };
         public override HashSet<Process> RequiredProcesses => new()
         {
+            GetCastedGDO<Process, SteamProcess>(),
             GetGDO<Process>(ProcessReferences.FillCoffee)
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Steam milk in any coffee machine, combine with espresso, and then serve." }
         };
-        public override LocalisationObject<UnlockInfo> Info => CreateUnlockLocalisation(
-                (Locale.English, "Cappuccino", "Adds cappuccino as a main dish", "Espresso with a few extra steps!")
-            );
+        public override List<(Locale, UnlockInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Cappuccino", "Adds cappuccino as a main dish", "Espresso with a few extra steps!"))
+        };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, SmallMug>(),
             GetCastedGDO<Item, Milk>(),
         };
 

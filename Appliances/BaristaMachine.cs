@@ -4,12 +4,14 @@ namespace MiniCafe.Appliances
 {
     public class BaristaMachine : CustomAppliance
     {
-        public override GameObject Prefab => (GDOUtils.GetExistingGDO(ApplianceReferences.CoffeeMachine) as Appliance).Prefab;
+        public override GameObject Prefab => (GetExistingGDO(ApplianceReferences.CoffeeMachine) as Appliance).Prefab;
 
         public override string UniqueNameID => "barista_machine";
-        public override string Name => "Barista Machine";
+        public override List<(Locale, ApplianceInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Mugs", "Provides both large and small mugs", new(), new()))
+        };
         public override bool IsPurchasableAsUpgrade => true;
-        public override bool IsAnUpgrade => true;
         public override PriceTier PriceTier => PriceTier.Medium;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
         public override List<Process> RequiresProcessForShop => new()
