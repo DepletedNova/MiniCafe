@@ -9,7 +9,17 @@ namespace MiniCafe.Systems
         {
             base.AfterLoading();
 
-            this.RegisterTransfer();
+            registeredTransfer = this.RegisterTransfer();
+        }
+
+        private static bool registeredTransfer = false;
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            if (registeredTransfer)
+                return;
+            registeredTransfer = this.RegisterTransfer();
         }
 
         protected override bool AllowActOrGrab => true;

@@ -6,13 +6,13 @@
 
         private static FieldInfo AcceptTransfersInfo = ReflectionUtils.GetField<ResolveTransfers>("AcceptTransfers");
         private static FieldInfo SendTransfersInfo = ReflectionUtils.GetField<ResolveTransfers>("SendTransfers");
-        public static void RegisterTransfer<T>(this T system) where T : GenericSystemBase
+        public static bool RegisterTransfer<T>(this T system) where T : GenericSystemBase
         {
-            if (registeredSystems.Contains(system)) return;
+            if (registeredSystems.Contains(system)) return true;
             try
             {
                 ResolveTransfers transfers = system.World.GetExistingSystem<ResolveTransfers>();
-                if (!(system is IAcceptTransfers) && system is ISendTransfers send)
+                if (system is ISendTransfers send)
                 {
                     var sendTransfers = SendTransfersInfo.GetValue(transfers) as Dictionary<SystemReference, ISendTransfers>;
                     sendTransfers.Add(system, send);
@@ -26,7 +26,11 @@
                 }
 
                 registeredSystems.Add(system);
-            } catch { }
+                return true;
+            } catch
+            {
+                return false;
+            }
         }
     }
 }

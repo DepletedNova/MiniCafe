@@ -10,13 +10,6 @@
             proposalQuery = GetEntityQuery(new QueryHelper().All(typeof(CItemTransferProposal)));
         }
 
-        public override void AfterLoading()
-        {
-            base.AfterLoading();
-
-            this.RegisterTransfer();
-        }
-
         public override void AcceptTransfer(Entity proposalEntity, Entity acceptance, EntityContext ctx, out Entity return_item)
         {
             return_item = default(Entity);
@@ -27,9 +20,22 @@
             ctx.Set(proposal.Destination, storage);
             ctx.Destroy(proposal.Item);
         }
+        public override void AfterLoading()
+        {
+            base.AfterLoading();
 
+            registeredTransfer = this.RegisterTransfer();
+        }
+
+        private static bool registeredTransfer = false;
         protected override void OnUpdate()
         {
+            if (!registeredTransfer)
+            {
+                registeredTransfer = this.RegisterTransfer();
+                return;
+            }
+
             using var proposals = proposalQuery.ToEntityArray(Allocator.Temp);
 
             foreach (var entity in proposals)
