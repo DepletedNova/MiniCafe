@@ -8,7 +8,7 @@
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.LargeIncrease;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.None;
         public override int MinimumFranchiseTier => 0;
         public override bool IsSpecificFranchiseTier => false;
         public override float SelectionBias => 0;
@@ -22,7 +22,7 @@
         {
             new()
             {
-                Item = GetCastedGDO<Item, BigEspresso>(),
+                Item = GetCastedGDO<ItemGroup, PlatedBigMug>(),
                 Phase = MenuPhase.Main,
                 Weight = 1,
                 DynamicMenuIngredient = null,
@@ -30,11 +30,24 @@
             },
             new()
             {
-                Item = GetCastedGDO<Item, SmallEspresso>(),
+                Item = GetCastedGDO<ItemGroup, PlatedSmallMug>(),
                 Phase = MenuPhase.Main,
                 Weight = 1,
                 DynamicMenuIngredient = null,
                 DynamicMenuType = DynamicMenuType.Static
+            }
+        };
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
+        {
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, BigEspresso>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigMug>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, SmallEspresso>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallMug>()
             }
         };
         public override HashSet<Process> RequiredProcesses => new()
@@ -44,7 +57,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take cup, fill with coffee, and then serve." }
+            { Locale.English, "Take cup, fill with coffee, add to plate, and then serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -52,7 +65,8 @@
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, SmallMug>()
+            GetCastedGDO<Item, SmallMug>(),
+            GetGDO<Item>(ItemReferences.Plate)
         };
         public override List<string> StartingNameSet => new()
         {
@@ -72,8 +86,6 @@
         {
             base.AttachDependentProperties(gameData, gdo);
             gdo.name = "Espresso Dish";
-
-            (gdo as Dish).UnlocksMenuItems = ResultingMenuItems;
         }
 
         public override void OnRegister(GameDataObject gdo)

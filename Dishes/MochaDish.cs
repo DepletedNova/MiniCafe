@@ -16,23 +16,27 @@
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Main;
-        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
         {
             new()
             {
-                Item = GetCastedGDO<Item, BigMocha>(),
-                Phase = MenuPhase.Main,
-                Weight = 1,
-                DynamicMenuIngredient = null,
-                DynamicMenuType = DynamicMenuType.Static
+                Ingredient = GetCastedGDO<Item, BigMocha>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigMug>()
             },
             new()
             {
-                Item = GetCastedGDO<Item, SmallMocha>(),
-                Phase = MenuPhase.Main,
-                Weight = 1,
-                DynamicMenuIngredient = null,
-                DynamicMenuType = DynamicMenuType.Static
+                Ingredient = GetCastedGDO<Item, SmallMocha>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallMug>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, BigWhipped>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigMug>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, SmallWhipped>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallMug>()
             }
         };
         public override HashSet<Process> RequiredProcesses => new()
@@ -41,22 +45,9 @@
             GetGDO<Process>(ProcessReferences.FillCoffee),
             GetGDO<Process>(ProcessReferences.Cook)
         };
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, WhippedCream>(),
-                MenuItem = GetCastedGDO<ItemGroup, BigMocha>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, WhippedCream>(),
-                MenuItem = GetCastedGDO<ItemGroup, SmallMocha>()
-            }
-        };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add melted chocolate to cappuccino, add whipped cream if ordered, then serve." }
+            { Locale.English, "Add melted chocolate to cappuccino, add whipped cream if ordered, add to plate, and then serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

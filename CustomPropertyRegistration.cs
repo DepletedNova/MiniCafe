@@ -3,6 +3,13 @@
     [UpdateInGroup(typeof(CreationGroup))]
     internal class AppliancePropertyRegistry : GenericSystemBase, IModSystem
     {
+        private void AddProperties(Entity appliance, IApplianceProperty property)
+        {
+            AddComponentData<CDualLimitedProvider>(appliance, property);
+            AddComponentData<CFlexibleStorage>(appliance, property);
+            // ...
+        }
+
         private EntityQuery applianceQuery;
         protected override void Initialise()
         {
@@ -20,7 +27,7 @@
                     continue;
                 foreach (var property in gdo.Properties)
                 {
-                    AddComponentData<CDualLimitedProvider>(appliance, property);
+                    AddProperties(appliance, property);
                 }
             }
         }

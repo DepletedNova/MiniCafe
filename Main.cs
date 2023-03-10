@@ -34,6 +34,9 @@ global using MiniCafe.Appliances;
 global using MiniCafe.Misc;
 global using MiniCafe.Items;
 global using MiniCafe.Dishes;
+global using MiniCafe.Components;
+global using MiniCafe.Views;
+global using MiniCafe.Extensions;
 global using static MiniCafe.MaterialHelper;
 
 namespace MiniCafe
@@ -41,7 +44,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.1.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -54,7 +57,11 @@ namespace MiniCafe
 
             // Appliances
             AddGameDataObject<MugCabinet>();
+            AddGameDataObject<MugCabinetDebug>();
+            AddGameDataObject<MugRack>();
+
             AddGameDataObject<WhippedCreamProvider>();
+
             AddGameDataObject<BaristaMachine>();
 
             // Items
@@ -64,6 +71,10 @@ namespace MiniCafe
             AddGameDataObject<BigCappuccino>();
             AddGameDataObject<BigAmericano>();
             AddGameDataObject<BigMocha>();
+            AddGameDataObject<BigWhipped>();
+
+            AddGameDataObject<PlatedBigMug>();
+            AddGameDataObject<PlatedBigDirty>();
 
             AddGameDataObject<SmallMug>();
             AddGameDataObject<SmallMugDirty>();
@@ -71,16 +82,25 @@ namespace MiniCafe
             AddGameDataObject<SmallCappuccino>();
             AddGameDataObject<SmallAmericano>();
             AddGameDataObject<SmallMocha>();
+            AddGameDataObject<SmallWhipped>();
+
+            AddGameDataObject<PlatedSmallMug>();
+            AddGameDataObject<PlatedSmallDirty>();
 
             AddGameDataObject<SteamedMilk>();
             AddGameDataObject<CannedWhippedCream>();
 
+            AddGameDataObject<UnrolledCroissant>();
+            AddGameDataObject<UncookedCroissant>();
+            AddGameDataObject<Croissant>();
+
             // Dishes
             AddGameDataObject<EspressoDish>();
-            cappuccino = AddGameDataObject<CappuccinoDish>().GameDataObject as Unlock;
-            americano = AddGameDataObject<AmericanoDish>().GameDataObject as Unlock;
-            mocha = AddGameDataObject<MochaDish>().GameDataObject as Unlock;
+            AddGameDataObject<CappuccinoDish>();
+            AddGameDataObject<AmericanoDish>();
+            AddGameDataObject<MochaDish>();
 
+            AddGameDataObject<CroissantDish>();
         }
 
         internal void AddMaterials()
@@ -94,12 +114,14 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Coffee Foam", 0xE0C2A8));
 
             AddMaterial(CreateFlat("Americano", 0x895238));
+
+            // Sides
+            AddMaterial(CreateFlat("Croissant", 0xDA9134));
         }
 
         private void UpdateRewards()
         {
-            GetCastedGDO<Item, SmallEspresso>().Reward = 4;
-            GetCastedGDO<Item, SmallAmericano>().Reward = 4;
+
         }
 
         private void UpdateCoffeeMachine()
@@ -172,17 +194,25 @@ namespace MiniCafe
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };
         }
+    }
 
-        static Unlock cappuccino;
-        static Unlock americano;
-        static Unlock mocha;
-        protected override void OnUpdate()
+    public abstract class AccessedItemGroupView : ItemGroupView
+    {
+        protected abstract List<ComponentGroup> groups { get; }
+        protected virtual List<ColourBlindLabel> labels => new();
+
+        public GameObject LabelGameObject;
+
+        public void Setup(GameDataObject gdo)
         {
-            if (mocha == null)
-                return;
-            cappuccino.BlockedBy.Clear();
-            americano.BlockedBy.Clear();
-            mocha.BlockedBy.Clear();
+            ComponentGroups = groups;
+
+            if (labels.Count > 0)
+            {
+                ComponentLabels = labels;
+                LabelGameObject = ColorblindUtils.cloneColourBlindObjectAndAddToItem(gdo as Item);
+                ColorblindUtils.setColourBlindLabelObjectOnItemGroupView(this, LabelGameObject);
+            }
         }
     }
 }

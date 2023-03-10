@@ -16,23 +16,17 @@
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Main;
-        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
         {
             new()
             {
-                Item = GetCastedGDO<Item, BigAmericano>(),
-                Phase = MenuPhase.Main,
-                Weight = 1,
-                DynamicMenuIngredient = null,
-                DynamicMenuType = DynamicMenuType.Static
+                Ingredient = GetCastedGDO<Item, BigAmericano>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigMug>()
             },
             new()
             {
-                Item = GetCastedGDO<Item, SmallAmericano>(),
-                Phase = MenuPhase.Main,
-                Weight = 1,
-                DynamicMenuIngredient = null,
-                DynamicMenuType = DynamicMenuType.Static
+                Ingredient = GetCastedGDO<Item, SmallAmericano>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallMug>()
             }
         };
         public override HashSet<Process> RequiredProcesses => new()
@@ -42,7 +36,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add water to espresso and serve." }
+            { Locale.English, "Add water to espresso, add to plate, and then serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
