@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MiniCafe.Systems
 {
@@ -23,6 +24,7 @@ namespace MiniCafe.Systems
             }
 
             ResolveTransfers transferResolve = World.GetExistingSystem<ResolveTransfers>();
+            List<GenericSystemBase> registeredTransfers = new();
             foreach (var transfer in UnregisteredTransfers)
             {
                 if (transfer is ISendTransfers sender)
@@ -37,8 +39,11 @@ namespace MiniCafe.Systems
                     acceptTransfers.Add(transfer, accepter);
                     AcceptTransfersInfo.SetValue(transferResolve, acceptTransfers);
                 }
-                UnregisteredTransfers.Remove(transfer);
+                registeredTransfers.Add(transfer);
             }
+            foreach (var transfers in registeredTransfers)
+                UnregisteredTransfers.Remove(transfers);
+            registeredTransfers.Clear();
         }
 
     }
