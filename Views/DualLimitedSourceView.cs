@@ -71,7 +71,7 @@ namespace MiniCafe.Views
         }
 
         [MessagePackObject(false)]
-        public struct ViewData : ISpecificViewData, IViewData, IViewData.ICheckForChanges<ViewData>
+        public struct ViewData : ISpecificViewData, IViewData, IViewResponseData, IViewData.ICheckForChanges<ViewData>
         {
             [Key(0)] public int Current;
             [Key(1)] public int Available1;

@@ -8,6 +8,11 @@
         {
             base.Initialise();
             proposalQuery = GetEntityQuery(new QueryHelper().All(typeof(CItemTransferProposal)));
+        }
+
+        public override void AfterLoading()
+        {
+            base.AfterLoading();
 
             this.RegisterTransfer();
         }
@@ -31,10 +36,10 @@
             {
                 var proposal = GetComponent<CItemTransferProposal>(entity);
                 if (proposal.Status == ItemTransferStatus.Pruned || (proposal.Flags & TransferFlags.RequireMerge) != 0 ||
-                    !Require<CFlexibleStorage>(proposal.Destination, out var storage) || storage.ItemSet[storage.Maximum - 1] != 0 || !Data.TryGet<Item>(proposal.ItemData.ID, out var item))
+                    !Require<CFlexibleStorage>(proposal.Destination, out var storage) || !Data.TryGet<Item>(proposal.ItemData.ID, out var item))
                     continue;
 
-                if (proposal.ItemData.ID != storage.Item1 && proposal.ItemData.ID != storage.Item2)
+                if (proposal.ItemData.ID != storage.Item1 && proposal.ItemData.ID != storage.Item2 || storage.ItemSet.Length >= storage.Maximum)
                     continue;
 
                 Accept(entity);

@@ -5,9 +5,9 @@ namespace MiniCafe.Systems
     [UpdateInGroup(typeof(ItemTransferPropose))]
     public class TakeFromFlexibleStorage : TransferInteractionProposalSystem, IModSystem
     {
-        protected override void Initialise()
+        public override void AfterLoading()
         {
-            base.Initialise();
+            base.AfterLoading();
 
             this.RegisterTransfer();
         }

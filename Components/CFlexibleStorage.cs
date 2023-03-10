@@ -7,7 +7,7 @@ using Unity.Collections;
 
 namespace MiniCafe.Components
 {
-    public struct CFlexibleStorage : IApplianceProperty, IAttachableProperty, IComponentData, IModComponent
+    public struct CFlexibleStorage : IApplianceProperty, IModComponent
     {
         public FixedListInt64 ItemSet;
         public int Maximum;

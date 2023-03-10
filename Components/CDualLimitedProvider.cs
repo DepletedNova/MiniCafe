@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MiniCafe.Components
 {
-    public struct CDualLimitedProvider : IApplianceProperty, IAttachableProperty, IComponentData, IModComponent
+    public struct CDualLimitedProvider : IApplianceProperty, IModComponent
     {
         public int Provided { get => Current == 1 ? Provide1 : Provide2; }
         public int Current;

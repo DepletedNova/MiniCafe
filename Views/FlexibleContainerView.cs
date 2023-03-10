@@ -29,23 +29,23 @@
 
             protected override void OnUpdate()
             {
-                using var entities = query.ToEntityArray(Allocator.Temp);
-                foreach (var entity in entities)
-                {
-                    if (!Require<CFlexibleStorage>(entity, out var storage) || !Require<CLinkedView>(entity, out var view))
-                        continue;
+                using var views = query.ToComponentDataArray<CLinkedView>(Allocator.Temp);
+                using var components = query.ToComponentDataArray<CFlexibleStorage>(Allocator.Temp);
 
-                    SendUpdate(view, new ViewData()
+                for (int i = 0; i < views.Length; i++)
+                {
+                    var data = components[i];
+                    SendUpdate(views[i], new ViewData()
                     {
-                        ItemSet = storage.ItemSet,
-                        Maximum = storage.Maximum
-                    });
+                        ItemSet = data.ItemSet,
+                        Maximum = data.Maximum
+                    }, MessageType.SpecificViewUpdate);
                 }
             }
         }
 
         [MessagePackObject(false)]
-        public struct ViewData : ISpecificViewData, IViewData, IViewData.ICheckForChanges<ViewData>
+        public struct ViewData : ISpecificViewData, IViewData, IViewResponseData, IViewData.ICheckForChanges<ViewData>
         {
             [Key(0)] public FixedListInt64 ItemSet;
             [Key(1)] public int Maximum;
