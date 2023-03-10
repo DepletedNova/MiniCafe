@@ -36,7 +36,6 @@ global using MiniCafe.Items;
 global using MiniCafe.Dishes;
 global using MiniCafe.Components;
 global using MiniCafe.Views;
-global using MiniCafe.Extensions;
 global using static MiniCafe.MaterialHelper;
 
 namespace MiniCafe
@@ -44,7 +43,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.1.4";
+        public const string VERSION = "1.1.5";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
