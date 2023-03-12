@@ -1,7 +1,4 @@
-﻿using MiniCafe.Components;
-using UnityEngine;
-
-namespace MiniCafe.Appliances
+﻿namespace MiniCafe.Appliances
 {
     // Appliance
     public class MugCabinet : CustomAppliance
@@ -13,10 +10,9 @@ namespace MiniCafe.Appliances
             (Locale.English, LocalisationUtils.CreateApplianceInfo("Mugs", "Provides both large and small mugs", new(), new()))
         };
         public override bool IsPurchasable => true;
-        public override bool SellOnlyAsDuplicate => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
         public override RarityTier RarityTier => RarityTier.Common;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Basic;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
 
         public override List<IApplianceProperty> Properties => new()
         {
@@ -35,7 +31,6 @@ namespace MiniCafe.Appliances
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Mug Cabinet";
             var cabinet = Prefab.GetChild("Cabinet");
             var bigMugs = cabinet.GetChild("Large Mugs");
             var smallMugs = cabinet.GetChild("Small Mugs");

@@ -1,7 +1,4 @@
-﻿using MiniCafe.Components;
-using UnityEngine;
-
-namespace MiniCafe.Appliances
+﻿namespace MiniCafe.Appliances
 {
     // Appliance
     public class MugCabinetDebug : CustomAppliance
@@ -12,8 +9,7 @@ namespace MiniCafe.Appliances
         {
             (Locale.English, LocalisationUtils.CreateApplianceInfo("Mugs (DEBUG)", "Provides both large and small dirty mugs", new(), new()))
         };
-        public override bool IsPurchasable => false;
-        public override PriceTier PriceTier => PriceTier.Free;
+        public override bool PreventSale => true;
 
         public override List<IApplianceProperty> Properties => new()
         {

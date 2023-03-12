@@ -1,6 +1,4 @@
-﻿using MiniCafe.Components;
-
-namespace MiniCafe.Systems
+﻿namespace MiniCafe.Systems
 {
     [UpdateInGroup(typeof(InteractionGroup))]
     public class DualLimitedProviderSwitch : ItemInteractionSystem, IModSystem

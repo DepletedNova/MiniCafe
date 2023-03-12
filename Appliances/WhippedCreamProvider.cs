@@ -20,8 +20,6 @@
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Whipped Cream Source";
-
             var holdTransform = Prefab.TryAddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
             var limitedSource = Prefab.TryAddComponent<LimitedItemSourceView>();
             limitedSource.HeldItemPosition = holdTransform;

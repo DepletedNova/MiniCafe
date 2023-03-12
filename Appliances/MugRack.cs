@@ -1,6 +1,4 @@
-﻿using MiniCafe.Items;
-
-namespace MiniCafe.Appliances
+﻿namespace MiniCafe.Appliances
 {
     public class MugRack : CustomAppliance
     {
@@ -31,8 +29,6 @@ namespace MiniCafe.Appliances
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Dirty Mug Rack";
-
             var parent = Prefab.GetChildFromPath("Block/Counter2");
             var paintedWood = GetMaterialArray("Wood 4 - Painted");
             var defaultWood = GetMaterialArray("Wood - Default");

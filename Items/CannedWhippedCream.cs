@@ -16,8 +16,6 @@
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Canned Whipped Cream";
-            
             Prefab.ApplyMaterialToChild("Can", "Metal", "Plastic - White", "Plastic - Red");
         }
     }

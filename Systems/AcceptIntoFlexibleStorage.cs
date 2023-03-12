@@ -1,4 +1,6 @@
-﻿namespace MiniCafe.Systems
+﻿using MiniCafe.Extensions;
+
+namespace MiniCafe.Systems
 {
     [UpdateInGroup(typeof(ItemTransferAccept))]
     public class AcceptIntoFlexibleStorage : TransferAcceptSystem, IModSystem
@@ -8,7 +10,7 @@
         {
             base.Initialise();
             proposalQuery = GetEntityQuery(new QueryHelper().All(typeof(CItemTransferProposal)));
-            RegisterTransfers.AddTransfer(this);
+            this.RegisterTransfer();
         }
 
         public override void AcceptTransfer(Entity proposalEntity, Entity acceptance, EntityContext ctx, out Entity return_item)

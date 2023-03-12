@@ -31,9 +31,11 @@ global using MessagePack;
 global using TMPro;
 
 global using MiniCafe.Appliances;
-global using MiniCafe.Misc;
 global using MiniCafe.Items;
-global using MiniCafe.Dishes;
+global using MiniCafe.Processes;
+global using MiniCafe.Desserts;
+global using MiniCafe.Mains;
+global using MiniCafe.Extras;
 global using MiniCafe.Components;
 global using MiniCafe.Views;
 global using static MiniCafe.MaterialHelper;
@@ -53,53 +55,62 @@ namespace MiniCafe
         {
             // Processes
             AddGameDataObject<SteamProcess>();
+            AddGameDataObject<CuplessFillCupProcess>();
 
-            // Appliances
+            // Generic Appliances
             AddGameDataObject<MugCabinet>();
             AddGameDataObject<MugCabinetDebug>();
             AddGameDataObject<MugRack>();
 
-            AddGameDataObject<WhippedCreamProvider>();
+            AddGameDataObject<CuplessCoffeeMachine>();
 
             AddGameDataObject<BaristaMachine>();
+            AddGameDataObject<SteamerMachine>();
 
-            // Items
+            // Big Mug
             AddGameDataObject<BigMug>();
             AddGameDataObject<BigMugDirty>();
             AddGameDataObject<BigEspresso>();
             AddGameDataObject<BigCappuccino>();
             AddGameDataObject<BigAmericano>();
+
             AddGameDataObject<BigMocha>();
-            AddGameDataObject<BigWhipped>();
 
-            AddGameDataObject<PlatedBigMug>();
-            AddGameDataObject<PlatedBigDirty>();
+            AddGameDataObject<PlatedBigCoffee>();
 
+            // Small Mug
             AddGameDataObject<SmallMug>();
             AddGameDataObject<SmallMugDirty>();
             AddGameDataObject<SmallEspresso>();
             AddGameDataObject<SmallCappuccino>();
             AddGameDataObject<SmallAmericano>();
+
             AddGameDataObject<SmallMocha>();
-            AddGameDataObject<SmallWhipped>();
 
-            AddGameDataObject<PlatedSmallMug>();
-            AddGameDataObject<PlatedSmallDirty>();
+            AddGameDataObject<PlatedSmallCoffee>();
 
-            AddGameDataObject<SteamedMilk>();
-            AddGameDataObject<CannedWhippedCream>();
-
+            // Extras
             AddGameDataObject<UnrolledCroissant>();
             AddGameDataObject<UncookedCroissant>();
             AddGameDataObject<Croissant>();
 
-            // Dishes
+            AddGameDataObject<TeaspoonDispenser>();
+            AddGameDataObject<Teaspoon>();
+
+            AddGameDataObject<WhippedCreamProvider>();
+            AddGameDataObject<SteamedMilk>();
+            AddGameDataObject<CannedWhippedCream>();
+
+            // Main Dishes
             AddGameDataObject<EspressoDish>();
             AddGameDataObject<CappuccinoDish>();
             AddGameDataObject<AmericanoDish>();
-            AddGameDataObject<MochaDish>();
 
+            // Extra Dishes
             AddGameDataObject<CroissantDish>();
+
+            // Dessert Dishes
+            AddGameDataObject<MochaDish>();
         }
 
         internal void AddMaterials()
@@ -127,37 +138,22 @@ namespace MiniCafe
         {
             // Coffee Machine
             var coffeeMachine = GetExistingGDO(ApplianceReferences.CoffeeMachine) as Appliance;
-            //coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, BaristaMachine>());
-            coffeeMachine.Processes = new()
+            coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, BaristaMachine>());
+            coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, SteamerMachine>());
+            coffeeMachine.Processes.Add(new()
             {
-                new()
-                {
-                    IsAutomatic = true,
-                    Process = GetExistingGDO(ProcessReferences.FillCoffee) as Process,
-                    Speed = 1f,
-                    Validity = ProcessValidity.Generic
-                },
-                new()
-                {
-                    IsAutomatic = true,
-                    Process = GetCastedGDO<Process, SteamProcess>(),
-                    Speed = 1f,
-                    Validity = ProcessValidity.Generic
-                }
-            };
-            coffeeMachine.RequiresProcessForShop = new()
-            {
-                GetExistingGDO(ProcessReferences.FillCoffee) as Process,
-                GetCastedGDO<Process, SteamProcess>()
-            };
-            coffeeMachine.ShoppingTags = ShoppingTags.Cooking | ShoppingTags.Basic;
+                IsAutomatic = true,
+                Process = GetCastedGDO<Process, SteamProcess>(),
+                Speed = 1f,
+                Validity = ProcessValidity.Generic
+            });
         }
 
         private void UpdateMilk()
         {
             GetCastedGDO<Item, MilkIngredient>().DerivedProcesses.Add(new()
             {
-                Duration = 1.3f,
+                Duration = 2.6f,
                 Process = GetCastedGDO<Process, SteamProcess>(),
                 Result = GetCastedGDO<Item, SteamedMilk>()
             });;

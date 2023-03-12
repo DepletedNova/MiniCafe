@@ -10,8 +10,6 @@
 
         public override void OnRegister(GameDataObject gdo)
         {
-            gdo.name = "Steamed Milk";
-
             var bowl = Prefab.GetChild("bowl");
             bowl.ApplyMaterialToChild("Cylinder.001", "Metal Dark");
             bowl.ApplyMaterialToChild("Cylinder", "Coffee Cup");

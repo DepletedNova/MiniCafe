@@ -1,42 +1,47 @@
 ﻿namespace MiniCafe.Appliances
 {
-    public class BaristaMachine : CustomAppliance
+    public class CuplessCoffeeMachine : CustomAppliance
     {
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Barista Machine");
-        public override string UniqueNameID => "barista_machine";
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Coffee Machine");
+        public override string UniqueNameID => "cupless_coffee_machine";
         public override List<(Locale, ApplianceInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateApplianceInfo("Barista Machine", "Pretty good at filling coffee!", new()
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Coffee Machine", "Fills cups right up! Does not include cups.", new()
             {
                 new()
                 {
-                    Title = "<sprite name=\"upgrade\" color=#A8FF1E> Filling",
-                    Description = "Performs <sprite name=\"fill_coffee\"> 50% faster and <sprite name=\"steam_0\"> 50% slower"
+                    Title = "Cupless",
+                    Description = "Does not provide cups."
                 }
             }, new()))
         };
+        public override bool IsPurchasable => true;
+        public override PriceTier PriceTier => PriceTier.Cheap;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
+        public override RarityTier RarityTier => RarityTier.Common;
+        public override List<Process> RequiresProcessForShop => new()
+        {
+            GetCastedGDO<Process, CuplessFillCupProcess>()
+        };
         public override List<Appliance> Upgrades => new()
         {
+            GetCastedGDO<Appliance, BaristaMachine>(),
             GetCastedGDO<Appliance, SteamerMachine>()
         };
-        public override bool IsPurchasableAsUpgrade => true;
-        public override PriceTier PriceTier => PriceTier.Medium;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
-
         public override List<Appliance.ApplianceProcesses> Processes => new()
         {
             new()
             {
                 IsAutomatic = true,
                 Process = GetGDO<Process>(ProcessReferences.FillCoffee),
-                Speed = 1.5f,
+                Speed = 1f,
                 Validity = ProcessValidity.Generic
             },
             new()
             {
                 IsAutomatic = true,
                 Process = GetCastedGDO<Process, SteamProcess>(),
-                Speed = 0.5f,
+                Speed = 1f,
                 Validity = ProcessValidity.Generic
             }
         };
@@ -47,16 +52,17 @@
 
         public override void OnRegister(GameDataObject gdo)
         {
+            Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
+
             var machine = Prefab.GetChild("CoffeeMachine");
-            machine.ApplyMaterialToChild("Machine", "Plastic - Dark Grey", "Metal Black", "Plastic - Grey", "Plastic");
-            machine.ApplyMaterialToChild("Steam", "Metal Very Dark");
+            machine.ApplyMaterialToChild("Machine", "Metal", "Plastic - Red", "Plastic - Black");
+            machine.ApplyMaterialToChild("Spout", "Metal Very Dark");
+            machine.ApplyMaterialToChild("Steam", "Metal Black");
 
             var counter = Prefab.GetChild("Counter");
             counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
             counter.ApplyMaterialToChild("Handle", "Knob");
             counter.ApplyMaterialToChild("Countertop", "Wood - Default");
-
-            Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
         }
     }
 }

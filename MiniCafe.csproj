@@ -41,6 +41,10 @@
     <Reference Include="Kitchen.GameData">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Kitchen.GameData.dll</HintPath>
     </Reference>
+    <Reference Include="Kitchen.Layouts, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IngredientLib\bin\Release\Kitchen.Layouts.dll</HintPath>
+    </Reference>
     <Reference Include="Kitchen.Persistence, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Kitchen.RestaurantMode">
       <HintPath>..\IngredientLib\bin\Release\Kitchen.RestaurantMode.dll</HintPath>
@@ -85,6 +89,7 @@
     <Reference Include="Unity.Entities">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Unity.Entities.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Unity.TextMeshPro.dll</HintPath>
@@ -102,49 +107,53 @@
     <Reference Include="UnityEngine.VFXModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appliances\SteamerMachine.cs" />
     <Compile Include="Appliances\BaristaMachine.cs" />
+    <Compile Include="Appliances\CuplessCoffeeMachine.cs" />
     <Compile Include="Appliances\MugCabinetDebug.cs" />
     <Compile Include="Appliances\MugCabinet.cs" />
     <Compile Include="Appliances\MugRack.cs" />
+    <Compile Include="Appliances\TeaspoonDispenser.cs" />
     <Compile Include="Appliances\WhippedCreamProvider.cs" />
     <Compile Include="Components\CDualLimitedProvider.cs" />
     <Compile Include="Components\CFlexibleStorage.cs" />
-    <Compile Include="CustomPropertyRegistration.cs" />
-    <Compile Include="Dishes\CroissantDish.cs" />
-    <Compile Include="Dishes\MochaDish.cs" />
-    <Compile Include="Dishes\AmericanoDish.cs" />
-    <Compile Include="Dishes\CappuccinoDish.cs" />
-    <Compile Include="Dishes\EspressoDish.cs" />
-    <Compile Include="Items\Big Mug\BigAmericano.cs" />
-    <Compile Include="Items\Big Mug\BigWhipped.cs" />
-    <Compile Include="Items\Big Mug\BigMocha.cs" />
-    <Compile Include="Items\Big Mug\BigCappuccino.cs" />
-    <Compile Include="Items\Big Mug\BigEspresso.cs" />
-    <Compile Include="Items\Big Mug\BigMugDirty.cs" />
-    <Compile Include="Items\Big Mug\BigMug.cs" />
-    <Compile Include="Items\Croissant\UncookedCroissant.cs" />
-    <Compile Include="Items\Croissant\Croissant.cs" />
-    <Compile Include="Items\Croissant\UnrolledCroissant.cs" />
-    <Compile Include="Items\Small Mug\PlatedSmallDirty.cs" />
-    <Compile Include="Items\Big Mug\PlatedBigDirty.cs" />
-    <Compile Include="Items\Small Mug\PlatedSmallMug.cs" />
-    <Compile Include="Items\Big Mug\PlatedBigMug.cs" />
-    <Compile Include="Items\Small Mug\SmallWhipped.cs" />
-    <Compile Include="Items\Small Mug\SmallMocha.cs" />
-    <Compile Include="Items\Small Mug\SmallAmericano.cs" />
-    <Compile Include="Items\Small Mug\SmallCappuccino.cs" />
-    <Compile Include="Items\Small Mug\SmallEspresso.cs" />
-    <Compile Include="Items\Small Mug\SmallMugDirty.cs" />
-    <Compile Include="Items\Small Mug\SmallMug.cs" />
+    <Compile Include="Components\CInvertedPlacement.cs" />
+    <Compile Include="Extensions\CPositionExtensions.cs" />
+    <Compile Include="Mains\Espresso\SmallEspresso.cs" />
+    <Compile Include="Mains\PlatedSmallCoffee.cs" />
+    <Compile Include="Mains\PlatedBigCoffee.cs" />
+    <Compile Include="Systems\CustomPropertyRegistration.cs" />
+    <Compile Include="Extras\Croissant\CroissantDish.cs" />
+    <Compile Include="Desserts\Mocha\MochaDish.cs" />
+    <Compile Include="Mains\Americano\AmericanoDish.cs" />
+    <Compile Include="Mains\Cappuccino\CappuccinoDish.cs" />
+    <Compile Include="Mains\Espresso\EspressoDish.cs" />
+    <Compile Include="Extensions\SystemExtensions.cs" />
+    <Compile Include="Mains\Americano\BigAmericano.cs" />
+    <Compile Include="Desserts\Mocha\BigMocha.cs" />
+    <Compile Include="Mains\Cappuccino\BigCappuccino.cs" />
+    <Compile Include="Mains\Espresso\BigEspresso.cs" />
+    <Compile Include="Items\Mug\BigMugDirty.cs" />
+    <Compile Include="Items\Mug\BigMug.cs" />
+    <Compile Include="Extras\Teaspoon.cs" />
+    <Compile Include="Extras\Croissant\UncookedCroissant.cs" />
+    <Compile Include="Extras\Croissant\Croissant.cs" />
+    <Compile Include="Extras\Croissant\UnrolledCroissant.cs" />
+    <Compile Include="Items\Mug\SmallMugDirty.cs" />
+    <Compile Include="Desserts\Mocha\SmallMocha.cs" />
+    <Compile Include="Mains\Americano\SmallAmericano.cs" />
+    <Compile Include="Mains\Cappuccino\SmallCappuccino.cs" />
+    <Compile Include="Items\Mug\SmallMug.cs" />
     <Compile Include="Items\CannedWhippedCream.cs" />
     <Compile Include="Items\SteamedMilk.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MaterialHelper.cs" />
-    <Compile Include="Misc\SteamProcess.cs" />
+    <Compile Include="Processes\CuplessFillCupProcess.cs" />
+    <Compile Include="Processes\SteamProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\AcceptIntoFlexibleStorage.cs" />
     <Compile Include="Systems\DualLimitedProviderSwitch.cs" />
-    <Compile Include="Systems\RegisterTransfers.cs" />
+    <Compile Include="Systems\InvertPlacement.cs" />
     <Compile Include="Systems\ResetDualLimitedNight.cs" />
     <Compile Include="Systems\ResetFlexibleStorageNight.cs" />
     <Compile Include="Systems\TakeFromFlexibleStorage.cs" />
@@ -152,8 +161,7 @@
     <Compile Include="Views\FlexibleContainerView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Patches\" />
+    <Folder Include="Sides\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IngredientLib\IngredientLib.csproj">

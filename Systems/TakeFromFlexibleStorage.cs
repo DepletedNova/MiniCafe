@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using MiniCafe.Extensions;
 
 namespace MiniCafe.Systems
 {
@@ -8,7 +8,7 @@ namespace MiniCafe.Systems
         protected override void Initialise()
         {
             base.Initialise();
-            RegisterTransfers.AddTransfer(this);
+            this.RegisterTransfer();
         }
 
         protected override bool AllowActOrGrab => true;

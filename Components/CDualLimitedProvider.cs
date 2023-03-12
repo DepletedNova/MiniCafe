@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MiniCafe.Components
+﻿namespace MiniCafe.Components
 {
     public struct CDualLimitedProvider : IApplianceProperty, IModComponent
     {
