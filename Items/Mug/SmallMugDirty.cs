@@ -9,7 +9,6 @@
         public override bool IsIndisposable => true;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override Appliance DedicatedProvider => GetCastedGDO<Appliance, MugCabinetDebug>();
         public override List<Item.ItemProcess> Processes => new()
         {
             new()

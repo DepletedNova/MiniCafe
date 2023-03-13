@@ -107,10 +107,11 @@
     <Reference Include="UnityEngine.VFXModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appliances\BigMugHolder.cs" />
+    <Compile Include="Appliances\SmallMugHolder.cs" />
     <Compile Include="Appliances\SteamerMachine.cs" />
     <Compile Include="Appliances\BaristaMachine.cs" />
     <Compile Include="Appliances\CuplessCoffeeMachine.cs" />
-    <Compile Include="Appliances\MugCabinetDebug.cs" />
     <Compile Include="Appliances\MugCabinet.cs" />
     <Compile Include="Appliances\MugRack.cs" />
     <Compile Include="Appliances\TeaspoonDispenser.cs" />
@@ -119,6 +120,14 @@
     <Compile Include="Components\CFlexibleStorage.cs" />
     <Compile Include="Components\CInvertedPlacement.cs" />
     <Compile Include="Extensions\CPositionExtensions.cs" />
+    <Compile Include="Extras\Scone\SconeDish.cs" />
+    <Compile Include="Extras\Scone\Scone.cs" />
+    <Compile Include="Extras\Scone\SconePlatter.cs" />
+    <Compile Include="Extras\Scone\UncookedScones.cs" />
+    <Compile Include="Extras\Scone\UnmixedSconeDough.cs" />
+    <Compile Include="Mains\Iced\IcedDish.cs" />
+    <Compile Include="Mains\Iced\BigIced.cs" />
+    <Compile Include="Mains\Iced\SmallIced.cs" />
     <Compile Include="Mains\Espresso\SmallEspresso.cs" />
     <Compile Include="Mains\PlatedSmallCoffee.cs" />
     <Compile Include="Mains\PlatedBigCoffee.cs" />
@@ -159,6 +168,7 @@
     <Compile Include="Systems\TakeFromFlexibleStorage.cs" />
     <Compile Include="Views\DualLimitedSourceView.cs" />
     <Compile Include="Views\FlexibleContainerView.cs" />
+    <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sides\" />

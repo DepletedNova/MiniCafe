@@ -2,7 +2,7 @@
 {
     public class MugRack : CustomAppliance
     {
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Mug Rack");
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Dirty Mug Rack");
         public override string UniqueNameID => "mug_rack";
         public override List<(Locale, ApplianceInfo)> InfoList => new()
         {
@@ -12,7 +12,7 @@
         public override bool IsPurchasable => true;
         public override List<Process> RequiresProcessForShop => new()
         {
-            GetCastedGDO<Process, SteamProcess>()
+            GetCastedGDO<Process, CuplessFillCupProcess>()
         };
         public override PriceTier PriceTier => PriceTier.Cheap;
         public override RarityTier RarityTier => RarityTier.Common;

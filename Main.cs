@@ -45,7 +45,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.2.0";
+        public const string VERSION = "1.3.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -59,8 +59,9 @@ namespace MiniCafe
 
             // Generic Appliances
             AddGameDataObject<MugCabinet>();
-            AddGameDataObject<MugCabinetDebug>();
             AddGameDataObject<MugRack>();
+            AddGameDataObject<SmallMugHolder>();
+            AddGameDataObject<BigMugHolder>();
 
             AddGameDataObject<CuplessCoffeeMachine>();
 
@@ -73,6 +74,7 @@ namespace MiniCafe
             AddGameDataObject<BigEspresso>();
             AddGameDataObject<BigCappuccino>();
             AddGameDataObject<BigAmericano>();
+            AddGameDataObject<BigIced>();
 
             AddGameDataObject<BigMocha>();
 
@@ -84,6 +86,7 @@ namespace MiniCafe
             AddGameDataObject<SmallEspresso>();
             AddGameDataObject<SmallCappuccino>();
             AddGameDataObject<SmallAmericano>();
+            AddGameDataObject<SmallIced>();
 
             AddGameDataObject<SmallMocha>();
 
@@ -93,6 +96,11 @@ namespace MiniCafe
             AddGameDataObject<UnrolledCroissant>();
             AddGameDataObject<UncookedCroissant>();
             AddGameDataObject<Croissant>();
+
+            AddGameDataObject<UnmixedSconeDough>();
+            AddGameDataObject<UncookedScones>();
+            AddGameDataObject<SconePlatter>();
+            AddGameDataObject<Scone>();
 
             AddGameDataObject<TeaspoonDispenser>();
             AddGameDataObject<Teaspoon>();
@@ -105,9 +113,11 @@ namespace MiniCafe
             AddGameDataObject<EspressoDish>();
             AddGameDataObject<CappuccinoDish>();
             AddGameDataObject<AmericanoDish>();
+            AddGameDataObject<IcedDish>();
 
             // Extra Dishes
             AddGameDataObject<CroissantDish>();
+            AddGameDataObject<SconeDish>();
 
             // Dessert Dishes
             AddGameDataObject<MochaDish>();

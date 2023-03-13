@@ -29,6 +29,21 @@
                 MenuItem = GetCastedGDO<ItemGroup, SmallMocha>()
             },
         };
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<ItemGroup, BigMocha>(),
+                Phase = MenuPhase.Dessert,
+                Weight = 1f
+            },
+            new()
+            {
+                Item = GetCastedGDO<ItemGroup, SmallMocha>(),
+                Phase = MenuPhase.Dessert,
+                Weight = 1f
+            }
+        };
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetCastedGDO<Process, SteamProcess>(),

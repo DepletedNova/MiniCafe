@@ -31,7 +31,6 @@
         };
         public override HashSet<Process> RequiredProcesses => new()
         {
-            GetCastedGDO<Process, SteamProcess>(),
             GetGDO<Process>(ProcessReferences.FillCoffee)
         };
         public override Dictionary<Locale, string> Recipe => new()

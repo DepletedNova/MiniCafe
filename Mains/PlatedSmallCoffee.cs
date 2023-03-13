@@ -6,9 +6,10 @@
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Plated Small");
         public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
         public override Item DirtiesTo => GetCastedGDO<Item, SmallMugDirty>();
-        public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
+        public override ItemStorage ItemStorageFlags => ItemStorage.None;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemValue ItemValue => ItemValue.MediumLarge;
+        public override bool CanContainSide => true;
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             // Main
@@ -19,6 +20,7 @@
                     GetCastedGDO<Item, SmallEspresso>(),
                     GetCastedGDO<Item, SmallAmericano>(),
                     GetCastedGDO<Item, SmallCappuccino>(),
+                    GetCastedGDO<Item, SmallIced>(),
                 },
                 Min = 1,
                 Max = 1,
@@ -32,6 +34,7 @@
                 {
                     GetCastedGDO<Item, Teaspoon>(),
                     GetCastedGDO<Item, Croissant>(),
+                    GetCastedGDO<Item, Scone>(),
                 },
                 Min = 1,
                 Max = 1,
@@ -49,10 +52,13 @@
             mug.ApplyMaterialToChild("Espresso", "Coffee - Black");
             mug.ApplyMaterialToChild("Americano", "Americano", "Coffee - Black");
             mug.ApplyMaterialToChild("Cappuccino", "Coffee Blend", "Coffee Foam");
+            mug.ApplyMaterialToChild("Iced", "Coffee - Black");
+            mug.GetChild("Iced").ApplyMaterialToChildren("Ice", "Ice");
 
             var sides = Prefab.GetChild("Sides");
             sides.ApplyMaterialToChild("Spoon", "Metal");
             sides.ApplyMaterialToChild("Croissant", "Croissant");
+            sides.ApplyMaterialToChild("Scone", "Bread - Inside Cooked", "Chocolate");
 
             Prefab.ApplyMaterialToChild("Plate", "Plate", "Plate - Ring");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
@@ -78,6 +84,11 @@
                     Item = GetCastedGDO<Item, SmallCappuccino>(),
                     GameObject = gameObject.GetChildFromPath("Mug/Cappuccino")
                 },
+                new()
+                {
+                    Item = GetCastedGDO<Item, SmallIced>(),
+                    GameObject = gameObject.GetChildFromPath("Mug/Iced")
+                },
                 // Extras
                 new()
                 {
@@ -88,6 +99,11 @@
                 {
                     Item = GetCastedGDO<Item, Croissant>(),
                     GameObject = gameObject.GetChildFromPath("Sides/Croissant")
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, Scone>(),
+                    GameObject = gameObject.GetChildFromPath("Sides/Scone")
                 },
             };
 
@@ -109,16 +125,26 @@
                     Item = GetCastedGDO<Item, SmallCappuccino>(),
                     Text = "SCa"
                 },
-                // Extras
                 new()
+                {
+                    Item = GetCastedGDO<Item, SmallIced>(),
+                    Text = "BIc"
+                },
+                // Extras
+                /*new()
                 {
                     Item = GetCastedGDO<Item, Teaspoon>(),
                     Text = "Sp"
-                },
+                },*/
                 new()
                 {
                     Item = GetCastedGDO<Item, Croissant>(),
                     Text = "Cr"
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, Scone>(),
+                    Text = "Sc"
                 },
             };
         }

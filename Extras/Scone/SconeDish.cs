@@ -1,8 +1,8 @@
 ﻿namespace MiniCafe.Extras
 {
-    public class CroissantDish : CustomDish
+    public class SconeDish : CustomDish
     {
-        public override string UniqueNameID => "croissant_dish";
+        public override string UniqueNameID => "scone_dish";
 
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
@@ -20,12 +20,12 @@
         {
             new()
             {
-                Ingredient = GetCastedGDO<Item, Croissant>(),
+                Ingredient = GetCastedGDO<Item, Scone>(),
                 MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
             },
             new()
             {
-                Ingredient = GetCastedGDO<Item, Croissant>(),
+                Ingredient = GetCastedGDO<Item, Scone>(),
                 MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
             }
         };
@@ -35,16 +35,18 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take flour, add water or knead, add a slice of butter, portion, cook, and then add with any coffee main. This is interchangeable with any extra/spoon." }
+            { Locale.English, "Crack an egg and then add flour. Knead this once and then add whipping cream. Knead once more and then cook. Portion and serve with any coffee main." +
+                "This is interchangeable with any extra/spoon." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Croissant", "Adds croissants as an extra", "Buttery goodness!"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Scones", "Adds scones as an extra", "Yummers!"))
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetGDO<Item>(ItemReferences.Flour),
-            GetCastedGDO<Item, Butter>(),
+            GetGDO<Item>(ItemReferences.Egg),
+            GetCastedGDO<Item, WhippingCream>(),
         };
     }
 }

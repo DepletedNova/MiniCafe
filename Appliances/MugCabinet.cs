@@ -11,21 +11,31 @@
         };
         public override bool IsPurchasable => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
-        public override RarityTier RarityTier => RarityTier.Common;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
+        public override RarityTier RarityTier => RarityTier.Uncommon;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Misc | ShoppingTags.Basic;
+        public override List<Process> RequiresProcessForShop => new()
+        {
+            GetCastedGDO<Process, CuplessFillCupProcess>()
+        };
+
+        public override List<Appliance> Upgrades => new()
+        {
+            GetCastedGDO<Appliance, SmallMugHolder>(),
+            GetCastedGDO<Appliance, BigMugHolder>()
+        };
 
         public override List<IApplianceProperty> Properties => new()
         {
-            GetCItemProvider(SmallMug.ItemID, 6, 6, false, false, false, false, true, true, false),
+            GetLimitedCItemProvider(SmallMug.ItemID, 4, 4),
             new CDualLimitedProvider()
             {
                 Current = 1,
                 Provide1 = SmallMug.ItemID,
-                Available1 = 6,
-                Maximum1 = 6,
+                Available1 = 4,
+                Maximum1 = 4,
                 Provide2 = BigMug.ItemID,
-                Available2 = 6,
-                Maximum2 = 6,
+                Available2 = 4,
+                Maximum2 = 4,
             }
         };
 
