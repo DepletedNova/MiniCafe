@@ -45,7 +45,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.3.0";
+        public const string VERSION = "1.3.1";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 

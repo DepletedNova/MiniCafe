@@ -35,7 +35,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take flour, add water or knead, add a slice of butter, portion, cook, and then add with any coffee main. This is interchangeable with any extra/spoon." }
+            { Locale.English, "Take flour, add water or knead, add a slice of butter, knead, cook, and then add with any coffee main. This is interchangeable with any extra/spoon." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
