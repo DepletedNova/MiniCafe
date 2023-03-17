@@ -33,5 +33,22 @@
         {
             GetGDO<Item>(ItemReferences.Water)
         };
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedBigCappuccino>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            },
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedSmallCappuccino>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            }
+        };
     }
 }

@@ -12,7 +12,7 @@
         public override bool IsPurchasable => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
         public override RarityTier RarityTier => RarityTier.Common;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Misc | ShoppingTags.Basic;
         public override List<Process> RequiresProcessForShop => new()
         {
             GetCastedGDO<Process, CuplessFillCupProcess>()

@@ -3,7 +3,6 @@
     public class EspressoDish : CustomDish
     {
         public override string UniqueNameID => "espresso_dish";
-
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Small;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;

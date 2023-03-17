@@ -17,7 +17,7 @@
         };
         public override bool IsPurchasable => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Cooking | ShoppingTags.Basic;
         public override RarityTier RarityTier => RarityTier.Common;
         public override List<Process> RequiresProcessForShop => new()
         {

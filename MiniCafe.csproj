@@ -141,6 +141,7 @@
     <Compile Include="Mains\Iced\PlatedBigIced.cs" />
     <Compile Include="Mains\Iced\SmallIced.cs" />
     <Compile Include="Mains\Espresso\SmallEspresso.cs" />
+    <Compile Include="Patches\GrantNecessaryAppliances_Patch.cs" />
     <Compile Include="Systems\CustomPropertyRegistration.cs" />
     <Compile Include="Extras\Croissant\CroissantDish.cs" />
     <Compile Include="Desserts\Mocha\MochaDish.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\AcceptIntoFlexibleStorage.cs" />
     <Compile Include="Systems\DualLimitedProviderSwitch.cs" />
+    <Compile Include="Systems\GrantNecessaryMugs.cs" />
     <Compile Include="Systems\InvertPlacement.cs" />
     <Compile Include="Systems\ResetDualLimitedNight.cs" />
     <Compile Include="Systems\ResetFlexibleStorageNight.cs" />

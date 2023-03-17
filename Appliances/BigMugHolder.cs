@@ -9,8 +9,9 @@
             (Locale.English, LocalisationUtils.CreateApplianceInfo("Big Mugs", "Provides only big mugs", new(), new()))
         };
         public override bool IsPurchasableAsUpgrade => true;
+        public override bool IsPurchasable => true;
         public override PriceTier PriceTier => PriceTier.Medium;
-        public override RarityTier RarityTier => RarityTier.Uncommon;
+        public override RarityTier RarityTier => RarityTier.Common;
         public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
         public override List<Process> RequiresProcessForShop => new()
         {
