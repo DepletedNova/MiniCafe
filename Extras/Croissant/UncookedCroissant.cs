@@ -16,9 +16,9 @@
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChild("roll", "Raw Pastry");
+            Prefab.ApplyMaterialToChildCafe("roll", "Raw Pastry");
         }
     }
 }

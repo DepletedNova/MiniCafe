@@ -35,6 +35,10 @@
     <Reference Include="0Harmony">
       <HintPath>..\IngredientLib\bin\Release\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="IngredientLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\IngredientLib\content\IngredientLib.dll</HintPath>
+    </Reference>
     <Reference Include="Kitchen.Common">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Kitchen.Common.dll</HintPath>
     </Reference>
@@ -125,12 +129,18 @@
     <Compile Include="Extras\Scone\SconePlatter.cs" />
     <Compile Include="Extras\Scone\UncookedScones.cs" />
     <Compile Include="Extras\Scone\UnmixedSconeDough.cs" />
+    <Compile Include="Mains\Americano\PlatedSmallAmericano.cs" />
+    <Compile Include="Mains\Americano\PlatedBigAmericano.cs" />
+    <Compile Include="Mains\Cappuccino\PlatedSmallCappuccino.cs" />
+    <Compile Include="Mains\Cappuccino\PlatedBigCappuccino.cs" />
+    <Compile Include="Mains\Espresso\PlatedSmallEspresso.cs" />
+    <Compile Include="Mains\Espresso\PlatedBigEspresso.cs" />
     <Compile Include="Mains\Iced\IcedDish.cs" />
     <Compile Include="Mains\Iced\BigIced.cs" />
+    <Compile Include="Mains\Iced\PlatedSmallIced.cs" />
+    <Compile Include="Mains\Iced\PlatedBigIced.cs" />
     <Compile Include="Mains\Iced\SmallIced.cs" />
     <Compile Include="Mains\Espresso\SmallEspresso.cs" />
-    <Compile Include="Mains\PlatedSmallCoffee.cs" />
-    <Compile Include="Mains\PlatedBigCoffee.cs" />
     <Compile Include="Systems\CustomPropertyRegistration.cs" />
     <Compile Include="Extras\Croissant\CroissantDish.cs" />
     <Compile Include="Desserts\Mocha\MochaDish.cs" />
@@ -156,7 +166,7 @@
     <Compile Include="Items\CannedWhippedCream.cs" />
     <Compile Include="Items\SteamedMilk.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="MaterialHelper.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Processes\CuplessFillCupProcess.cs" />
     <Compile Include="Processes\SteamProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,12 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sides\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IngredientLib\IngredientLib.csproj">
-      <Project>{273e222c-4939-447c-9fcd-3fae7445a797}</Project>
-      <Name>IngredientLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

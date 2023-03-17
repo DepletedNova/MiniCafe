@@ -14,9 +14,9 @@
         public override bool AllowSplitMerging => true;
         public override int SplitCount => 999;
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChild("Can", "Metal", "Plastic - White", "Plastic - Red");
+            Prefab.ApplyMaterialToChildCafe("Can", "Metal", "Plastic - White", "Plastic - Red");
         }
     }
 }

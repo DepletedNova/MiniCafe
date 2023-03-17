@@ -25,10 +25,10 @@
             ItemID = gdo.ID;
         }
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
             BigMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("dirty_mug", "Plate - Dirty Food");
+            Prefab.ApplyMaterialToChildCafe("dirty_mug", "Plate - Dirty Food");
         }
     }
 }

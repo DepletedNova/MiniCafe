@@ -13,7 +13,7 @@
         {
             new()
             {
-                Duration = 1.5f,
+                Duration = 1.25f,
                 Process = GetGDO<Process>(ProcessReferences.Clean),
                 Result = GetCastedGDO<Item, SmallMug>()
             }
@@ -25,10 +25,10 @@
             ItemID = gdo.ID;
         }
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
             SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("dirty_mug", "Plate - Dirty Food");
+            Prefab.ApplyMaterialToChildCafe("dirty_mug", "Plate - Dirty Food");
         }
     }
 }

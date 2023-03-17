@@ -3,7 +3,8 @@
     public class MochaDish : CustomDish
     {
         public override string UniqueNameID => "mocha_dish";
-
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Big Mocha");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Big Mocha");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
@@ -16,19 +17,6 @@
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Dessert;
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, WhippedCream>(),
-                MenuItem = GetCastedGDO<ItemGroup, BigMocha>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, WhippedCream>(),
-                MenuItem = GetCastedGDO<ItemGroup, SmallMocha>()
-            },
-        };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()
@@ -47,7 +35,7 @@
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetCastedGDO<Process, SteamProcess>(),
-            GetGDO<Process>(ProcessReferences.FillCoffee),
+            GetCastedGDO<Process, CuplessFillCupProcess>(),
             GetGDO<Process>(ProcessReferences.Cook)
         };
         public override Dictionary<Locale, string> Recipe => new()

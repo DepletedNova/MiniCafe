@@ -15,7 +15,7 @@
         {
             new()
             {
-                Duration = 4.5f,
+                Duration = 4f,
                 Process = GetGDO<Process>(ProcessReferences.FillCoffee),
                 Result = GetCastedGDO<Item, BigEspresso>()
             }
@@ -26,11 +26,11 @@
             ItemID = gdo.ID;
         }
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
             ApplyMugMaterials(Prefab.GetChild("mug"));
         }
 
-        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterial("Light Coffee Cup", "Coffee Cup");
+        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterialCafe("Light Coffee Cup", "Coffee Cup");
     }
 }

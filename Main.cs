@@ -12,9 +12,7 @@ global using KitchenData;
 global using Kitchen;
 
 global using IngredientLib;
-global using IngredientLib.Util;
 global using IngredientLib.Ingredient.Items;
-global using static IngredientLib.Util.Helper;
 global using static IngredientLib.Util.VisualEffectHelper;
 
 global using System.Linq;
@@ -38,90 +36,18 @@ global using MiniCafe.Mains;
 global using MiniCafe.Extras;
 global using MiniCafe.Components;
 global using MiniCafe.Views;
-global using static MiniCafe.MaterialHelper;
+global using static MiniCafe.Helper;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.3.1";
+        public const string VERSION = "1.4.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
         internal static AssetBundle Bundle;
-
-        internal void AddGameData()
-        {
-            // Processes
-            AddGameDataObject<SteamProcess>();
-            AddGameDataObject<CuplessFillCupProcess>();
-
-            // Generic Appliances
-            AddGameDataObject<MugCabinet>();
-            AddGameDataObject<MugRack>();
-            AddGameDataObject<SmallMugHolder>();
-            AddGameDataObject<BigMugHolder>();
-
-            AddGameDataObject<CuplessCoffeeMachine>();
-
-            AddGameDataObject<BaristaMachine>();
-            AddGameDataObject<SteamerMachine>();
-
-            // Big Mug
-            AddGameDataObject<BigMug>();
-            AddGameDataObject<BigMugDirty>();
-            AddGameDataObject<BigEspresso>();
-            AddGameDataObject<BigCappuccino>();
-            AddGameDataObject<BigAmericano>();
-            AddGameDataObject<BigIced>();
-
-            AddGameDataObject<BigMocha>();
-
-            AddGameDataObject<PlatedBigCoffee>();
-
-            // Small Mug
-            AddGameDataObject<SmallMug>();
-            AddGameDataObject<SmallMugDirty>();
-            AddGameDataObject<SmallEspresso>();
-            AddGameDataObject<SmallCappuccino>();
-            AddGameDataObject<SmallAmericano>();
-            AddGameDataObject<SmallIced>();
-
-            AddGameDataObject<SmallMocha>();
-
-            AddGameDataObject<PlatedSmallCoffee>();
-
-            // Extras
-            AddGameDataObject<UnrolledCroissant>();
-            AddGameDataObject<UncookedCroissant>();
-            AddGameDataObject<Croissant>();
-
-            AddGameDataObject<UnmixedSconeDough>();
-            AddGameDataObject<UncookedScones>();
-            AddGameDataObject<SconePlatter>();
-            AddGameDataObject<Scone>();
-
-            AddGameDataObject<TeaspoonDispenser>();
-            AddGameDataObject<Teaspoon>();
-
-            AddGameDataObject<WhippedCreamProvider>();
-            AddGameDataObject<SteamedMilk>();
-            AddGameDataObject<CannedWhippedCream>();
-
-            // Main Dishes
-            AddGameDataObject<EspressoDish>();
-            AddGameDataObject<CappuccinoDish>();
-            AddGameDataObject<AmericanoDish>();
-            AddGameDataObject<IcedDish>();
-
-            // Extra Dishes
-            AddGameDataObject<CroissantDish>();
-            AddGameDataObject<SconeDish>();
-
-            // Dessert Dishes
-            AddGameDataObject<MochaDish>();
-        }
 
         internal void AddMaterials()
         {
@@ -139,17 +65,11 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Croissant", 0xDA9134));
         }
 
-        private void UpdateRewards()
-        {
-
-        }
-
         private void UpdateCoffeeMachine()
         {
             // Coffee Machine
             var coffeeMachine = GetExistingGDO(ApplianceReferences.CoffeeMachine) as Appliance;
             coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, BaristaMachine>());
-            coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, SteamerMachine>());
             coffeeMachine.Processes.Add(new()
             {
                 IsAutomatic = true,
@@ -192,32 +112,32 @@ namespace MiniCafe
 
             Events.BuildGameDataEvent += (s, args) =>
             {
-                UpdateRewards();
                 UpdateCoffeeMachine();
                 UpdateMilk();
 
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };
         }
-    }
 
-    public abstract class AccessedItemGroupView : ItemGroupView
-    {
-        protected abstract List<ComponentGroup> groups { get; }
-        protected virtual List<ColourBlindLabel> labels => new();
-
-        public GameObject LabelGameObject;
-
-        public void Setup(GameDataObject gdo)
+        internal void AddGameData()
         {
-            ComponentGroups = groups;
-
-            if (labels.Count > 0)
+            MethodInfo AddGDOMethod = typeof(BaseMod).GetMethod(nameof(BaseMod.AddGameDataObject));
+            int counter = 0;
+            Log("Registering GameDataObjects.");
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                ComponentLabels = labels;
-                LabelGameObject = ColorblindUtils.cloneColourBlindObjectAndAddToItem(gdo as Item);
-                ColorblindUtils.setColourBlindLabelObjectOnItemGroupView(this, LabelGameObject);
+                if (type.IsAbstract || typeof(IWontRegister).IsAssignableFrom(type))
+                    continue;
+
+                if (typeof(CustomGameDataObject).IsAssignableFrom(type))
+                {
+                    MethodInfo generic = AddGDOMethod.MakeGenericMethod(type);
+                    generic.Invoke(this, null);
+                    counter++;
+                }
             }
+            Log($"Registered {counter} GameDataObjects.");
         }
+
     }
 }

@@ -10,15 +10,15 @@
         public override Item SplitSubItem => GetCastedGDO<Item, Scone>();
         public override List<Item> SplitDepletedItems => new() { GetCastedGDO<Item, Scone>() };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChild("Platter", "Plate", "Plate - Ring", "Plastic - Blue");
+            Prefab.ApplyMaterialToChildCafe("Platter", "Plate", "Plate - Ring", "Plastic - Blue");
             var scones = Prefab.GetChild("Scones");
             var sconeList = new List<GameObject>();
             for (int i = 0; i < scones.GetChildCount(); i++)
             {
                 var scone = scones.GetChild(i);
-                scone.ApplyMaterial("Bread - Inside Cooked", "Chocolate");
+                scone.ApplyMaterialCafe("Bread - Inside Cooked", "Chocolate");
                 if (i > 0)
                     sconeList.Add(scone);
             }

@@ -8,11 +8,11 @@
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override Appliance DedicatedProvider => GetGDO<Appliance>(References.GetProvider("Milk"));
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
             var bowl = Prefab.GetChild("bowl");
-            bowl.ApplyMaterialToChild("Cylinder.001", "Metal Dark");
-            bowl.ApplyMaterialToChild("Cylinder", "Coffee Cup");
+            bowl.ApplyMaterialToChildCafe("Cylinder.001", "Metal Dark");
+            bowl.ApplyMaterialToChildCafe("Cylinder", "Coffee Cup");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
         }
     }

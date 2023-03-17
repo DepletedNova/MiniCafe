@@ -3,7 +3,8 @@
     public class IcedDish : CustomDish
     {
         public override string UniqueNameID => "iced_coffee_dish";
-
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Big Iced");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Big Iced");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
@@ -16,19 +17,6 @@
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Main;
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, BigIced>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, SmallIced>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
-            }
-        };
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetGDO<Process>(ProcessReferences.FillCoffee)
@@ -44,6 +32,23 @@
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetCastedGDO<Item, Ice>()
+        };
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedBigIced>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            },
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedSmallIced>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            }
         };
     }
 }

@@ -17,7 +17,7 @@
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
             Prefab.ApplyMaterialToChildren("Scone", "Raw Pastry");
         }

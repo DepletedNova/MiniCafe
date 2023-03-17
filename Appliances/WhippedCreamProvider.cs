@@ -15,31 +15,31 @@
 
         public override List<IApplianceProperty> Properties => new List<IApplianceProperty>()
         {
-            GetLimitedCItemProvider(GetCustomGameDataObject<CannedWhippedCream>().ID, 3, 3)
+            GetCItemProvider(GetCustomGameDataObject<CannedWhippedCream>().ID, 3, 3, false, false, false, false, false, true, false),
+            new CItemHolder()
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Appliance gdo)
         {
             var holdTransform = Prefab.TryAddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
             var limitedSource = Prefab.TryAddComponent<LimitedItemSourceView>();
             limitedSource.HeldItemPosition = holdTransform;
+            var whipped = Prefab.GetChild("Whipped");
             ReflectionUtils.GetField<LimitedItemSourceView>("Items").SetValue(limitedSource, new List<GameObject>()
             {
-                Prefab.GetChild("Whipped Cream (0)"),
-                Prefab.GetChild("Whipped Cream (1)"),
-                Prefab.GetChild("Whipped Cream (2)")
+                whipped.GetChild("Can 0"),
+                whipped.GetChild("Can 1"),
+                whipped.GetChild("Can")
             });
 
-            for (int i = 0; i < Prefab.GetChildCount(); i++)
-                if (Prefab.GetChild(i).name.Contains("Whipped"))
-                    Prefab.GetChild(i).ApplyMaterialToChild("Can", "Metal", "Plastic - White", "Plastic - Red");
+            whipped.ApplyMaterialToChildren("Can", "Metal", "Plastic - White", "Plastic - Red");
 
-            var stand = Prefab.GetChildFromPath("Stand/Model");
-            stand.ApplyMaterialToChild("Body", "Wood 4 - Painted");
-            stand.ApplyMaterialToChild("Doors", "Wood 4 - Painted");
-            stand.ApplyMaterialToChild("Handles", "Metal - Brass");
-            stand.ApplyMaterialToChild("Sides", "Wood - Default");
-            stand.ApplyMaterialToChild("Top", "Wood - Default");
+            var stand = Prefab.GetChild("Stand/Model");
+            stand.ApplyMaterialToChildCafe("Body", "Wood 4 - Painted");
+            stand.ApplyMaterialToChildCafe("Doors", "Wood 4 - Painted");
+            stand.ApplyMaterialToChildCafe("Handles", "Metal - Brass");
+            stand.ApplyMaterialToChildCafe("Sides", "Wood - Default");
+            stand.ApplyMaterialToChildCafe("Top", "Wood - Default");
         }
     }
 }

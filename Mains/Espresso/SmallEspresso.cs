@@ -9,10 +9,10 @@
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override string ColourBlindTag => "SEs";
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(ItemGroup gdo)
         {
             SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("fill", "Coffee - Black");
+            Prefab.ApplyMaterialToChildCafe("fill", "Coffee - Black");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
         }
     }

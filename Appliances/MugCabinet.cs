@@ -11,8 +11,8 @@
         };
         public override bool IsPurchasable => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
-        public override RarityTier RarityTier => RarityTier.Uncommon;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Misc | ShoppingTags.Basic;
+        public override RarityTier RarityTier => RarityTier.Common;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
         public override List<Process> RequiresProcessForShop => new()
         {
             GetCastedGDO<Process, CuplessFillCupProcess>()
@@ -39,7 +39,7 @@
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Appliance gdo)
         {
             var cabinet = Prefab.GetChild("Cabinet");
             var bigMugs = cabinet.GetChild("Large Mugs");
@@ -60,22 +60,22 @@
             }
 
             // Materials
-            GameObject parent = Prefab.GetChildFromPath("Block/Counter2");
+            GameObject parent = Prefab.GetChild("Block/Counter2");
             var paintedWood = GetMaterialArray("Wood 4 - Painted");
             var defaultWood = GetMaterialArray("Wood - Default");
-            parent.ApplyMaterialToChild("Counter", paintedWood);
-            parent.ApplyMaterialToChild("Counter Doors", paintedWood);
-            parent.ApplyMaterialToChild("Counter Surface", defaultWood);
-            parent.ApplyMaterialToChild("Counter Top", defaultWood);
-            parent.ApplyMaterialToChild("Handles", "Knob");
+            parent.ApplyMaterialToChildCafe("Counter", paintedWood);
+            parent.ApplyMaterialToChildCafe("Counter Doors", paintedWood);
+            parent.ApplyMaterialToChildCafe("Counter Surface", defaultWood);
+            parent.ApplyMaterialToChildCafe("Counter Top", defaultWood);
+            parent.ApplyMaterialToChildCafe("Handles", "Knob");
 
             for (int i = 0; i < smallMugs.GetChildCount(); i++)
                 SmallMug.ApplyMugMaterials(smallMugs.GetChild(i));
             for (int i = 0; i < bigMugs.GetChildCount(); i++)
                 BigMug.ApplyMugMaterials(bigMugs.GetChild(i));
 
-            cabinet.ApplyMaterialToChild("cabinet", "Wood");
-            cabinet.ApplyMaterialToChild("door", "Door Glass", "Wood", "Metal");
+            cabinet.ApplyMaterialToChildCafe("cabinet", "Wood");
+            cabinet.ApplyMaterialToChildCafe("door", "Door Glass", "Wood", "Metal");
         }
     }
 }

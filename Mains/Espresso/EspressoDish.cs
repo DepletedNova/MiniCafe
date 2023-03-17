@@ -14,52 +14,10 @@
         public override float SelectionBias => 0;
 
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Coffee Icon");
-        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Plated Big");
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Plated Big Espresso");
         public override DishType Type => DishType.Base;
         public override bool IsAvailableAsLobbyOption => true;
         public override bool DestroyAfterModUninstall => false;
-        public override List<Dish.MenuItem> ResultingMenuItems => new()
-        {
-            new()
-            {
-                Item = GetCastedGDO<ItemGroup, PlatedBigCoffee>(),
-                Phase = MenuPhase.Main,
-                Weight = 1,
-                DynamicMenuIngredient = null,
-                DynamicMenuType = DynamicMenuType.Static
-            },
-            new()
-            {
-                Item = GetCastedGDO<ItemGroup, PlatedSmallCoffee>(),
-                Phase = MenuPhase.Main,
-                Weight = 1,
-                DynamicMenuIngredient = null,
-                DynamicMenuType = DynamicMenuType.Static
-            }
-        };
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, BigEspresso>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, SmallEspresso>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, Teaspoon>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, Teaspoon>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
-            },
-        };
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetCastedGDO<Process, CuplessFillCupProcess>(),
@@ -90,12 +48,76 @@
             "Hugs with Mugs",
             "The Rancid Spoon"
         };
-
-        public override void OnRegister(GameDataObject gdo)
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
         {
-            IconPrefab.ApplyMaterialToChild("Croissant", "Croissant");
-            IconPrefab.ApplyMaterialToChild("Fill", "Americano", "Coffee - Black");
-            IconPrefab.ApplyMaterialToChild("Plate", "Marble", "Plate - Ring");
+            // Espresso
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigEspresso>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallEspresso>()
+            },
+            // Americano
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigAmericano>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallAmericano>()
+            },
+            // Iced
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigIced>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallIced>()
+            },
+            // Cappuccino
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCappuccino>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Teaspoon>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCappuccino>()
+            },
+        };
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedBigEspresso>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            },
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedSmallEspresso>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            }
+        };
+
+        public override void OnRegister(Dish gdo)
+        {
+            IconPrefab.ApplyMaterialToChildCafe("Croissant", "Croissant");
+            IconPrefab.ApplyMaterialToChildCafe("Fill", "Americano", "Coffee - Black");
+            IconPrefab.ApplyMaterialToChildCafe("Plate", "Marble", "Plate - Ring");
             BigMug.ApplyMugMaterials(IconPrefab.GetChild("Mug"));
         }
     }

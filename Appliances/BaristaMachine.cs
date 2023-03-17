@@ -22,6 +22,10 @@
         public override bool IsPurchasableAsUpgrade => true;
         public override PriceTier PriceTier => PriceTier.Medium;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
+        public override List<Process> RequiresProcessForShop => new()
+        {
+            GetCastedGDO<Process, CuplessFillCupProcess>()
+        };
 
         public override List<Appliance.ApplianceProcesses> Processes => new()
         {
@@ -45,16 +49,16 @@
             new CItemHolder()
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Appliance gdo)
         {
             var machine = Prefab.GetChild("CoffeeMachine");
-            machine.ApplyMaterialToChild("Machine", "Plastic - Dark Grey", "Metal Black", "Plastic - Grey", "Plastic");
-            machine.ApplyMaterialToChild("Steam", "Metal Very Dark");
+            machine.ApplyMaterialToChildCafe("Machine", "Plastic - Dark Grey", "Metal Black", "Plastic - Grey", "Plastic");
+            machine.ApplyMaterialToChildCafe("Steam", "Metal Very Dark");
 
             var counter = Prefab.GetChild("Counter");
-            counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
-            counter.ApplyMaterialToChild("Handle", "Knob");
-            counter.ApplyMaterialToChild("Countertop", "Wood - Default");
+            counter.ApplyMaterialCafe("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
+            counter.ApplyMaterialToChildCafe("Handle", "Knob");
+            counter.ApplyMaterialToChildCafe("Countertop", "Wood - Default");
 
             Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
         }

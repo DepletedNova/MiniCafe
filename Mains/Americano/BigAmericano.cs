@@ -23,10 +23,10 @@
             },
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(ItemGroup gdo)
         {
             BigMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("fill", "Americano", "Coffee - Black");
+            Prefab.ApplyMaterialToChildCafe("fill", "Americano", "Coffee - Black");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
         }
     }

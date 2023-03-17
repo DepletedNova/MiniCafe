@@ -7,9 +7,9 @@
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChild("Scone", "Bread - Inside Cooked", "Chocolate");
+            Prefab.ApplyMaterialToChildCafe("Scone", "Bread - Inside Cooked", "Chocolate");
         }
     }
 }

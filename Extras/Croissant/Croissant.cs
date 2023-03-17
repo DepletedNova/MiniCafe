@@ -18,9 +18,9 @@
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChild("roll", "Croissant");
+            Prefab.ApplyMaterialToChildCafe("roll", "Croissant");
         }
     }
 }

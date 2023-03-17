@@ -11,14 +11,14 @@
                 new()
                 {
                     Title = "Dispenser",
-                    Description = "Automated adds spoons to anything in front of it."
+                    Description = "Automatically adds spoons to anything in front of it"
                 }
             }, new()))
         };
         public override bool IsPurchasable => true;
         public override PriceTier PriceTier => PriceTier.Cheap;
         public override RarityTier RarityTier => RarityTier.Common;
-        public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
+        public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
         public override bool SellOnlyAsDuplicate => true;
 
         public override List<IApplianceProperty> Properties => new()
@@ -42,18 +42,18 @@
             new CInvertedPlacement()
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Appliance gdo)
         {
             Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
 
             var counter = Prefab.GetChild("Counter");
-            counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
-            counter.ApplyMaterialToChild("Handle", "Knob");
-            counter.ApplyMaterialToChild("Countertop", "Wood - Default");
+            counter.ApplyMaterialCafe("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
+            counter.ApplyMaterialToChildCafe("Handle", "Knob");
+            counter.ApplyMaterialToChildCafe("Countertop", "Wood - Default");
 
-            Prefab.ApplyMaterialToChild("Pusher", "Plastic - Blue");
+            Prefab.ApplyMaterialToChildCafe("Pusher", "Plastic - Blue");
 
-            Prefab.ApplyMaterialToChild("Dispenser", "Plastic - Red", "Plastic - Black", "Hob Black");
+            Prefab.ApplyMaterialToChildCafe("Dispenser", "Plastic - Red", "Plastic - Black", "Hob Black");
         }
     }
 }

@@ -3,7 +3,8 @@
     public class AmericanoDish : CustomDish
     {
         public override string UniqueNameID => "americano_dish";
-
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Big Americano");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Big Americano");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
@@ -16,19 +17,6 @@
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Main;
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, BigAmericano>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, SmallAmericano>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
-            }
-        };
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetGDO<Process>(ProcessReferences.FillCoffee)

@@ -1,13 +1,15 @@
 ﻿namespace MiniCafe.Desserts
 {
-    public class SmallMocha : CustomItemGroup<SmallMocha.View>
+    internal class SmallMocha : CustomItemGroup<SmallMocha.View>
     {
         public override string UniqueNameID => "small_mocha";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Small Mocha");
         public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
+        public override Item DirtiesTo => GetCastedGDO<Item, SmallMugDirty>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemValue ItemValue => ItemValue.MediumLarge;
+        public override string ColourBlindTag => "SMo";
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()
@@ -28,26 +30,25 @@
                     GetCastedGDO<Item, WhippedCream>()
                 },
                 Max = 1,
-                Min = 0,
-                RequiresUnlock = true
+                Min = 1,
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(ItemGroup gdo)
         {
             Prefab.GetComponent<View>().Setup(gdo);
 
             SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChild("fill", "Coffee Blend", "Chocolate");
+            Prefab.ApplyMaterialToChildCafe("fill", "Coffee Blend", "Chocolate");
 
             var cream = Prefab.GetChild("cream");
-            cream.ApplyMaterial("Coffee Cup");
-            cream.ApplyMaterialToChild("chocolate", "Chocolate");
+            cream.ApplyMaterialCafe("Coffee Cup");
+            cream.ApplyMaterialToChildCafe("chocolate", "Chocolate");
 
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
         }
 
-        public class View : AccessedItemGroupView
+        internal class View : AccessedItemGroupView
         {
             protected override List<ComponentGroup> groups => new()
             {
@@ -55,19 +56,6 @@
                 {
                     Item = GetCastedGDO<Item, WhippedCream>(),
                     GameObject = gameObject.GetChild("cream")
-                }
-            };
-            protected override List<ColourBlindLabel> labels => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, SmallMocha>(),
-                    Text = "SMo"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, WhippedCream>(),
-                    Text = "W"
                 }
             };
         }

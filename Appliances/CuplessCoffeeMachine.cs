@@ -6,12 +6,12 @@
         public override string UniqueNameID => "cupless_coffee_machine";
         public override List<(Locale, ApplianceInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateApplianceInfo("Coffee Machine", "Fills cups right up! Does not include cups.", new()
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Coffee Machine", "Fills cups right up! Does not include cups", new()
             {
                 new()
                 {
                     Title = "Cupless",
-                    Description = "Does not provide cups."
+                    Description = "Does not provide cups"
                 }
             }, new()))
         };
@@ -50,19 +50,19 @@
             new CItemHolder()
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Appliance gdo)
         {
             Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
 
             var machine = Prefab.GetChild("CoffeeMachine");
-            machine.ApplyMaterialToChild("Machine", "Metal", "Plastic - Red", "Plastic - Black");
-            machine.ApplyMaterialToChild("Spout", "Metal Very Dark");
-            machine.ApplyMaterialToChild("Steam", "Metal Black");
+            machine.ApplyMaterialToChildCafe("Machine", "Metal", "Plastic - Red", "Plastic - Black");
+            machine.ApplyMaterialToChildCafe("Spout", "Metal Very Dark");
+            machine.ApplyMaterialToChildCafe("Steam", "Metal Black");
 
             var counter = Prefab.GetChild("Counter");
-            counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
-            counter.ApplyMaterialToChild("Handle", "Knob");
-            counter.ApplyMaterialToChild("Countertop", "Wood - Default");
+            counter.ApplyMaterialCafe("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
+            counter.ApplyMaterialToChildCafe("Handle", "Knob");
+            counter.ApplyMaterialToChildCafe("Countertop", "Wood - Default");
         }
     }
 }

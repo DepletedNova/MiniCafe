@@ -3,7 +3,8 @@
     public class CappuccinoDish : CustomDish
     {
         public override string UniqueNameID => "cappuccino_dish";
-
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Big Cappuccino");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Big Cappuccino");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
@@ -16,19 +17,6 @@
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Main;
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, BigCappuccino>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, SmallCappuccino>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
-            }
-        };
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetCastedGDO<Process, SteamProcess>(),
@@ -45,6 +33,23 @@
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetCastedGDO<Item, Milk>(),
+        };
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedBigCappuccino>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            },
+            new()
+            {
+                Item = GetCastedGDO<Item, PlatedSmallCappuccino>(),
+                DynamicMenuType = DynamicMenuType.Static,
+                Phase = MenuPhase.Main,
+                Weight = 1
+            }
         };
     }
 }

@@ -12,7 +12,7 @@
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.Knead),
-                Duration = 1.8f,
+                Duration = 1.3f,
                 Result = GetCastedGDO<Item, UncookedScones>()
             }
         };
@@ -31,11 +31,11 @@
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChild("Bowl", "Metal Dark");
-            Prefab.ApplyMaterialToChild("Dough", "Egg Dough");
-            Prefab.ApplyMaterialToChild("Whipping", "Coffee Cup");
+            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal Dark");
+            Prefab.ApplyMaterialToChildCafe("Dough", "Egg Dough");
+            Prefab.ApplyMaterialToChildCafe("Whipping", "Coffee Cup");
         }
     }
 }

@@ -3,7 +3,8 @@
     public class CroissantDish : CustomDish
     {
         public override string UniqueNameID => "croissant_dish";
-
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Croissant");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Croissant");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
@@ -14,24 +15,12 @@
         public override float SelectionBias => 0;
         public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EspressoDish>() };
         public override List<Unlock> HardcodedBlockers => new();
-
         public override DishType Type => DishType.Extra;
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
-        {
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, Croissant>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCoffee>()
-            },
-            new()
-            {
-                Ingredient = GetCastedGDO<Item, Croissant>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCoffee>()
-            }
-        };
+
         public override HashSet<Process> RequiredProcesses => new()
         {
-            GetGDO<Process>(ProcessReferences.Cook)
+            GetGDO<Process>(ProcessReferences.Cook),
+            GetGDO<Process>(ProcessReferences.Knead)
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
@@ -45,6 +34,53 @@
         {
             GetGDO<Item>(ItemReferences.Flour),
             GetCastedGDO<Item, Butter>(),
+        };
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
+        {
+            // Espresso
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigEspresso>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallEspresso>()
+            },
+            // Americano
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigAmericano>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallAmericano>()
+            },
+            // Iced
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigIced>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallIced>()
+            },
+            // Cappuccino
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedBigCappuccino>()
+            },
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, Croissant>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedSmallCappuccino>()
+            },
         };
     }
 }

@@ -6,7 +6,7 @@
         public override string UniqueNameID => "mug_rack";
         public override List<(Locale, ApplianceInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateApplianceInfo("Mug Rack", "Put them here and wait for someone else to do it", new() 
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Dirty Mug Rack", "Put them here and wait for someone else to do it", new() 
                 { new() { Title = "Dirty Storage", Description = "Stores up to 4 dirty mugs" } }, new()))
         };
         public override bool IsPurchasable => true;
@@ -27,19 +27,19 @@
             }
         };
 
-        public override void OnRegister(GameDataObject gdo)
+        public override void OnRegister(Appliance gdo)
         {
-            var parent = Prefab.GetChildFromPath("Block/Counter2");
+            var parent = Prefab.GetChild("Block/Counter2");
             var paintedWood = GetMaterialArray("Wood 4 - Painted");
             var defaultWood = GetMaterialArray("Wood - Default");
-            parent.ApplyMaterialToChild("Counter", paintedWood);
-            parent.ApplyMaterialToChild("Counter Doors", paintedWood);
-            parent.ApplyMaterialToChild("Counter Surface", defaultWood);
-            parent.ApplyMaterialToChild("Counter Top", defaultWood);
-            parent.ApplyMaterialToChild("Handles", "Knob");
+            parent.ApplyMaterialToChildCafe("Counter", paintedWood);
+            parent.ApplyMaterialToChildCafe("Counter Doors", paintedWood);
+            parent.ApplyMaterialToChildCafe("Counter Surface", defaultWood);
+            parent.ApplyMaterialToChildCafe("Counter Top", defaultWood);
+            parent.ApplyMaterialToChildCafe("Handles", "Knob");
 
             var rack = Prefab.GetChild("Rack");
-            rack.ApplyMaterialToChild("Rack", "Plastic");
+            rack.ApplyMaterialToChildCafe("Rack", "Plastic");
 
             List<GameObject> items1 = new();
             List<GameObject> items2 = new();
@@ -48,7 +48,7 @@
             for (int i = 0; i < big.GetChildCount(); i++)
             {
                 var mug = big.GetChild(i);
-                mug.ApplyMaterialToChild("dirt", "Plate - Dirty Food");
+                mug.ApplyMaterialToChildCafe("dirt", "Plate - Dirty Food");
                 BigMug.ApplyMugMaterials(mug);
                 items1.Add(mug);
             }
@@ -57,7 +57,7 @@
             for (int i = 0; i < small.GetChildCount(); i++)
             {
                 var mug = small.GetChild(i);
-                mug.ApplyMaterialToChild("dirt", "Plate - Dirty Food");
+                mug.ApplyMaterialToChildCafe("dirt", "Plate - Dirty Food");
                 SmallMug.ApplyMugMaterials(mug);
                 items2.Add(mug);
             }
