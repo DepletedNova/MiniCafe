@@ -11,7 +11,7 @@
                 new()
                 {
                     Title = "<sprite name=\"upgrade\" color=#A8FF1E> Filling",
-                    Description = "Performs <sprite name=\"fill_coffee\"> 50% faster and <sprite name=\"steam_0\"> 50% slower"
+                    Description = "Performs <sprite name=\"fill_coffee\"> 75% faster and <sprite name=\"steam_0\"> 50% slower"
                 }
             }, new()))
         };
@@ -33,7 +33,7 @@
             {
                 IsAutomatic = true,
                 Process = GetGDO<Process>(ProcessReferences.FillCoffee),
-                Speed = 1.5f,
+                Speed = 1.75f,
                 Validity = ProcessValidity.Generic
             },
             new()

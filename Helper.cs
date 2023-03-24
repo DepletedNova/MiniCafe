@@ -1,4 +1,6 @@
-﻿namespace MiniCafe
+﻿using UnityEngine.VFX;
+
+namespace MiniCafe
 {
     internal static class Helper
     {
@@ -9,20 +11,6 @@
         {
             return GetExistingGDO(id) as T;
         }
-
-        public static ItemGroup.ItemSet ExtrasSet => new()
-        {
-            Items = new()
-            {
-                GetCastedGDO<Item, Teaspoon>(),
-                GetCastedGDO<Item, Croissant>(),
-                GetCastedGDO<Item, Scone>()
-            },
-            IsMandatory = true,
-            RequiresUnlock = true,
-            Max = 1,
-            Min = 1,
-        };
 
         internal interface IWontRegister { }
 
@@ -96,14 +84,14 @@
 
             public GameObject LabelGameObject;
 
-            public virtual void Setup(GameDataObject gdo)
+            public virtual void Setup(Item gdo)
             {
                 ComponentGroups = groups;
 
                 if (labels.Count > 0)
                 {
                     ComponentLabels = labels;
-                    LabelGameObject = ColorblindUtils.cloneColourBlindObjectAndAddToItem(gdo as Item);
+                    LabelGameObject = ColorblindUtils.cloneColourBlindObjectAndAddToItem(gdo);
                     ColorblindUtils.setColourBlindLabelObjectOnItemGroupView(this, LabelGameObject);
                 }
             }
@@ -117,10 +105,43 @@
             if (steam != null)
                 steam.ApplyVisualEffect("Steam");
 
-            var extras = prefab.GetChild("Sides");
-            extras.ApplyMaterialToChildCafe("Spoon", "Metal");
-            extras.ApplyMaterialToChildCafe("Croissant", "Croissant");
-            extras.ApplyMaterialToChildCafe("Scone", "Bread - Inside Cooked", "Chocolate");
+            AttachPlateExtras(prefab);
+        }
+
+        private static GameObject ExtrasPrefab;
+        internal static void AttachPlateExtras(this GameObject prefab)
+        {
+            if (ExtrasPrefab == null)
+            {
+                ExtrasPrefab = Main.Bundle.LoadAsset<GameObject>("Sides");
+                ExtrasPrefab.ApplyMaterialToChildCafe("Spoon", "Metal");
+                ExtrasPrefab.ApplyMaterialToChildCafe("Croissant", "Croissant");
+                ExtrasPrefab.ApplyMaterialToChildCafe("Scone", "Bread - Inside Cooked", "Chocolate");
+            }
+            var extras = Object.Instantiate(ExtrasPrefab);
+            var transform = extras.transform;
+            transform.SetParent(prefab.transform, false);
+            transform.localPosition = new(-0.117f, 0.005f, 0.021f);
+            transform.localRotation = Quaternion.Euler(0, 94.24f, 0);
+            extras.name = "Sides";
+        }
+
+        private static Dictionary<string, VisualEffectAsset> VisualEffects = new();
+        internal static VisualEffect ApplyVisualEffect(this GameObject gameObject, string effectName)
+        {
+            if (VisualEffects.IsNullOrEmpty())
+            {
+                foreach (VisualEffectAsset asset in Resources.FindObjectsOfTypeAll<VisualEffectAsset>())
+                {
+                    if (!VisualEffects.ContainsKey(asset.name))
+                    {
+                        VisualEffects.Add(asset.name, asset);
+                    }
+                }
+            }
+            var comp = gameObject.TryAddComponent<VisualEffect>();
+            comp.visualEffectAsset = VisualEffects.TryGetValue(effectName, out var effect) ? effect : null;
+            return comp;
         }
 
         // Materials

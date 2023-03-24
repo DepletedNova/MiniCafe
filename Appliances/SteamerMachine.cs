@@ -11,7 +11,7 @@
                 new()
                 {
                     Title = "<sprite name=\"upgrade\" color=#A8FF1E> Steamy",
-                    Description = "Performs <sprite name=\"steam_0\"> 75% faster but does not perform <sprite name=\"fill_coffee\">"
+                    Description = "Performs <sprite name=\"steam_0\"> 125% faster but does not perform <sprite name=\"fill_coffee\">"
                 }
             }, new()))
         };
@@ -33,7 +33,7 @@
             {
                 IsAutomatic = true,
                 Process = GetCastedGDO<Process, SteamProcess>(),
-                Speed = 1.75f,
+                Speed = 2.25f,
                 Validity = ProcessValidity.Generic
             }
         };

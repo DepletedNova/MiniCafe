@@ -10,7 +10,7 @@ namespace MiniCafe.Patches
         [HarmonyPostfix]
         internal static void TotalPlates_Postfix(ref int __result, Dictionary<int, int> ___ProvidersOfType)
         {
-            if (GrantNecessaryMugs.HasOnlyMugs())
+            if (GrantNecessaryEquipment.HasOnlyMugs())
                 __result = 99;
         }
     }
