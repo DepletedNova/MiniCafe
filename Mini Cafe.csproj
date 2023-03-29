@@ -36,7 +36,7 @@
       <HintPath>..\IngredientLib\bin\Release\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="ApplianceLib-Workshop">
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\1599600\2950474624\ApplianceLib-Workshop.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\1599600\2934088024\ApplianceLib-Workshop.dll</HintPath>
     </Reference>
     <Reference Include="IngredientLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -151,7 +151,6 @@
     <Compile Include="Items\Kettle\KettleRaw.cs" />
     <Compile Include="Items\Kettle\Kettle.cs" />
     <Compile Include="Items\LemonSlice.cs" />
-    <Compile Include="Items\LemonSlicePlated.cs" />
     <Compile Include="Mains\Coffee\Americano\PlatedSmallAmericano.cs" />
     <Compile Include="Mains\Coffee\Americano\PlatedBigAmericano.cs" />
     <Compile Include="Mains\Coffee\Cappuccino\PlatedSmallCappuccino.cs" />
@@ -187,6 +186,7 @@
     <Compile Include="Mains\Tea\Sage\Sage.cs" />
     <Compile Include="Patches\GrantNecessaryAppliances_Patch.cs" />
     <Compile Include="Patches\TakeFromComponentSplit_Patch.cs" />
+    <Compile Include="Processes\RequiresMugProcess.cs" />
     <Compile Include="Processes\SteepProcess.cs" />
     <Compile Include="Extras\Croissant\CroissantCoffeeDish.cs" />
     <Compile Include="Desserts\Mocha\MochaDish.cs" />

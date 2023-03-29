@@ -148,7 +148,7 @@ namespace MiniCafe.Systems
                 if (unlock.Type != CardType.Default)
                     continue;
 
-                if (MinimumHasItem(unlock.ID, SmallMug.ItemID))
+                if (HasProcess(unlock.ID, RequiresMugProcess.StaticID))
                     return true;
             }
             return false;
@@ -173,7 +173,7 @@ namespace MiniCafe.Systems
                     continue;
                 }
 
-                if (MinimumHasItem(unlock.ID, SmallMug.ItemID))
+                if (HasProcess(unlock.ID, RequiresMugProcess.StaticID))
                     hasEspresso = true;
             }
             return !hasOther && hasEspresso;
@@ -185,6 +185,14 @@ namespace MiniCafe.Systems
                 return false;
 
             return dish.MinimumIngredients.Any(item => item.ID == item_id);
+        }
+
+        private static bool HasProcess(int id, int process_id)
+        {
+            if (!GameData.Main.TryGet<Dish>(id, out var dish, false))
+                return false;
+
+            return dish.RequiredProcesses.Any(process => process.ID == process_id);
         }
     }
 }

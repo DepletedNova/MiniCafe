@@ -14,7 +14,7 @@
             {
                 Result = GetCastedGDO<Item, KettleBoiled>(),
                 Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 8
+                Duration = 6
             }
         };
 

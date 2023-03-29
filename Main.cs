@@ -1,44 +1,34 @@
-﻿global using KitchenLib;
-global using KitchenLib.Customs;
-global using KitchenLib.Utils;
-global using KitchenLib.References;
-global using KitchenLib.Event;
-global using KitchenLib.Colorblind;
-global using static KitchenLib.Utils.GDOUtils;
-global using static KitchenLib.Utils.KitchenPropertiesUtils;
-
-global using KitchenMods;
-global using KitchenData;
-global using Kitchen;
-
-global using IngredientLib;
+﻿global using IngredientLib;
 global using IngredientLib.Ingredient.Items;
-
-global using System.Linq;
-global using System.Reflection;
-global using System.Collections.Generic;
-
-global using UnityEngine;
-
-global using Unity.Entities;
-global using Unity.Collections;
-
+global using Kitchen;
+global using KitchenData;
+global using KitchenLib;
+global using KitchenLib.Colorblind;
+global using KitchenLib.Customs;
+global using KitchenLib.Event;
+global using KitchenLib.References;
+global using KitchenLib.Utils;
+global using KitchenMods;
 global using MessagePack;
-
-global using TMPro;
-
 global using MiniCafe.Appliances;
+global using MiniCafe.Components;
+global using MiniCafe.Extras;
 global using MiniCafe.Items;
-global using MiniCafe.Processes;
-global using MiniCafe.Desserts;
 global using MiniCafe.Mains.Coffee;
 global using MiniCafe.Mains.Tea;
-global using MiniCafe.Extras;
-global using MiniCafe.Components;
+global using MiniCafe.Processes;
 global using MiniCafe.Views;
-global using static MiniCafe.Helper;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Reflection;
+global using TMPro;
+global using Unity.Collections;
+global using Unity.Entities;
+global using UnityEngine;
+global using static KitchenLib.Utils.GDOUtils;
+global using static KitchenLib.Utils.KitchenPropertiesUtils;
 global using static MiniCafe.Extras.ExtraHelper;
-using ApplianceLib.Api.References;
+global using static MiniCafe.Helper;
 using ApplianceLib.Api;
 
 namespace MiniCafe
@@ -46,7 +36,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.5.0";
+        public const string VERSION = "1.5.2";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -124,7 +114,7 @@ namespace MiniCafe
             lemon.SplitCount = 1;
             lemon.AllowSplitMerging = true;
             lemon.PreventExplicitSplit = true;
-            lemon.SplitDepletedItems = new() { GetCastedGDO<Item, LemonSlicePlated>() };
+            lemon.SplitDepletedItems = new() { GetCastedGDO<Item, LemonSlice>() };
             lemon.SplitSubItem = GetCastedGDO<Item, LemonSlice>();
         }
 

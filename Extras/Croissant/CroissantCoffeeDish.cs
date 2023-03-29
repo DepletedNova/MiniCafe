@@ -11,7 +11,7 @@
         public override CardType CardType => CardType.Default;
         public override int MinimumFranchiseTier => 0;
         public override bool IsSpecificFranchiseTier => false;
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.LargeDecrease;
         public override float SelectionBias => 0;
         public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EspressoDish>() };
         public override List<Unlock> HardcodedBlockers => new() { GetCastedGDO<Unlock, CroissantTeaDish>() };

@@ -31,7 +31,7 @@
             Prefab.ApplyMaterialToChildCafe("Hibiscus", "Hibiscus Teapot");
         }
 
-        public override int SplitCount => 4;
+        public override int SplitCount => 6;
         public override float SplitSpeed => 1;
         public override bool PreventExplicitSplit => true;
         public override bool AllowSplitMerging => true;

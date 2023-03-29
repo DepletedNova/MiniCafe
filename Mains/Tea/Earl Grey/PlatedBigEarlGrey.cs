@@ -49,6 +49,7 @@
 
             Prefab.ApplyMaterialToChildCafe("Lemon", "Lemon", "Lemon Inner", "White Fruit");
             Prefab.ApplyMaterialToChildCafe("Honey", "Honey");
+            Prefab.ApplyMaterialToChildCafe("Napkin", "Cloth - Fancy");
         }
 
         internal class View : PlatedItemGroupView
@@ -58,7 +59,7 @@
                 new()
                 {
                     Item = GetCastedGDO<Item, EarlGreySteeped>(),
-                    Text = "SEG"
+                    Text = "BEG"
                 },
                 new()
                 {

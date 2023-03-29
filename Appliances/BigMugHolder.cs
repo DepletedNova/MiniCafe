@@ -13,9 +13,16 @@
         public override PriceTier PriceTier => PriceTier.Medium;
         public override RarityTier RarityTier => RarityTier.Common;
         public override ShoppingTags ShoppingTags => ShoppingTags.Misc;
+        public override List<Appliance.ApplianceProcesses> Processes => new()
+        {
+            new()
+            {
+                Process = GetCastedGDO<Process, RequiresMugProcess>()
+            }
+        };
         public override List<Process> RequiresProcessForShop => new()
         {
-            GetCastedGDO<Process, CuplessFillCupProcess>()
+            GetCastedGDO<Process, RequiresMugProcess>()
         };
 
         public override List<Appliance> Upgrades => new()

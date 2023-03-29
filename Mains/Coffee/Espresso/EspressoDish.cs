@@ -20,6 +20,7 @@
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetCastedGDO<Process, CuplessFillCupProcess>(),
+            GetCastedGDO<Process, RequiresMugProcess>()
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
@@ -31,7 +32,6 @@
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, SmallMug>(),
             GetCastedGDO<Item, Teaspoon>(),
         };
         public override List<string> StartingNameSet => new()

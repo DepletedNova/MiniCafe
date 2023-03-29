@@ -19,7 +19,8 @@
         public override bool DestroyAfterModUninstall => false;
         public override HashSet<Process> RequiredProcesses => new()
         {
-            GetGDO<Process>(ProcessReferences.Cook)
+            GetGDO<Process>(ProcessReferences.Cook),
+            GetCastedGDO<Process, RequiresMugProcess>()
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
@@ -31,7 +32,6 @@
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, SmallMug>(),
             GetCastedGDO<Item, Teaspoon>(),
             GetCastedGDO<Item, Kettle>(),
             GetCastedGDO<Item, EarlGrey>(),
@@ -48,6 +48,7 @@
             "The Tipsy Teapot",
             "Tea-riffic!",
             "Tea?",
+            "Lorem Sipsum"
         };
         public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => GetUnlocks(GetCastedGDO<Item, Teaspoon>());
         public override List<Dish.MenuItem> ResultingMenuItems => new()

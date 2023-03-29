@@ -32,7 +32,7 @@
             parent.ApplyMaterialToChildCafe("Handles", "Knob");
 
             Prefab.ApplyMaterialToChildCafe("Container", "Door Glass");
-            Prefab.ApplyMaterialToChildCafe("Sage", "Sage", "Sage Dried 1", "Sage Dried 2");
+            Prefab.ApplyMaterialToChildCafe("Sage", "Sage", "Sage", "Sage");
         }
     }
 }

@@ -28,6 +28,7 @@
             BigMug.ApplyMugMaterials(Prefab.GetChild("mug"));
             Prefab.ApplyMaterialToChildCafe("fill", "Americano", "Coffee - Black");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
+            Prefab.ApplyMaterialToChildCafe("Straw", "Plastic - Red", "Plastic - Red");
         }
     }
 }

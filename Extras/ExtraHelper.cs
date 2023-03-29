@@ -95,7 +95,6 @@
                 GetCastedGDO<Item, Croissant>(),
                 GetCastedGDO<Item, Scone>()
             },
-            IsMandatory = true,
             RequiresUnlock = true,
             Max = 1,
             Min = 1,

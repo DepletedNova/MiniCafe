@@ -7,7 +7,17 @@
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override int MaxOrderSharers => 2;
-        public override ItemValue ItemValue => ItemValue.Medium;
+        public override ItemValue ItemValue => ItemValue.Small;
+        public override List<Item.ItemProcess> Processes => new()
+        {
+            new()
+            {
+                Duration = 5f,
+                IsBad = true,
+                Process = GetGDO<Process>(ProcessReferences.Cook),
+                Result = GetGDO<Item>(ItemReferences.BurnedFood)
+            }
+        };
 
         public override void OnRegister(Item gdo)
         {

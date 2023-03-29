@@ -21,7 +21,7 @@
             {
                 Result = GetCastedGDO<Item, KettleSteeped>(),
                 Process = GetCastedGDO<Process, SteepProcess>(),
-                Duration = 8
+                Duration = 6
             }
         };
 

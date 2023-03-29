@@ -12,9 +12,16 @@ namespace MiniCafe.Appliances
                 { new() { Title = "Dirty Storage", Description = "Stores up to 4 dirty mugs" } }, new()))
         };
         public override bool IsPurchasable => true;
+        public override List<Appliance.ApplianceProcesses> Processes => new()
+        {
+            new()
+            {
+                Process = GetCastedGDO<Process, RequiresMugProcess>()
+            }
+        };
         public override List<Process> RequiresProcessForShop => new()
         {
-            GetCastedGDO<Process, CuplessFillCupProcess>()
+            GetCastedGDO<Process, RequiresMugProcess>()
         };
         public override PriceTier PriceTier => PriceTier.Cheap;
         public override RarityTier RarityTier => RarityTier.Common;
