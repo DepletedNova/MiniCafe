@@ -4,7 +4,7 @@
     {
         public override string UniqueNameID => "small_hibiscus";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Small Hibiscus");
-        public override Item DisposesTo => GetCastedGDO<Item, BigMug>();
+        public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
@@ -20,16 +20,6 @@
                 IsMandatory = true,
                 Min = 2,
                 Max = 2,
-            },
-            new()
-            {
-                Items = new()
-                {
-                    GetCastedGDO<Item, HoneyIngredient>(),
-                    GetCastedGDO<Item, LemonSlice>()
-                },
-                Min = 0,
-                Max = 2
             }
         };
 

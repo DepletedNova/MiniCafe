@@ -1,4 +1,5 @@
 ﻿using ApplianceLib.Api;
+using KitchenLib.Registry;
 
 namespace MiniCafe.Appliances
 {
@@ -37,6 +38,13 @@ namespace MiniCafe.Appliances
                 ApplianceKey = Main.DirtyMugKey
             }
         };
+
+        public override void Convert(GameData gameData, out GameDataObject gdo)
+        {
+            base.Convert(gameData, out gdo);
+            if (ModRegistery.Registered.Any(modPair => modPair.Value.ModID == "paperPlates"))
+                (gdo as Appliance).IsPurchasable = false;
+        }
 
         public override void OnRegister(Appliance gdo)
         {

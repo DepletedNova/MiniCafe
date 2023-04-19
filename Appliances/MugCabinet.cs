@@ -53,17 +53,32 @@
             var smallMugs = cabinet.GetChild("Small Mugs");
 
             // View
-            if (!Prefab.HasComponent<DualLimitedSourceView>())
+            var sourceView = Prefab.TryAddComponent<DualLimitedSourceView>();
+            sourceView.Animator = Prefab.GetComponent<Animator>();
+            if (!Main.PaperPlatesInstalled)
             {
-                var sourceView = Prefab.AddComponent<DualLimitedSourceView>();
-
                 for (int i = 0; i < smallMugs.GetChildCount(); i++)
                     sourceView.Items1.Add(smallMugs.GetChild(i).gameObject);
 
                 for (int i = 0; i < bigMugs.GetChildCount(); i++)
                     sourceView.Items2.Add(bigMugs.GetChild(i).gameObject);
-
-                sourceView.Animator = Prefab.GetComponent<Animator>();
+            }
+            else
+            {
+                gdo.Properties = new()
+                {
+                    GetLimitedCItemProvider(SmallMug.ItemID, 0, 0),
+                    new CDualLimitedProvider()
+                    {
+                        Current = 1,
+                        Provide1 = SmallMug.ItemID,
+                        Available1 = 0,
+                        Maximum1 = 0,
+                        Provide2 = BigMug.ItemID,
+                        Available2 = 0,
+                        Maximum2 = 0,
+                    }
+                };
             }
 
             // Materials

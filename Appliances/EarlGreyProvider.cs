@@ -35,6 +35,8 @@
             container.ApplyMaterial("Wood 1");
             container.ApplyMaterialToChildCafe("Herbs", "Earl Grey");
             container.ApplyMaterialToChildren("extra", "Earl Grey Extra");
+
+            Prefab.ApplyMaterialToChildCafe("Napkin", "Paper", "Earl Grey Tea");
         }
     }
 }

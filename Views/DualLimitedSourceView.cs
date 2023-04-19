@@ -11,7 +11,7 @@ namespace MiniCafe.Views
         protected override void UpdateData(ViewData data)
         {
             Animator.SetInteger(Index, data.Current);
-            if (Items1 == null || Items2 == null)
+            if (Items1.IsNullOrEmpty() || Items2.IsNullOrEmpty())
                 return;
             var current = data.Current == 1;
             UpdateAmount(current ? data.CurrentAvailable : data.Available1, ref Displayed1, ref Items1);

@@ -29,8 +29,11 @@
         public override void OnRegister(Item gdo)
         {
             ApplyMugMaterials(Prefab.GetChild("mug"));
+
+            if (Main.PaperPlatesInstalled)
+                gdo.IsIndisposable = false;
         }
 
-        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterialCafe("Light Coffee Cup", "Coffee Cup");
+        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterialCafe("Coffee Cup", "Sack - Blue");
     }
 }

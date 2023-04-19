@@ -100,7 +100,8 @@ namespace MiniCafe
         // Generic
         internal static void ApplyGenericPlated(this GameObject prefab)
         {
-            prefab.ApplyMaterialToChildCafe("Plate", "Plate", "Plate - Ring");
+            string size = prefab.name.ToLower().Contains("big") ? "Sack - Blue" : "Coffee Blend";
+            prefab.ApplyMaterialToChildCafe("Plate", "Plate", size);
             var steam = prefab.GetChild("Steam");
             if (steam != null)
                 steam.ApplyVisualEffect("Steam");
@@ -121,8 +122,6 @@ namespace MiniCafe
             var extras = Object.Instantiate(ExtrasPrefab);
             var transform = extras.transform;
             transform.SetParent(prefab.transform, false);
-            transform.localPosition = new(-0.117f, 0.005f, 0.021f);
-            transform.localRotation = Quaternion.Euler(0, 94.24f, 0);
             extras.name = "Sides";
         }
 

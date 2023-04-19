@@ -2,6 +2,13 @@
 {
     internal class KettleFilled : CustomItemGroup<KettleFilled.View>
     {
+        public static int KettleID { get; private set; }
+        public override void AttachDependentProperties(GameData gameData, GameDataObject gdo)
+        {
+            base.AttachDependentProperties(gameData, gdo);
+            KettleID = gdo.ID;
+        }
+
         public override string UniqueNameID => "kettle_filled";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Kettle");
         public override ItemCategory ItemCategory => ItemCategory.Generic;

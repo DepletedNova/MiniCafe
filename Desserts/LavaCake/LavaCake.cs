@@ -6,13 +6,13 @@
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake");
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override int MaxOrderSharers => 2;
+        public override int MaxOrderSharers => 1;
         public override ItemValue ItemValue => ItemValue.Small;
         public override List<Item.ItemProcess> Processes => new()
         {
             new()
             {
-                Duration = 5f,
+                Duration = 4.5f,
                 IsBad = true,
                 Process = GetGDO<Process>(ProcessReferences.Cook),
                 Result = GetGDO<Item>(ItemReferences.BurnedFood)

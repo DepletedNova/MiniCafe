@@ -20,16 +20,6 @@
                 IsMandatory = true,
                 Min = 2,
                 Max = 2,
-            },
-            new()
-            {
-                Items = new()
-                {
-                    GetCastedGDO<Item, HoneyIngredient>(),
-                    GetCastedGDO<Item, LemonSlice>()
-                },
-                Min = 0,
-                Max = 2
             }
         };
 

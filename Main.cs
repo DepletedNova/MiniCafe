@@ -30,17 +30,20 @@ global using static KitchenLib.Utils.KitchenPropertiesUtils;
 global using static MiniCafe.Extras.ExtraHelper;
 global using static MiniCafe.Helper;
 using ApplianceLib.Api;
+using KitchenLib.Registry;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.5.2";
+        public const string VERSION = "1.6.1";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
         internal static AssetBundle Bundle;
+
+        internal static bool PaperPlatesInstalled => ModRegistery.Registered.Any(modPair => modPair.Value.ModID == "paperPlates");
 
         internal void AddMaterials()
         {
@@ -123,14 +126,17 @@ namespace MiniCafe
             foreach (var appliance in gameData.Get<Appliance>())
             {
                 #region Steeping
-                if (appliance.GetProperty<CItemHolder>(out var _) && !appliance.GetProperty<CItemProvider>(out var _) && !appliance.Processes.Any(p => 
-                    p.Process.ID == ProcessReferences.Cook || p.Process.ID == GetCustomGameDataObject<SteepProcess>().ID))
+                var hasProvider = appliance.GetProperty<CItemProvider>(out var cProvider);
+                var isFreezer = appliance.ID == ApplianceReferences.Freezer;
+                if ((appliance.GetProperty<CItemHolder>(out var _) && hasProvider && cProvider.AutoPlaceOnHolder && cProvider.Maximum == 1) || 
+                    appliance.Name.ToLower().Contains("counter") || isFreezer)
                 {
                     appliance.Processes.Add(new()
                     {
                         Process = GetCastedGDO<Process, SteepProcess>(),
                         IsAutomatic = true,
-                        Speed = appliance.ID == ApplianceReferences.Freezer ? 1.5f : 1f,
+                        Speed = isFreezer ? 1 : 2f,
+                        Validity = ProcessValidity.Generic
                     });
                 }
                 #endregion
@@ -181,12 +187,12 @@ namespace MiniCafe
                 if (type.IsAbstract || typeof(IWontRegister).IsAssignableFrom(type))
                     continue;
 
-                if (typeof(CustomGameDataObject).IsAssignableFrom(type))
-                {
-                    MethodInfo generic = AddGDOMethod.MakeGenericMethod(type);
-                    generic.Invoke(this, null);
-                    counter++;
-                }
+                if (!typeof(CustomGameDataObject).IsAssignableFrom(type))
+                    continue;
+
+                MethodInfo generic = AddGDOMethod.MakeGenericMethod(type);
+                generic.Invoke(this, null);
+                counter++;
             }
             Log($"Registered {counter} GameDataObjects.");
         }

@@ -44,7 +44,17 @@
             mugList.Reverse();
 
             // View
-            Prefab.TryAddComponent<LocalLimitedItemSourceView>().Items = mugList;
+            if (!Main.PaperPlatesInstalled)
+            {
+                Prefab.TryAddComponent<LocalLimitedItemSourceView>().Items = mugList;
+            }
+            else
+            {
+                gdo.Properties = new()
+                {
+                    GetUnlimitedCItemProvider(BigMug.ItemID)
+                };
+            }
 
             // Materials
             GameObject parent = Prefab.GetChild("Block/Counter2");

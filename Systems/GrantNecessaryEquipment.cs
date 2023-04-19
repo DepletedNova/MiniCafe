@@ -3,7 +3,7 @@ using System;
 
 namespace MiniCafe.Systems
 {
-    [UpdateAfter(typeof(GrantNecessaryAppliances))]
+    [UpdateBefore(typeof(GrantNecessaryAppliances))]
     internal class GrantNecessaryEquipment : NightSystem, IModSystem
     {
         private static EntityQuery Unlocks;

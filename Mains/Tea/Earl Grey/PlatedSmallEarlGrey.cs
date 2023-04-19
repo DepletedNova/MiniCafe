@@ -33,7 +33,7 @@
                 },
                 RequiresUnlock = true,
                 Min = 0,
-                Max = 2
+                Max = 1
             },
             ExtrasSet
         };
@@ -48,8 +48,8 @@
             Prefab.ApplyMaterialToChildren("Decoration", "Plastic - Dark Green");
 
             Prefab.ApplyMaterialToChildCafe("Lemon", "Lemon", "Lemon Inner", "White Fruit");
-            Prefab.ApplyMaterialToChildCafe("Honey", "Honey");
-            Prefab.ApplyMaterialToChildCafe("Napkin", "Cloth - Fancy");
+            Prefab.ApplyMaterialToChildCafe("Honey", "Door Glass", "Honey", "Wood 1");
+            Prefab.ApplyMaterialToChildCafe("Napkin", "Clothing Soft Pink");
         }
 
         internal class View : PlatedItemGroupView

@@ -35,6 +35,8 @@
             container.ApplyMaterial("Wood 1");
             container.ApplyMaterialToChildCafe("Herbs", "Hibiscus");
             container.ApplyMaterialToChildren("extra", "Hibiscus Extra");
+
+            Prefab.ApplyMaterialToChildCafe("Napkin", "Paper", "Hibiscus Teapot");
         }
     }
 }

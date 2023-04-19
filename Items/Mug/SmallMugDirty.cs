@@ -29,6 +29,9 @@
         {
             SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
             Prefab.ApplyMaterialToChildCafe("dirty_mug", "Plate - Dirty Food");
+
+            if (Main.PaperPlatesInstalled)
+                gdo.IsIndisposable = false;
         }
     }
 }
