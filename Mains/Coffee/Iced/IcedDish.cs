@@ -16,6 +16,9 @@
         public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EspressoDish>() };
         public override List<Unlock> HardcodedBlockers => new();
 
+        public override Item RequiredDishItem => GetCastedGDO<Item, SmallMug>();
+        public override bool RequiredNoDishItem => true;
+
         public override DishType Type => DishType.Main;
         public override HashSet<Process> RequiredProcesses => new()
         {

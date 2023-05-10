@@ -11,6 +11,15 @@
         public override ItemValue ItemValue => ItemValue.MediumLarge;
         public override bool CanContainSide => true;
 
+        public override List<ItemGroupView.ColourBlindLabel> Labels => ApplyPlatedLabel(new()
+            {
+                new()
+                {
+                    Item = GetGDO<Item>(ItemReferences.Water),
+                    Text = "SAm"
+                }
+            });
+
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()
@@ -37,17 +46,7 @@
             Prefab.ApplyMaterialToChildCafe("Straw", "Plastic - Red", "Plastic - Red");
         }
 
-        internal class View : PlatedItemGroupView
-        {
-            protected override List<ColourBlindLabel> labels => new()
-            {
-                new()
-                {
-                    Item = GetGDO<Item>(ItemReferences.Water),
-                    Text = "SAm"
-                }
-            };
-        }
+        internal class View : PlatedItemGroupView { }
 
     }
 }

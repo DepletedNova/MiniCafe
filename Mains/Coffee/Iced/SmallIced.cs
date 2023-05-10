@@ -7,7 +7,14 @@
         public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override string ColourBlindTag => "SIc";
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, Ice>(),
+                Text = "SIc"
+            }
+        };
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()

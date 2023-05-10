@@ -58,8 +58,7 @@
     </Reference>
     <Reference Include="KitchenLib-Workshop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\KitchenLib\content\KitchenLib-Workshop.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\1599600\2898069883\KitchenLib-Workshop.dll</HintPath>
     </Reference>
     <Reference Include="KitchenMode">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\KitchenMode.dll</HintPath>
@@ -127,10 +126,15 @@
     <Compile Include="Appliances\MugCabinet.cs" />
     <Compile Include="Appliances\DirtyMugRack.cs" />
     <Compile Include="Appliances\TeaspoonDispenser.cs" />
+    <Compile Include="Appliances\SprinklesProvider.cs" />
     <Compile Include="Appliances\WhippedCreamProvider.cs" />
     <Compile Include="Components\CComponentSplitDepleted.cs" />
     <Compile Include="Components\CDualLimitedProvider.cs" />
     <Compile Include="Components\CInvertedPlacement.cs" />
+    <Compile Include="Desserts\Donuts\CookedDonut.cs" />
+    <Compile Include="Desserts\Donuts\Donut.cs" />
+    <Compile Include="Desserts\Donuts\DonutDish.cs" />
+    <Compile Include="Desserts\Donuts\UncookedDonut.cs" />
     <Compile Include="Desserts\LavaCake\LavaCake.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeDish.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeMix.cs" />
@@ -145,6 +149,8 @@
     <Compile Include="Extras\Scone\SconePlatter.cs" />
     <Compile Include="Extras\Scone\UncookedScones.cs" />
     <Compile Include="Extras\Scone\UnmixedSconeDough.cs" />
+    <Compile Include="Items\Sprinkles.cs" />
+    <Compile Include="Items\SprinklesIngredient.cs" />
     <Compile Include="Items\Kettle\KettleFilled.cs" />
     <Compile Include="Items\Kettle\KettleBoiled.cs" />
     <Compile Include="Items\Kettle\KettleSteeped.cs" />
@@ -184,7 +190,6 @@
     <Compile Include="Mains\Tea\Sage\BigSage.cs" />
     <Compile Include="Mains\Tea\Sage\SageSteeped.cs" />
     <Compile Include="Mains\Tea\Sage\Sage.cs" />
-    <Compile Include="Patches\GrantNecessaryAppliances_Patch.cs" />
     <Compile Include="Patches\TakeFromComponentSplit_Patch.cs" />
     <Compile Include="Processes\RequiresMugProcess.cs" />
     <Compile Include="Processes\SteepProcess.cs" />
@@ -216,17 +221,22 @@
     <Compile Include="Processes\CuplessFillCupProcess.cs" />
     <Compile Include="Processes\SteamProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sides\Stroopwafel\StroopwafelDish.cs" />
+    <Compile Include="Sides\Stroopwafel\Stroopwafel.cs" />
+    <Compile Include="Sides\Stroopwafel\Wafel.cs" />
+    <Compile Include="Sides\Stroopwafel\Stroop.cs" />
+    <Compile Include="Sides\Stroopwafel\WafelTray.cs" />
+    <Compile Include="Sides\Stroopwafel\UncookedWafelTray.cs" />
+    <Compile Include="Sides\Stroopwafel\WafelMix.cs" />
+    <Compile Include="Sides\Stroopwafel\StroopMix.cs" />
     <Compile Include="Systems\DualLimitedProviderSwitch.cs" />
-    <Compile Include="Systems\GrantNecessaryEquipment.cs" />
     <Compile Include="Systems\InvertPlacement.cs" />
     <Compile Include="Systems\ResetDualLimitedNight.cs" />
     <Compile Include="Views\DualLimitedSourceView.cs" />
     <Compile Include="Views\ItemProcessView.cs" />
     <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sides\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y

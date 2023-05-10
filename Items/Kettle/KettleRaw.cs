@@ -15,6 +15,25 @@
         public override ItemStorage ItemStorageFlags => ItemStorage.None;
         public override Item DisposesTo => GetCastedGDO<Item, Kettle>();
 
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+            {
+                new()
+                {
+                    Item = GetCastedGDO<Item, Sage>(),
+                    Text = "Sa"
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, EarlGrey>(),
+                    Text = "EG"
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, Hibiscus>(),
+                    Text = "Hi"
+                },
+            };
+
         public override List<Item.ItemProcess> Processes => new()
         {
             new()
@@ -66,7 +85,6 @@
         {
             var view = Prefab.GetComponent<View>();
             view.Setup(gdo);
-            view.LabelGameObject.transform.localPosition += Vector3.up * 0.65f;
 
             Prefab.ApplyMaterialToChild("pot", "Plastic", "Metal Dark", "Metal", "Hob Black");
             Prefab.ApplyMaterialToChild("lid", "Plastic", "Metal");
@@ -105,24 +123,6 @@
                 {
                     Item = GetCastedGDO<Item, Hibiscus>(),
                     GameObject = gameObject.GetChild("Hibiscus"),
-                },
-            };
-            protected override List<ColourBlindLabel> labels => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, Sage>(),
-                    Text = "Sa"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, EarlGrey>(),
-                    Text = "EG"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, Hibiscus>(),
-                    Text = "Hi"
                 },
             };
         }

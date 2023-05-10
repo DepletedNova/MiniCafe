@@ -1,4 +1,5 @@
 ﻿using UnityEngine.VFX;
+using static Kitchen.ItemGroupView;
 
 namespace MiniCafe
 {
@@ -12,35 +13,18 @@ namespace MiniCafe
             return GetExistingGDO(id) as T;
         }
 
-        internal interface IWontRegister { }
-
-        public abstract class PlatedItemGroupView : ItemGroupView
+        public static List<ColourBlindLabel> ApplyPlatedLabel(List<ColourBlindLabel> addedLabels)
         {
-            protected virtual List<ComponentGroup> groups => new();
-            protected virtual List<ColourBlindLabel> labels => new();
+            List<ColourBlindLabel> labels = new();
+            foreach (var label in addedLabels)
+                labels.Add(label);
+            foreach (var label in defaultLabels)
+                labels.Add(label);
 
-            public GameObject LabelGameObject;
+            return labels;
+        }
 
-            private List<ComponentGroup> defaultGroups => new()
-        {
-            new()
-            {
-                Item = GetCastedGDO<Item, Teaspoon>(),
-                GameObject = gameObject.GetChild("Sides/Spoon")
-            },
-            new()
-            {
-                Item = GetCastedGDO<Item, Croissant>(),
-                GameObject = gameObject.GetChild("Sides/Croissant")
-            },
-            new()
-            {
-                Item = GetCastedGDO<Item, Scone>(),
-                GameObject = gameObject.GetChild("Sides/Scone")
-            },
-        };
-
-            private List<ColourBlindLabel> defaultLabels => new()
+        private static List<ColourBlindLabel> defaultLabels => new()
         {
             new()
             {
@@ -54,6 +38,31 @@ namespace MiniCafe
             },
         };
 
+        internal interface IWontRegister { }
+
+        public abstract class PlatedItemGroupView : ItemGroupView
+        {
+            protected virtual List<ComponentGroup> groups => new();
+
+            private List<ComponentGroup> defaultGroups => new()
+            {
+                new()
+                {
+                    Item = GetCastedGDO<Item, Teaspoon>(),
+                    GameObject = gameObject.GetChild("Sides/Spoon")
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, Croissant>(),
+                    GameObject = gameObject.GetChild("Sides/Croissant")
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, Scone>(),
+                    GameObject = gameObject.GetChild("Sides/Scone")
+                },
+            };
+
             public virtual void Setup(GameDataObject gdo)
             {
                 List<ComponentGroup> compGroups = new();
@@ -61,18 +70,6 @@ namespace MiniCafe
                     compGroups.Add(group);
                 foreach (var group in defaultGroups)
                     compGroups.Add(group);
-
-                List<ColourBlindLabel> compLabels = new();
-                foreach (var label in labels)
-                    compLabels.Add(label);
-                foreach (var label in defaultLabels)
-                    compLabels.Add(label);
-
-                ComponentGroups = compGroups;
-                ComponentLabels = compLabels;
-                LabelGameObject = ColorblindUtils.cloneColourBlindObjectAndAddToItem(gdo as Item);
-                ColorblindUtils.setColourBlindLabelObjectOnItemGroupView(this, LabelGameObject);
-                LabelGameObject.transform.Find("Title").localPosition += Vector3.up * 0.15f;
             }
         }
 
@@ -82,18 +79,9 @@ namespace MiniCafe
             protected abstract List<ComponentGroup> groups { get; }
             protected virtual List<ColourBlindLabel> labels => new();
 
-            public GameObject LabelGameObject;
-
             public virtual void Setup(Item gdo)
             {
                 ComponentGroups = groups;
-
-                if (labels.Count > 0)
-                {
-                    ComponentLabels = labels;
-                    LabelGameObject = ColorblindUtils.cloneColourBlindObjectAndAddToItem(gdo);
-                    ColorblindUtils.setColourBlindLabelObjectOnItemGroupView(this, LabelGameObject);
-                }
             }
         }
 

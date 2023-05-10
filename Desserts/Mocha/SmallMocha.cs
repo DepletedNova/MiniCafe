@@ -9,7 +9,16 @@
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override ItemValue ItemValue => ItemValue.MediumLarge;
-        public override string ColourBlindTag => "SMo";
+
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, ChocolateSauce>(),
+                Text = "SMo"
+            }
+        };
+
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()

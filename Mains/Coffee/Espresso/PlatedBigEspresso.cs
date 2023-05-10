@@ -11,6 +11,15 @@
         public override ItemValue ItemValue => ItemValue.MediumLarge;
         public override bool CanContainSide => true;
 
+        public override List<ItemGroupView.ColourBlindLabel> Labels => ApplyPlatedLabel(new()
+            {
+                new()
+                {
+                    Item = GetCastedGDO<Item, BigEspresso>(),
+                    Text = "BEs"
+                }
+            });
+
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()
@@ -38,14 +47,7 @@
 
         internal class View : PlatedItemGroupView
         {
-            protected override List<ColourBlindLabel> labels => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, BigEspresso>(),
-                    Text = "BEs"
-                }
-            };
+
         }
 
     }

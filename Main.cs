@@ -37,7 +37,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.6.1";
+        public const string VERSION = "1.6.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -74,6 +74,7 @@ namespace MiniCafe
 
             // Sides
             AddMaterial(CreateFlat("Croissant", 0xDA9134));
+            AddMaterial(CreateFlat("Stroop", 0xC97919));
 
             // Desserts
             AddMaterial(CreateFlat("Lava Cake Light", 0xA05000));

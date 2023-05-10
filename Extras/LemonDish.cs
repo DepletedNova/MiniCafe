@@ -15,8 +15,10 @@
         public override float SelectionBias => 0;
         public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EarlGreyDish>() };
         public override List<Unlock> HardcodedBlockers => new();
-
         public override DishType Type => DishType.Extra;
+
+        public override bool RequiredNoDishItem => true;
+
         public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Chop a lemon and then add directly to any tea if ordered." }

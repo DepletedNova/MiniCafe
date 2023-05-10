@@ -1,12 +1,21 @@
 ﻿namespace MiniCafe.Mains.Tea
 {
-    internal class BigSage : CustomItemGroup<BigSage.View>
+    internal class BigSage : CustomItemGroup
     {
         public override string UniqueNameID => "big_sage";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Big Sage");
         public override Item DisposesTo => GetCastedGDO<Item, BigMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
+
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, SageSteeped>(),
+                Text = "BSa"
+            }
+        };
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {
@@ -25,8 +34,6 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.GetComponent<View>().Setup(gdo);
-
             BigMug.ApplyMugMaterials(Prefab.GetChild("mug"));
             Prefab.ApplyMaterialToChildCafe("fill", "Sage Tea");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
@@ -34,42 +41,6 @@
 
             Prefab.ApplyMaterialToChildCafe("Lemon", "Lemon", "Lemon Inner", "White Fruit");
             Prefab.ApplyMaterialToChildCafe("Honey", "Honey");
-        }
-
-        internal class View : AccessedItemGroupView
-        {
-            protected override List<ComponentGroup> groups => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, LemonSlice>(),
-                    GameObject = gameObject.GetChild("Lemon")
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, HoneyIngredient>(),
-                    GameObject = gameObject.GetChild("Honey"),
-                }
-            };
-
-            protected override List<ColourBlindLabel> labels => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, SageSteeped>(),
-                    Text = "BSa"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, LemonSlice>(),
-                    Text = "L"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, HoneyIngredient>(),
-                    Text = "H"
-                }
-            };
         }
     }
 }

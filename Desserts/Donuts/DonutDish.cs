@@ -1,10 +1,10 @@
 ﻿namespace MiniCafe.Desserts
 {
-    internal class LavaCakeDish : CustomDish
+    internal class DonutDish : CustomDish
     {
-        public override string UniqueNameID => "lava_cake_dish";
-        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake");
-        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake");
+        public override string UniqueNameID => "donut_dish";
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Donut");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Donut");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
@@ -21,7 +21,7 @@
         {
             new()
             {
-                Item = GetCastedGDO<Item, LavaCake>(),
+                Item = GetCastedGDO<Item, Donut>(),
                 Phase = MenuPhase.Dessert,
                 Weight = 1f
             }
@@ -34,15 +34,19 @@
         {
             GetCastedGDO<Item, Chocolate>(),
             GetCastedGDO<Item, ButterBlock>(),
-            GetGDO<Item>(ItemReferences.Egg)
+            GetGDO<Item>(ItemReferences.Flour),
+            GetCastedGDO<Item, WhippingCreamIngredient>(),
+            GetCastedGDO<Item, MilkIngredient>(),
+            GetCastedGDO<Item, Sprinkles>()
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Crack an egg, add twice chopped chocolate, add a slice of butter, and then cook and serve. Lava Cakes can be shared between 2 customers." }
+            { Locale.English, "Knead dough or add water, add a slice of butter, add milk, then cook. Melt chocolate and add whipping cream then add to cooked doughnut. " +
+                "Doughnuts can optionally have sprinkles." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Lava Cake", "Adds Lava Cake as a dessert", "Lava?"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Doughnuts", "Adds doughnuts as a dessert", "Now with sprinkles!"))
         };
     }
 }

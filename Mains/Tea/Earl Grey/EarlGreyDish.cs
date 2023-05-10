@@ -12,6 +12,9 @@
         public override bool IsSpecificFranchiseTier => false;
         public override float SelectionBias => 0;
 
+        public override Item RequiredDishItem => GetCastedGDO<Item, SmallMug>();
+        public override bool RequiredNoDishItem => true;
+
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Tea Icon");
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Plated Small Earl Grey");
         public override DishType Type => DishType.Base;

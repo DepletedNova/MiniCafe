@@ -16,11 +16,34 @@
         public override Item DisposesTo => GetCastedGDO<Item, Kettle>();
         public override bool ApplyProcessesToComponents => true;
 
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+            {
+                new()
+                {
+                    Item = GetCastedGDO<Item, KettleSteeped>(),
+                    Text = "St"
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, SageSteeped>(),
+                    Text = "Sa"
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, EarlGreySteeped>(),
+                    Text = "EG"
+                },
+                new()
+                {
+                    Item = GetCastedGDO<Item, HibiscusSteeped>(),
+                    Text = "Hi"
+                },
+            };
+
         public override void OnRegister(ItemGroup gdo)
         {
             var view = Prefab.GetComponent<View>();
             view.Setup(gdo);
-            view.LabelGameObject.transform.localPosition += Vector3.up * 0.15f;
 
             Prefab.ApplyMaterialToChild("pot", "Plastic", "Metal Dark", "Metal", "Hob Black");
             Prefab.ApplyMaterialToChild("lid", "Plastic", "Metal");
@@ -83,30 +106,6 @@
                 {
                     Item = GetCastedGDO<Item, HibiscusSteeped>(),
                     GameObject = gameObject.GetChild("Hibiscus"),
-                },
-            };
-
-            protected override List<ColourBlindLabel> labels => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, KettleSteeped>(),
-                    Text = "St"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, SageSteeped>(),
-                    Text = "Sa"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, EarlGreySteeped>(),
-                    Text = "EG"
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, HibiscusSteeped>(),
-                    Text = "Hi"
                 },
             };
         }

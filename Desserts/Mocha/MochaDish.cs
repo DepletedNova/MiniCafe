@@ -16,6 +16,9 @@
         public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, CappuccinoDish>() };
         public override List<Unlock> HardcodedBlockers => new();
 
+        public override Item RequiredDishItem => GetCastedGDO<Item, SmallMug>();
+        public override bool RequiredNoDishItem => true;
+
         public override DishType Type => DishType.Dessert;
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
@@ -40,7 +43,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add melted chocolate to cappuccino, add whipped cream if ordered and then serve." }
+            { Locale.English, "Take chocolate and cook, then add to cappuccino and then serve. Whipped cream can optionally be ordered." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

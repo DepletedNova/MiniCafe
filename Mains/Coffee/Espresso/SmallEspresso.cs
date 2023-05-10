@@ -1,6 +1,6 @@
 ﻿namespace MiniCafe.Mains.Coffee
 {
-    public class SmallEspresso : CustomItemGroup
+    public class SmallEspresso : CustomItem
     {
         public override string UniqueNameID => "small_espresso";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Small Espresso");
@@ -9,7 +9,7 @@
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override string ColourBlindTag => "SEs";
 
-        public override void OnRegister(ItemGroup gdo)
+        public override void OnRegister(Item gdo)
         {
             SmallMug.ApplyMugMaterials(Prefab.GetChild("mug"));
             Prefab.ApplyMaterialToChildCafe("fill", "Coffee - Black");

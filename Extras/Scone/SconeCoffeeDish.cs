@@ -16,6 +16,9 @@
         public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EspressoDish>() };
         public override List<Unlock> HardcodedBlockers => new() { GetCastedGDO<Unlock, SconeTeaDish>() };
         public override DishType Type => DishType.Extra;
+
+        public override bool RequiredNoDishItem => true;
+
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetGDO<Process>(ProcessReferences.Cook),
