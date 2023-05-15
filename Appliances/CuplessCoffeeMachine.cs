@@ -1,4 +1,6 @@
-﻿namespace MiniCafe.Appliances
+﻿using MiniCafe.Appliances.Spills;
+
+namespace MiniCafe.Appliances
 {
     public class CuplessCoffeeMachine : CustomAppliance
     {
@@ -47,7 +49,11 @@
         };
         public override List<IApplianceProperty> Properties => new()
         {
-            new CItemHolder()
+            new CItemHolder(),
+            new CSpillsOnFail()
+            {
+                ID = GetCustomGameDataObject<CoffeeSpill1>().ID
+            }
         };
 
         public override void OnRegister(Appliance gdo)

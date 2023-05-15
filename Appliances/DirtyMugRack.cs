@@ -60,18 +60,18 @@ namespace MiniCafe.Appliances
             var rack = Prefab.GetChild("Rack");
             rack.ApplyMaterialToChildCafe("Rack", "Plastic");
 
-            List<Transform> items = new();
+            List<GameObject> items = new();
 
             for (int i = 0; i < rack.GetChildCount(); i++)
             {
-                var mug = rack.transform.GetChild(i);
+                var mug = rack.GetChild(i);
                 if (!mug.name.ToLower().Contains("mug"))
                     continue;
                 items.Add(mug);
             }
 
             var flexibleView = Prefab.AddComponent<FlexibleContainerView>();
-            flexibleView.Transforms = items;
+            flexibleView.Items = items;
         }
     }
 }

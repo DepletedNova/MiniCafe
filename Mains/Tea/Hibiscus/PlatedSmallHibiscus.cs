@@ -15,7 +15,7 @@
             {
                 new()
                 {
-                    Item = GetCastedGDO<Item, HibiscusSteeped>(),
+                    Item = GetCastedGDO<Item, Teaspoon>(),
                     Text = "SHi"
                 },
                 new()
@@ -36,8 +36,8 @@
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, SmallMug>(),
-                    GetCastedGDO<Item, HibiscusSteeped>()
+                    GetCastedGDO<Item, SmallHibiscus>(),
+                    GetCastedGDO<Item, Teaspoon>()
                 },
                 IsMandatory = true,
                 Min = 2,
@@ -53,8 +53,7 @@
                 RequiresUnlock = true,
                 Min = 0,
                 Max = 1
-            },
-            ExtrasSet
+            }
         };
 
         public override void OnRegister(ItemGroup gdo)
@@ -69,7 +68,7 @@
             Prefab.ApplyMaterialToChildCafe("Honey", "Door Glass", "Honey", "Wood 1");
         }
 
-        internal class View : PlatedItemGroupView
+        internal class View : AccessedItemGroupView
         {
 
             protected override List<ComponentGroup> groups => new()

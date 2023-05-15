@@ -1,6 +1,6 @@
 ﻿namespace MiniCafe.Mains.Coffee
 {
-    internal class PlatedBigAmericano : CustomItemGroup<PlatedBigAmericano.View>
+    internal class PlatedBigAmericano : CustomItemGroup
     {
         public override string UniqueNameID => "plated_big_americano";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Plated Big Americano");
@@ -11,14 +11,14 @@
         public override ItemValue ItemValue => ItemValue.MediumLarge;
         public override bool CanContainSide => true;
 
-        public override List<ItemGroupView.ColourBlindLabel> Labels => ApplyPlatedLabel(new()
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
             {
                 new()
                 {
                     Item = GetGDO<Item>(ItemReferences.Water),
                     Text = "BAm"
                 }
-            });
+            };
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {
@@ -27,25 +27,30 @@
                 Items = new()
                 {
                     GetCastedGDO<Item, BigEspresso>(),
-                    GetGDO<Item>(ItemReferences.Water)
+                    GetCastedGDO<Item, Teaspoon>()
                 },
                 IsMandatory = true,
                 Max = 2,
                 Min = 2,
             },
-            ExtrasSet
+            new()
+            {
+                Items = new()
+                {
+                    GetGDO<Item>(ItemReferences.Water)
+                },
+                Max = 1,
+                Min = 1,
+            },
         };
 
         public override void OnRegister(ItemGroup gdo)
         {
             Prefab.ApplyGenericPlated();
-            Prefab.GetComponent<View>().Setup(gdo);
 
             BigMug.ApplyMugMaterials(Prefab.GetChild("Mug"));
             Prefab.ApplyMaterialToChildCafe("Filling", "Coffee - Black", "Americano");
             Prefab.ApplyMaterialToChildCafe("Straw", "Plastic - Red", "Plastic - Red");
         }
-
-        internal class View : PlatedItemGroupView { }
     }
 }

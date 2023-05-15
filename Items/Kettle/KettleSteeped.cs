@@ -26,7 +26,7 @@
                 new()
                 {
                     Item = GetCastedGDO<Item, SageSteeped>(),
-                    Text = "Sa"
+                    Text = "Ma"
                 },
                 new()
                 {
@@ -49,10 +49,8 @@
             Prefab.ApplyMaterialToChild("lid", "Plastic", "Metal");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
 
-            // Sage
-            var sage = Prefab.GetChild("Sage");
-            sage.ApplyMaterialCafe("Sage Tea");
-            sage.ApplyMaterialToChildren("sage", "Sage");
+            // Matcha
+            Prefab.ApplyMaterialToChildCafe("Matcha", "Sage Tea");
 
             // Earl Grey
             Prefab.ApplyMaterialToChildCafe("Earl Grey", "Earl Grey Tea");
@@ -69,17 +67,6 @@
         public override Item SplitByComponentsHolder => GetCastedGDO<Item, KettleBoiled>();
         public override Item RefuseSplitWith => GetCastedGDO<Item, KettleBoiled>();
 
-        public override List<Item.ItemProcess> Processes => new()
-        {
-            new()
-            {
-                Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 12f,
-                IsBad = true,
-                Result = GetCastedGDO<Item, Kettle>()
-            }
-        };
-
         public override List<IItemProperty> Properties => new()
         {
             new CComponentSplitDepleted()
@@ -95,7 +82,7 @@
                 new()
                 {
                     Item = GetCastedGDO<Item, SageSteeped>(),
-                    GameObject = gameObject.GetChild("Sage"),
+                    GameObject = gameObject.GetChild("Matcha"),
                 },
                 new()
                 {

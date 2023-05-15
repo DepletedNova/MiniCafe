@@ -1,6 +1,6 @@
 ﻿namespace MiniCafe.Mains.Coffee
 {
-    internal class PlatedSmallCappuccino : CustomItemGroup<PlatedSmallCappuccino.View>
+    internal class PlatedSmallCappuccino : CustomItemGroup
     {
         public override string UniqueNameID => "plated_small_cappuccino";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Plated Small Cappuccino");
@@ -11,14 +11,14 @@
         public override ItemValue ItemValue => ItemValue.MediumLarge;
         public override bool CanContainSide => true;
 
-        public override List<ItemGroupView.ColourBlindLabel> Labels => ApplyPlatedLabel(new()
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
             {
                 new()
                 {
                     Item = GetCastedGDO<Item, SteamedMilk>(),
                     Text = "SCa"
                 }
-            });
+            };
 
         public override List<ItemGroup.ItemSet> Sets => new()
         {
@@ -27,29 +27,30 @@
                 Items = new()
                 {
                     GetCastedGDO<Item, SmallEspresso>(),
-                    GetCastedGDO<Item, SteamedMilk>()
+                    GetCastedGDO<Item, Teaspoon>()
                 },
                 IsMandatory = true,
                 Max = 2,
                 Min = 2,
             },
-            ExtrasSet
+            new()
+            {
+                Items = new()
+                {
+                    GetCastedGDO<Item, SteamedMilk>()
+                },
+                Max = 1,
+                Min = 1,
+            }
         };
 
         public override void OnRegister(ItemGroup gdo)
         {
             Prefab.ApplyGenericPlated();
-            Prefab.GetComponent<View>().Setup(gdo);
 
             SmallMug.ApplyMugMaterials(Prefab.GetChild("Mug"));
             Prefab.ApplyMaterialToChildCafe("Filling", "Coffee Blend", "Coffee Foam");
             Prefab.ApplyMaterialToChildCafe("Napkin", "Cloth - Blue");
         }
-
-        internal class View : PlatedItemGroupView
-        {
-
-        }
-
     }
 }

@@ -2,6 +2,8 @@
 {
     public class KettleStand : CustomAppliance
     {
+        public static int KettleID { get; private set; }
+
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Kettle Stand");
         public override string UniqueNameID => "kettle_provider";
         public override List<(Locale, ApplianceInfo)> InfoList => new()
@@ -21,6 +23,8 @@
 
         public override void OnRegister(Appliance gdo)
         {
+            KettleID = gdo.ID;
+
             var stand = Prefab.GetChild("Stand");
             List<GameObject> kettleList = new();
             for (int i = 0; i < stand.GetChildCount(); i++)

@@ -7,7 +7,7 @@
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.None;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallIncrease;
         public override int MinimumFranchiseTier => 0;
         public override bool IsSpecificFranchiseTier => false;
         public override float SelectionBias => 0;
@@ -27,7 +27,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take mug, fill with coffee, add spoon or any other valid extra, and then serve. Interact with the mug container to swap between mug types." }
+            { Locale.English, "Take mug, fill with coffee, add spoon and then serve. Interact with the mug container to swap between mug types." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -52,7 +52,7 @@
             "Bean There, Sipped That",
             "Depresso Espresso"
         };
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => ExtraHelper.GetUnlocks(GetCastedGDO<Item, Teaspoon>());
+        //public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => ExtraHelper.GetUnlocks(GetCastedGDO<Item, Teaspoon>());
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()

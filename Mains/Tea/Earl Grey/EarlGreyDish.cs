@@ -7,7 +7,7 @@
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.None;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallIncrease;
         public override int MinimumFranchiseTier => 0;
         public override bool IsSpecificFranchiseTier => false;
         public override float SelectionBias => 0;
@@ -23,11 +23,12 @@
         public override HashSet<Process> RequiredProcesses => new()
         {
             GetGDO<Process>(ProcessReferences.Cook),
-            GetCastedGDO<Process, RequiresMugProcess>()
+            GetCastedGDO<Process, RequiresMugProcess>(),
+            GetCastedGDO<Process, SteepProcess>(),
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take a kettle, fill with water, and put it to a boil. Add the earl grey and then let it steep on a counter. Portion with a mug and serve with a spoon or any other valid extra." }
+            { Locale.English, "Take a kettle, fill with water, and put it to a boil. Add the earl grey and then let it steep on a counter. Portion with a mug and serve with a spoon." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -38,7 +39,7 @@
             GetCastedGDO<Item, Teaspoon>(),
             GetCastedGDO<Item, Kettle>(),
             GetCastedGDO<Item, EarlGrey>(),
-            GetGDO<Item>(ItemReferences.Water),
+            GetGDO<Item>(ItemReferences.Water)
         };
         public override List<string> StartingNameSet => new()
         {
@@ -53,7 +54,7 @@
             "Tea?",
             "Lorem Sipsum"
         };
-        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => GetUnlocks(GetCastedGDO<Item, Teaspoon>());
+        //public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => GetUnlocks(GetCastedGDO<Item, Teaspoon>());
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()

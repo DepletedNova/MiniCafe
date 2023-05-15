@@ -33,8 +33,7 @@
 
             var container = Prefab.GetChild("Container");
             container.ApplyMaterial("Wood 1");
-            container.ApplyMaterialToChildCafe("Herbs", "Earl Grey");
-            container.ApplyMaterialToChildren("extra", "Earl Grey Extra");
+            container.ApplyMaterialToChildren("Teabag", "Cloth - Fancy", "Earl Grey Tea");
 
             Prefab.ApplyMaterialToChildCafe("Napkin", "Paper", "Earl Grey Tea");
         }

@@ -20,7 +20,7 @@
                 new()
                 {
                     Item = GetCastedGDO<Item, Sage>(),
-                    Text = "Sa"
+                    Text = "Ma"
                 },
                 new()
                 {
@@ -29,7 +29,7 @@
                 },
                 new()
                 {
-                    Item = GetCastedGDO<Item, Hibiscus>(),
+                    Item = GetCastedGDO<Item, GroundHibiscus>(),
                     Text = "Hi"
                 },
             };
@@ -38,16 +38,9 @@
         {
             new()
             {
-                Result = GetCastedGDO<Item, Kettle>(),
-                Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 8,
-                IsBad = true,
-            },
-            new()
-            {
                 Result = GetCastedGDO<Item, KettleSteeped>(),
                 Process = GetCastedGDO<Process, SteepProcess>(),
-                Duration = 6
+                Duration = 4.5f
             }
         };
 
@@ -67,9 +60,9 @@
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, Sage>(),
+                    GetCastedGDO<Item, GroundMatcha>(),
                     GetCastedGDO<Item, EarlGrey>(),
-                    GetCastedGDO<Item, Hibiscus>()
+                    GetCastedGDO<Item, GroundHibiscus>()
                 },
                 Min = 1,
                 Max = 1
@@ -91,13 +84,13 @@
             Prefab.ApplyMaterialToChild("water", "Soup - Watery");
             Prefab.GetChild("Steam").ApplyVisualEffect("Steam");
 
-            // Sage
-            Prefab.GetChild("Sage").ApplyMaterialToChildren("sage", "Sage");
+            // Matcha
+            Prefab.GetChild("Matcha").ApplyMaterialToChildren("fill", "Sage");
 
             // Earl Grey
             var eg = Prefab.GetChild("Earl Grey");
             eg.ApplyMaterialToChildCafe("earl", "Earl Grey");
-            eg.ApplyMaterialToChildCafe("grey", "Earl Grey Extra");
+            eg.ApplyMaterialToChildCafe("grey", "Plastic - Blue");
 
             // Earl Grey
             var hi = Prefab.GetChild("Hibiscus");
@@ -111,8 +104,8 @@
             {
                 new()
                 {
-                    Item = GetCastedGDO<Item, Sage>(),
-                    GameObject = gameObject.GetChild("Sage"),
+                    Item = GetCastedGDO<Item, GroundMatcha>(),
+                    GameObject = gameObject.GetChild("Matcha"),
                 },
                 new()
                 {
@@ -121,7 +114,7 @@
                 },
                 new()
                 {
-                    Item = GetCastedGDO<Item, Hibiscus>(),
+                    Item = GetCastedGDO<Item, GroundHibiscus>(),
                     GameObject = gameObject.GetChild("Hibiscus"),
                 },
             };

@@ -22,7 +22,8 @@
         public override DishType Type => DishType.Main;
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take a kettle, fill with water, and put it to a boil. Add hibiscus and then let it steep on a counter. Portion with a mug and serve with a spoon or any other valid extra." }
+            { Locale.English, "Take a kettle, fill with water, and put it to a boil. Take a hibiscus flower and grind it up before placing it in the kettle. Let it steep on a counter. " +
+                "Portion with a mug and serve with a spoon." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

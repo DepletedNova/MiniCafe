@@ -13,65 +13,7 @@ namespace MiniCafe
             return GetExistingGDO(id) as T;
         }
 
-        public static List<ColourBlindLabel> ApplyPlatedLabel(List<ColourBlindLabel> addedLabels)
-        {
-            List<ColourBlindLabel> labels = new();
-            foreach (var label in addedLabels)
-                labels.Add(label);
-            foreach (var label in defaultLabels)
-                labels.Add(label);
-
-            return labels;
-        }
-
-        private static List<ColourBlindLabel> defaultLabels => new()
-        {
-            new()
-            {
-                Item = GetCastedGDO<Item, Croissant>(),
-                Text = "Cr"
-            },
-            new()
-            {
-                Item = GetCastedGDO<Item, Scone>(),
-                Text = "Sc"
-            },
-        };
-
         internal interface IWontRegister { }
-
-        public abstract class PlatedItemGroupView : ItemGroupView
-        {
-            protected virtual List<ComponentGroup> groups => new();
-
-            private List<ComponentGroup> defaultGroups => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, Teaspoon>(),
-                    GameObject = gameObject.GetChild("Sides/Spoon")
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, Croissant>(),
-                    GameObject = gameObject.GetChild("Sides/Croissant")
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, Scone>(),
-                    GameObject = gameObject.GetChild("Sides/Scone")
-                },
-            };
-
-            public virtual void Setup(GameDataObject gdo)
-            {
-                List<ComponentGroup> compGroups = new();
-                foreach (var group in groups)
-                    compGroups.Add(group);
-                foreach (var group in defaultGroups)
-                    compGroups.Add(group);
-            }
-        }
 
         // Views
         public abstract class AccessedItemGroupView : ItemGroupView
@@ -94,23 +36,33 @@ namespace MiniCafe
             if (steam != null)
                 steam.ApplyVisualEffect("Steam");
 
-            AttachPlateExtras(prefab);
+            prefab.ApplyMaterialToChildCafe("Spoon", "Metal");
         }
 
-        private static GameObject ExtrasPrefab;
-        internal static void AttachPlateExtras(this GameObject prefab)
+        internal static void AddObjectsSplittableView(this Item gdo, GameObject childSelect, string name, params string[] materials)
         {
-            if (ExtrasPrefab == null)
+            List<GameObject> objects = new();
+            for (int i = 0; i < childSelect.GetChildCount(); i++)
             {
-                ExtrasPrefab = Main.Bundle.LoadAsset<GameObject>("Sides");
-                ExtrasPrefab.ApplyMaterialToChildCafe("Spoon", "Metal");
-                ExtrasPrefab.ApplyMaterialToChildCafe("Croissant", "Croissant");
-                ExtrasPrefab.ApplyMaterialToChildCafe("Scone", "Bread - Inside Cooked", "Chocolate");
+                var child = childSelect.GetChild(i);
+                if (!child.name.ToLower().Contains(name))
+                    continue;
+
+                child.ApplyMaterialCafe(materials);
+
+                if (objects.Count < gdo.SplitCount)
+                    objects.Add(child);
             }
-            var extras = Object.Instantiate(ExtrasPrefab);
-            var transform = extras.transform;
-            transform.SetParent(prefab.transform, false);
-            extras.name = "Sides";
+            objects.Reverse();
+            ReflectionUtils.GetField<ObjectsSplittableView>("Objects").SetValue(gdo.Prefab.AddComponent<ObjectsSplittableView>(), objects);
+        }
+
+        internal static void AddPositionSplittableView(this GameObject prefab, List<GameObject> objects, Vector3 emptyPos, Vector3 fullPos)
+        {
+            var view = prefab.TryAddComponent<PositionSplittableView>();
+            ReflectionUtils.GetField<PositionSplittableView>("Objects").SetValue(view, objects);
+            ReflectionUtils.GetField<PositionSplittableView>("EmptyPosition").SetValue(view, emptyPos);
+            ReflectionUtils.GetField<PositionSplittableView>("FullPosition").SetValue(view, fullPos);
         }
 
         private static Dictionary<string, VisualEffectAsset> VisualEffects = new();

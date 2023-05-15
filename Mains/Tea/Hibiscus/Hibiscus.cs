@@ -12,17 +12,15 @@
         {
             new()
             {
-                Result = GetCastedGDO<Item, HibiscusSteeped>(),
-                Process = GetCastedGDO<Process, SteepProcess>(),
-                RequiresWrapper = true
+                Result = GetCastedGDO<Item, GroundHibiscus>(),
+                Process = GetGDO<Process>(ProcessReferences.Chop),
+                Duration = 0.5f
             }
         };
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("scoop", "Metal - Brass");
-            Prefab.ApplyMaterialToChildren("main", "Hibiscus");
-            Prefab.ApplyMaterialToChildCafe("extra", "Hibiscus Extra");
+            Prefab.ApplyMaterialToChildCafe("flower", "AppleRed", "AppleRed");
         }
     }
 }

@@ -26,7 +26,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add ice to espresso, add spoon or any other valid extra, and then serve." }
+            { Locale.English, "Add ice to espresso, add spoon and then serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

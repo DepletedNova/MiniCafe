@@ -7,12 +7,13 @@
         public override Item DisposesTo => GetCastedGDO<Item, SmallMug>();
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
+        public override bool AutoCollapsing => true;
 
         public override List<ItemGroupView.ColourBlindLabel> Labels => new()
         {
             new()
             {
-                Item = GetCastedGDO<Item, HibiscusSteeped>(),
+                Item = GetCastedGDO<Item, SmallHibiscus>(),
                 Text = "SHi"
             }
         };

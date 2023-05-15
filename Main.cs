@@ -16,6 +16,7 @@ global using MiniCafe.Extras;
 global using MiniCafe.Items;
 global using MiniCafe.Mains.Coffee;
 global using MiniCafe.Mains.Tea;
+global using MiniCafe.Mains;
 global using MiniCafe.Processes;
 global using MiniCafe.Views;
 global using System.Collections.Generic;
@@ -27,17 +28,17 @@ global using Unity.Entities;
 global using UnityEngine;
 global using static KitchenLib.Utils.GDOUtils;
 global using static KitchenLib.Utils.KitchenPropertiesUtils;
-global using static MiniCafe.Extras.ExtraHelper;
 global using static MiniCafe.Helper;
 using ApplianceLib.Api;
 using KitchenLib.Registry;
+using MiniCafe.Appliances.Spills;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.6.0";
+        public const string VERSION = "1.7.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -61,7 +62,7 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Sage", 0x80B25C));
             AddMaterial(CreateFlat("Sage Dried 1", 0xB1AB82));
             AddMaterial(CreateFlat("Sage Dried 2", 0x8D8043));
-            AddMaterial(CreateFlat("Sage Tea", 0xE6EDA6));
+            AddMaterial(CreateFlat("Sage Tea", 0x5B7329));
 
             AddMaterial(CreateFlat("Earl Grey", 0x2E2818));
             AddMaterial(CreateFlat("Earl Grey Extra", 0xAC7021));
@@ -88,6 +89,24 @@ namespace MiniCafe
             RestrictedItemTransfers.AllowItem(DirtyMugKey, GetCastedGDO<Item, SmallMugDirty>());
         }
 
+        internal static string EmptyMugKey = "BaristaEmptyMugs";
+        internal static string FilledMugKey = "BaristaFilledMugs";
+        private void UpdateBaristaTransfer(GameData gameData)
+        {
+            RestrictedItemTransfers.AllowProcessableItems(EmptyMugKey, ProcessReferences.FillCoffee);
+
+            foreach (var item in gameData.Get<Item>())
+            {
+                foreach (var process in item.DerivedProcesses)
+                {
+                    if (process.Process.ID == ProcessReferences.FillCoffee)
+                    {
+                        RestrictedItemTransfers.AllowItem(FilledMugKey, process.Result);
+                    }
+                }
+            }
+        }
+
         private void UpdateCoffeeMachine()
         {
             // Coffee Machine
@@ -100,6 +119,14 @@ namespace MiniCafe
                 Speed = 1f,
                 Validity = ProcessValidity.Generic
             });
+            coffeeMachine.Properties = new()
+            {
+                new CItemHolder(),
+                new CSpillsOnFail()
+                {
+                    ID = GetCustomGameDataObject<CoffeeSpill1>().ID
+                }
+            };
         }
 
         private void UpdateMilk()
@@ -128,15 +155,16 @@ namespace MiniCafe
             {
                 #region Steeping
                 var hasProvider = appliance.GetProperty<CItemProvider>(out var cProvider);
-                var isFreezer = appliance.ID == ApplianceReferences.Freezer;
+                var isHob = appliance.ID == ApplianceReferences.HobSafe;
                 if ((appliance.GetProperty<CItemHolder>(out var _) && hasProvider && cProvider.AutoPlaceOnHolder && cProvider.Maximum == 1) || 
-                    appliance.Name.ToLower().Contains("counter") || isFreezer)
+                    appliance.Name.ToLower().Contains("counter") || isHob || 
+                    appliance.GetProperty(out CAutomatedInteractor _) || appliance.GetProperty(out CConveyTeleport _))
                 {
                     appliance.Processes.Add(new()
                     {
                         Process = GetCastedGDO<Process, SteepProcess>(),
                         IsAutomatic = true,
-                        Speed = isFreezer ? 1 : 2f,
+                        Speed = isHob ? 0.75f : 1f,
                         Validity = ProcessValidity.Generic
                     });
                 }
@@ -173,6 +201,7 @@ namespace MiniCafe
 
                 UpdateAppliances(args.gamedata);
                 UpdateMugTransfer();
+                UpdateBaristaTransfer(args.gamedata);
 
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };

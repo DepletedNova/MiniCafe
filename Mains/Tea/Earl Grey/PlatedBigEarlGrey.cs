@@ -15,7 +15,7 @@
             {
                 new()
                 {
-                    Item = GetCastedGDO<Item, EarlGreySteeped>(),
+                    Item = GetCastedGDO<Item, Teaspoon>(),
                     Text = "BEG"
                 },
                 new()
@@ -36,8 +36,8 @@
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, BigMug>(),
-                    GetCastedGDO<Item, EarlGreySteeped>()
+                    GetCastedGDO<Item, BigEarlGrey>(),
+                    GetCastedGDO<Item, Teaspoon>()
                 },
                 IsMandatory = true,
                 Max = 2,
@@ -53,14 +53,13 @@
                 RequiresUnlock = true,
                 Min = 0,
                 Max = 1
-            },
-            ExtrasSet
+            }
         };
 
         public override void OnRegister(ItemGroup gdo)
         {
             Prefab.ApplyGenericPlated();
-            Prefab.GetComponent<View>().Setup(gdo);
+            Prefab.TryAddComponent<View>().Setup(gdo);
 
             BigMug.ApplyMugMaterials(Prefab.GetChild("Mug"));
             Prefab.ApplyMaterialToChildCafe("Filling", "Earl Grey Tea");
@@ -71,7 +70,7 @@
             Prefab.ApplyMaterialToChildCafe("Napkin", "Clothing Soft Pink");
         }
 
-        internal class View : PlatedItemGroupView
+        internal class View : AccessedItemGroupView
         {
 
             protected override List<ComponentGroup> groups => new()

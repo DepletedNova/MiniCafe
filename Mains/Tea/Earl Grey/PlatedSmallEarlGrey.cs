@@ -15,7 +15,7 @@
             {
                 new()
                 {
-                    Item = GetCastedGDO<Item, EarlGreySteeped>(),
+                    Item = GetCastedGDO<Item, Teaspoon>(),
                     Text = "SEG"
                 },
                 new()
@@ -36,8 +36,8 @@
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, SmallMug>(),
-                    GetCastedGDO<Item, EarlGreySteeped>()
+                    GetCastedGDO<Item, SmallEarlGrey>(),
+                    GetCastedGDO<Item, Teaspoon>()
                 },
                 IsMandatory = true,
                 Max = 2,
@@ -53,8 +53,7 @@
                 RequiresUnlock = true,
                 Min = 0,
                 Max = 1
-            },
-            ExtrasSet
+            }
         };
 
         public override void OnRegister(ItemGroup gdo)
@@ -71,7 +70,7 @@
             Prefab.ApplyMaterialToChildCafe("Napkin", "Clothing Soft Pink");
         }
 
-        internal class View : PlatedItemGroupView
+        internal class View : AccessedItemGroupView
         {
             protected override List<ComponentGroup> groups => new()
             {

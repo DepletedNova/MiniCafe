@@ -11,7 +11,7 @@
 
         protected override void OnUpdate()
         {
-            using var providers = Query.ToEntityArray(Allocator.TempJob);
+            using var providers = Query.ToEntityArray(Allocator.Temp);
             foreach (var provider in providers)
             {
                 var limitedProvider = EntityManager.GetComponentData<CDualLimitedProvider>(provider);

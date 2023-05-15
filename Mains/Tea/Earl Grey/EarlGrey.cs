@@ -20,9 +20,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("scoop", "Metal - Brass");
-            Prefab.ApplyMaterialToChildren("main", "Earl Grey");
-            Prefab.ApplyMaterialToChildCafe("extra", "Earl Grey Extra");
+            Prefab.ApplyMaterialToChildCafe("teabag", "Cloth - Fancy", "Earl Grey Tea");
         }
     }
 }

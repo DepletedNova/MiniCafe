@@ -11,7 +11,7 @@
                 new()
                 {
                     Title = "<sprite name=\"upgrade\" color=#A8FF1E> Steamy",
-                    Description = "Performs <sprite name=\"steam_0\"> 125% faster but does not perform <sprite name=\"fill_coffee\">"
+                    Description = "Performs only <sprite name=\"steam_0\"> at 225% speed!"
                 }
             }, new()))
         };

@@ -72,11 +72,11 @@
                     {
                         Current = 1,
                         Provide1 = SmallMug.ItemID,
-                        Available1 = 0,
-                        Maximum1 = 0,
+                        Available1 = int.MaxValue / 2,
+                        Maximum1 = int.MaxValue,
                         Provide2 = BigMug.ItemID,
-                        Available2 = 0,
-                        Maximum2 = 0,
+                        Available2 = int.MaxValue / 2,
+                        Maximum2 = int.MaxValue,
                     }
                 };
             }
