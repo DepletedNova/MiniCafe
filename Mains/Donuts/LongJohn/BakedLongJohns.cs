@@ -6,12 +6,13 @@ namespace MiniCafe.Mains
     {
         public override string UniqueNameID => "baked_long_johns";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Baked Long Johns");
-        public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
+        public override ItemStorage ItemStorageFlags => ItemStorage.Small;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
         public override int SplitCount => 2;
         public override Item SplitSubItem => GetCastedGDO<Item, PlainLongJohn>();
         public override List<Item> SplitDepletedItems => new() { GetCastedGDO<Item, PlainLongJohn>() };
+        public override float SplitSpeed => 1.5f;
 
         public override void OnRegister(Item gdo)
         {

@@ -46,7 +46,7 @@
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Stroopwafels", "Adds stroopwafels as a side", "A tasty Dutch treat!"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Stroopwafels", "Adds stroopwafels as a dessert", "A tasty Dutch treat!"))
         };
     }
 }

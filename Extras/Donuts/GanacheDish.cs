@@ -32,7 +32,7 @@ namespace MiniCafe.Extras
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, WhippingCreamIngredient>(),
+            GetCastedGDO<Item, WhippingCream>(),
             GetCastedGDO<Item, Chocolate>(),
         };
         public override HashSet<Process> RequiredProcesses => new()

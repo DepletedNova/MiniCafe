@@ -8,7 +8,7 @@ namespace MiniCafe.Mains
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Plated Jelly");
         public override ItemStorage ItemStorageFlags => ItemStorage.Small;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override ItemValue ItemValue => ItemValue.Large;
+        public override ItemValue ItemValue => ItemValue.MediumLarge;
 
         public override bool CanContainSide => true;
         public override Item DisposesTo => GetGDO<Item>(ItemReferences.Plate);
@@ -71,6 +71,7 @@ namespace MiniCafe.Mains
             {
                 Max = 1,
                 Min = 0,
+                RequiresUnlock = true,
                 Items = new()
                 {
                     GetCastedGDO<Item, Caramel>(),

@@ -43,7 +43,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take chocolate and cook, then add to cappuccino and then serve. Whipped cream can optionally be ordered." }
+            { Locale.English, "Take chocolate and cook, then add to cappuccino. Add whipped cream and then serve!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

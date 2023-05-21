@@ -26,11 +26,11 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Take flour, add water or knead, add a slice of butter, knead, cook, and then add with any valid main. This is interchangeable with any extra/spoon." }
+            { Locale.English, "Take flour, add water or knead, add a slice of butter, knead, cook, and then add to any main if ordered!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Croissant", "Adds croissants as an extra", "Buttery goodness!"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Croissant", "Adds croissants as a side", "Buttery goodness!"))
         };
         public override HashSet<Item> MinimumIngredients => new()
         {

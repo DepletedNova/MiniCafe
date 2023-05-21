@@ -6,7 +6,7 @@
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Lemon Slice Plate");
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Lemon Slice Plate");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
-        public override bool IsUnlockable => true;
+        public override bool IsUnlockable => false;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
         public override int MinimumFranchiseTier => 0;

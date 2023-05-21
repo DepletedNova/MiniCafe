@@ -20,7 +20,7 @@
         public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Add milk, flour, and sugar together and then knead and cook. Add sugar and water, cook, add butter, and then mix. " +
-                "Portion doughnut and add ordered filling, plate, and then serve." }
+                "Portion doughnut and combine it with the filling that is ordered before serving." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -32,11 +32,7 @@
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetGDO<Item>(ItemReferences.Plate),
-            GetGDO<Item>(ItemReferences.Flour),
-            GetGDO<Item>(ItemReferences.Sugar),
             GetGDO<Item>(ItemReferences.Water),
-            GetCastedGDO<Item, MilkIngredient>(),
             GetCastedGDO<Item, ButterBlock>(),
         };
 

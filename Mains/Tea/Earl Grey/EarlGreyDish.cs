@@ -7,7 +7,7 @@
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallIncrease;
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.None;
         public override int MinimumFranchiseTier => 0;
         public override bool IsSpecificFranchiseTier => false;
         public override float SelectionBias => 0;
@@ -52,7 +52,11 @@
             "The Tipsy Teapot",
             "Tea-riffic!",
             "Tea?",
-            "Lorem Sipsum"
+            "Lorem Sipsum",
+            "Lord of the Mugs",
+            "The Matcha Mistress",
+            "Lady of Leaf",
+            "Tea Mater"
         };
         //public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => GetUnlocks(GetCastedGDO<Item, Teaspoon>());
         public override List<Dish.MenuItem> ResultingMenuItems => new()

@@ -6,7 +6,7 @@ namespace MiniCafe.Mains
     {
         public override string UniqueNameID => "unbaked_donuts";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Unbaked Donuts");
-        public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
+        public override ItemStorage ItemStorageFlags => ItemStorage.Small;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override List<Item.ItemProcess> Processes => new()
         {
@@ -19,7 +19,7 @@ namespace MiniCafe.Mains
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 4f,
+                Duration = 3.5f,
                 Result = GetCastedGDO<Item, BakedDonuts>()
             }
         };

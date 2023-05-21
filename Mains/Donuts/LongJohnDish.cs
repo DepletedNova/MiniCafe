@@ -29,14 +29,6 @@
         {
             GetGDO<Process>(ProcessReferences.Cook)
         };
-        public override HashSet<Item> MinimumIngredients => new()
-        {
-            GetGDO<Item>(ItemReferences.Plate),
-            GetGDO<Item>(ItemReferences.Flour),
-            GetGDO<Item>(ItemReferences.Sugar),
-            GetCastedGDO<Item, MilkIngredient>(),
-            GetCastedGDO<Item, Sprinkles>(),
-        };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()
