@@ -41,8 +41,8 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add cinnamon, flour together and then add a slice of butter. Knead and then cook to make a tray of wafels." +
-                " Add syrup and sugar together before cooking to create the stroop. Add the stroop to the tray, portion, and then serve." }
+            { Locale.English, "Wafel: Add cinnamon, flour together and then add a slice of butter. Cook to make a tray of wafels. " +
+                "\nStroop: Add syrup and sugar together before cooking to create the stroop. Add the stroop to the tray, portion, and then serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

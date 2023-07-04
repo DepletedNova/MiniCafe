@@ -11,7 +11,7 @@
                 new()
                 {
                     Title = "Dispenser",
-                    Description = "Automatically adds spoons to anything in front of it"
+                    Description = "Automatically adds teaspoons to anything in front of it"
                 }
             }, new()))
         };

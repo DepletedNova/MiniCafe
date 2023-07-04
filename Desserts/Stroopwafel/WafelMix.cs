@@ -12,9 +12,9 @@ namespace MiniCafe.Sides
         {
             new()
             {
-                Process = GetGDO<Process>(ProcessReferences.Knead),
-                Duration = 1.3f,
-                Result = GetCastedGDO<Item, UncookedWafelTray>()
+                Process = GetGDO<Process>(ProcessReferences.Cook),
+                Duration = 4.5f,
+                Result = GetCastedGDO<Item, WafelTray>()
             }
         };
         public override List<ItemGroupView.ColourBlindLabel> Labels => new()

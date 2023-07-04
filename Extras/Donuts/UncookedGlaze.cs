@@ -12,7 +12,7 @@
         {
             new()
             {
-                Duration = 10f,
+                Duration = 6.5f,
                 Process = GetGDO<Process>(ProcessReferences.Cook),
                 Result = GetCastedGDO<Item, Glaze>()
             }

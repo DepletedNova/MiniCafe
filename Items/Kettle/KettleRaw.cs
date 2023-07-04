@@ -38,9 +38,9 @@
         {
             new()
             {
+                Process = GetGDO<Process>(SteepProcess),
+                Duration = 4.5f,
                 Result = GetCastedGDO<Item, KettleSteeped>(),
-                Process = GetCastedGDO<Process, SteepProcess>(),
-                Duration = 4.5f
             }
         };
 
@@ -78,6 +78,13 @@
         {
             var view = Prefab.GetComponent<View>();
             view.Setup(gdo);
+
+            gdo.AutomaticItemProcess = new()
+            {
+                Process = GetGDO<Process>(SteepProcess),
+                Duration = 4.5f,
+                Result = GetCastedGDO<Item, KettleSteeped>(),
+            };
 
             Prefab.ApplyMaterialToChild("pot", "Plastic", "Metal Dark", "Metal", "Hob Black");
             Prefab.ApplyMaterialToChild("lid", "Plastic", "Metal");

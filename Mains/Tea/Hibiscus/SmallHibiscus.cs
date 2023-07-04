@@ -1,4 +1,6 @@
-﻿namespace MiniCafe.Mains.Tea
+﻿using ApplianceLib.Api;
+
+namespace MiniCafe.Mains.Tea
 {
     internal class SmallHibiscus : CustomItemGroup
     {
@@ -41,6 +43,8 @@
 
             Prefab.ApplyMaterialToChildCafe("Lemon", "Lemon", "Lemon Inner", "White Fruit");
             Prefab.ApplyMaterialToChildCafe("Honey", "Honey");
+
+            RestrictedItemTransfers.AllowItem(Main.GenericMugKey, gdo);
         }
     }
 }

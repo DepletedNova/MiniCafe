@@ -19,7 +19,7 @@ namespace MiniCafe.Mains
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 3.5f,
+                Duration = 2.75f,
                 Result = GetCastedGDO<Item, BakedDonuts>()
             }
         };

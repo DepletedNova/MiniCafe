@@ -18,16 +18,12 @@ namespace MiniCafe.Appliances
                 }
             }, new()))
         };
-        public override List<Appliance> Upgrades => new()
-        {
-            GetCastedGDO<Appliance, SteamerMachine>()
-        };
         public override bool IsPurchasableAsUpgrade => true;
         public override PriceTier PriceTier => PriceTier.Medium;
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
         public override List<Process> RequiresProcessForShop => new()
         {
-            GetCastedGDO<Process, CuplessFillCupProcess>()
+            GetGDO<Process>(ProcessReferences.FillCoffee)
         };
 
         public override List<IApplianceProperty> Properties => new()
@@ -42,25 +38,16 @@ namespace MiniCafe.Appliances
             },
             new CAppliesProcessToFlexible
             {
-                MinimumItems = 2,
-                ProcessTimeMultiplier = 0.5f,
+                ProcessTimeMultiplier = 0.9f,
                 ProcessType = FlexibleProcessType.Average
             },
             new CFlexibleContainer
             {
                 Maximum = 2
             },
-            new CRestrictedReceiver
+            new COverfills
             {
-                ApplianceKey = Main.EmptyMugKey
-            },
-            new CChangeRestrictedReceiverKeyAfterDuration
-            {
-                ApplianceKey = Main.FilledMugKey
-            },
-            new CChangeRestrictedReceiverKeyWhenEmpty
-            {
-                ApplianceKey = Main.EmptyMugKey
+                ID = GetCustomGameDataObject<CoffeeSpill1>().ID
             }
         };
         public override List<Appliance.ApplianceProcesses> Processes => new()

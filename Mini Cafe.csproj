@@ -114,29 +114,49 @@
     <Reference Include="UnityEngine.VFXModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appliances\Boiler.cs" />
     <Compile Include="Appliances\HibiscusProvider.cs" />
     <Compile Include="Appliances\EarlGreyProvider.cs" />
+    <Compile Include="Appliances\LargeCoffeeMachine.cs" />
     <Compile Include="Appliances\Spills\CoffeeSpill3.cs" />
     <Compile Include="Appliances\Spills\CoffeeSpill2.cs" />
     <Compile Include="Appliances\Spills\CoffeeSpill1.cs" />
-    <Compile Include="Appliances\SteepingStand.cs" />
     <Compile Include="Appliances\SageProvider.cs" />
     <Compile Include="Appliances\BigMugHolder.cs" />
     <Compile Include="Appliances\KettleStand.cs" />
     <Compile Include="Appliances\SmallMugHolder.cs" />
-    <Compile Include="Appliances\SteamerMachine.cs" />
     <Compile Include="Appliances\BaristaMachine.cs" />
-    <Compile Include="Appliances\CuplessCoffeeMachine.cs" />
     <Compile Include="Appliances\MugCabinet.cs" />
     <Compile Include="Appliances\DirtyMugRack.cs" />
     <Compile Include="Appliances\TeaspoonDispenser.cs" />
     <Compile Include="Appliances\SprinklesProvider.cs" />
     <Compile Include="Appliances\WhippedCreamProvider.cs" />
-    <Compile Include="Components\CSpillsOnFail.cs" />
+    <Compile Include="Coffee\Americano.cs" />
+    <Compile Include="Coffee\AmericanoDish.cs" />
+    <Compile Include="Coffee\CannoliCoffeeDish.cs" />
+    <Compile Include="Coffee\Large\LargeCoffeeDishes.cs" />
+    <Compile Include="Coffee\Large\LargeAmericano.cs" />
+    <Compile Include="Coffee\Large\LargeMugsCard.cs" />
+    <Compile Include="Coffee\Large\LargeIced.cs" />
+    <Compile Include="Coffee\Large\LargeLatte.cs" />
+    <Compile Include="Coffee\Large\LargeCoffee.cs" />
+    <Compile Include="Coffee\Large\LargeCup.cs" />
+    <Compile Include="Coffee\OverfillingCard.cs" />
+    <Compile Include="Components\CCombinesOnSelf.cs" />
+    <Compile Include="Components\COverfills.cs" />
     <Compile Include="Components\CComponentSplitDepleted.cs" />
     <Compile Include="Components\CDualLimitedProvider.cs" />
     <Compile Include="Components\CInvertedPlacement.cs" />
+    <Compile Include="Components\CRefillOnEmpty.cs" />
     <Compile Include="Cosmetics\VisorHat.cs" />
+    <Compile Include="Desserts\Cannoli\Cannoli.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliTray.cs" />
+    <Compile Include="Desserts\Cannoli\BurntCannoliTray.cs" />
+    <Compile Include="Desserts\Cannoli\CookedCannoliTray.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliDish.cs" />
+    <Compile Include="Desserts\Cannoli\UncookedCannoliTray.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliFillingMix.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliFilling.cs" />
     <Compile Include="Desserts\LavaCake\LavaCake.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeDish.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeMix.cs" />
@@ -157,12 +177,15 @@
     <Compile Include="Extras\Donuts\SugarWater.cs" />
     <Compile Include="Extras\Donuts\UncookedGlaze.cs" />
     <Compile Include="Extras\Donuts\UncookedChocolateGlaze.cs" />
+    <Compile Include="Items\BoiledWater.cs" />
+    <Compile Include="Mains\Donuts\Basic\BurntDonuts.cs" />
     <Compile Include="Mains\Donuts\Basic\Donut.cs" />
     <Compile Include="Mains\Donuts\Basic\PlatedDonut.cs" />
     <Compile Include="Mains\Donuts\Basic\PlainDonut.cs" />
     <Compile Include="Mains\Donuts\Basic\BakedDonuts.cs" />
     <Compile Include="Mains\Donuts\Basic\UnbakedDonuts.cs" />
     <Compile Include="Mains\Donuts\DonutDish.cs" />
+    <Compile Include="Mains\Donuts\Jelly\BurntJelly.cs" />
     <Compile Include="Mains\Donuts\Jelly\Jelly.cs" />
     <Compile Include="Mains\Donuts\Jelly\PlatedJelly.cs" />
     <Compile Include="Mains\Donuts\JellyDish.cs" />
@@ -170,6 +193,7 @@
     <Compile Include="Mains\Donuts\Jelly\PlainJelly.cs" />
     <Compile Include="Mains\Donuts\Jelly\BakedJelly.cs" />
     <Compile Include="Mains\Donuts\Jelly\UnbakedJelly.cs" />
+    <Compile Include="Mains\Donuts\LongJohn\BurntLongJohns.cs" />
     <Compile Include="Mains\Donuts\LongJohn\LongJohn.cs" />
     <Compile Include="Mains\Donuts\LongJohn\PlainLongJohn.cs" />
     <Compile Include="Mains\Donuts\LongJohn\BakedLongJohns.cs" />
@@ -178,11 +202,13 @@
     <Compile Include="Mains\Donuts\UnmixedDonutDough.cs" />
     <Compile Include="Mains\Tea\Hibiscus\GroundHibiscus.cs" />
     <Compile Include="Mains\Tea\Matcha\GroundMatcha.cs" />
-    <Compile Include="Sides\Croissant\CroissantTeaDish.cs" />
     <Compile Include="Extras\HoneyDish.cs" />
     <Compile Include="Extras\LemonDish.cs" />
-    <Compile Include="Sides\Scone\SconeTeaDish.cs" />
-    <Compile Include="Sides\Scone\SconeCoffeeDish.cs" />
+    <Compile Include="Processes\BoilWaterProcess.cs" />
+    <Compile Include="References.cs" />
+    <Compile Include="Sides\Croissant\CroissantDish.cs" />
+    <Compile Include="Sides\Scone\SconeDish.cs" />
+    <Compile Include="Coffee\SconeCoffeeDish.cs" />
     <Compile Include="Sides\Scone\Scone.cs" />
     <Compile Include="Sides\Scone\SconePlatter.cs" />
     <Compile Include="Sides\Scone\UncookedScones.cs" />
@@ -195,18 +221,6 @@
     <Compile Include="Items\Kettle\KettleRaw.cs" />
     <Compile Include="Items\Kettle\Kettle.cs" />
     <Compile Include="Items\LemonSlice.cs" />
-    <Compile Include="Mains\Coffee\Americano\PlatedSmallAmericano.cs" />
-    <Compile Include="Mains\Coffee\Americano\PlatedBigAmericano.cs" />
-    <Compile Include="Mains\Coffee\Cappuccino\PlatedSmallCappuccino.cs" />
-    <Compile Include="Mains\Coffee\Cappuccino\PlatedBigCappuccino.cs" />
-    <Compile Include="Mains\Coffee\Espresso\PlatedSmallEspresso.cs" />
-    <Compile Include="Mains\Coffee\Espresso\PlatedBigEspresso.cs" />
-    <Compile Include="Mains\Coffee\Iced\IcedDish.cs" />
-    <Compile Include="Mains\Coffee\Iced\BigIced.cs" />
-    <Compile Include="Mains\Coffee\Iced\PlatedSmallIced.cs" />
-    <Compile Include="Mains\Coffee\Iced\PlatedBigIced.cs" />
-    <Compile Include="Mains\Coffee\Iced\SmallIced.cs" />
-    <Compile Include="Mains\Coffee\Espresso\SmallEspresso.cs" />
     <Compile Include="Mains\Tea\Earl Grey\EarlGreyDish.cs" />
     <Compile Include="Mains\Tea\Earl Grey\SmallEarlGrey.cs" />
     <Compile Include="Mains\Tea\Earl Grey\BigEarlGrey.cs" />
@@ -230,17 +244,8 @@
     <Compile Include="Mains\Tea\Matcha\Sage.cs" />
     <Compile Include="Patches\TakeFromComponentSplit_Patch.cs" />
     <Compile Include="Processes\RequiresMugProcess.cs" />
-    <Compile Include="Processes\SteepProcess.cs" />
-    <Compile Include="Sides\Croissant\CroissantCoffeeDish.cs" />
-    <Compile Include="Desserts\Mocha\MochaDish.cs" />
-    <Compile Include="Mains\Coffee\Americano\AmericanoDish.cs" />
-    <Compile Include="Mains\Coffee\Cappuccino\CappuccinoDish.cs" />
-    <Compile Include="Mains\Coffee\Espresso\EspressoDish.cs" />
+    <Compile Include="Coffee\CroissantCoffeeDish.cs" />
     <Compile Include="Extensions\SystemExtensions.cs" />
-    <Compile Include="Mains\Coffee\Americano\BigAmericano.cs" />
-    <Compile Include="Desserts\Mocha\BigMocha.cs" />
-    <Compile Include="Mains\Coffee\Cappuccino\BigCappuccino.cs" />
-    <Compile Include="Mains\Coffee\Espresso\BigEspresso.cs" />
     <Compile Include="Items\Mug\BigMugDirty.cs" />
     <Compile Include="Items\Mug\BigMug.cs" />
     <Compile Include="Items\Teaspoon.cs" />
@@ -248,16 +253,10 @@
     <Compile Include="Sides\Croissant\Croissant.cs" />
     <Compile Include="Sides\Croissant\UnrolledCroissant.cs" />
     <Compile Include="Items\Mug\SmallMugDirty.cs" />
-    <Compile Include="Desserts\Mocha\SmallMocha.cs" />
-    <Compile Include="Mains\Coffee\Americano\SmallAmericano.cs" />
-    <Compile Include="Mains\Coffee\Cappuccino\SmallCappuccino.cs" />
     <Compile Include="Items\Mug\SmallMug.cs" />
     <Compile Include="Items\CannedWhippedCream.cs" />
-    <Compile Include="Items\SteamedMilk.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Processes\CuplessFillCupProcess.cs" />
-    <Compile Include="Processes\SteamProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Desserts\Stroopwafel\StroopwafelDish.cs" />
     <Compile Include="Desserts\Stroopwafel\Stroopwafel.cs" />
@@ -266,16 +265,22 @@
     <Compile Include="Desserts\Stroopwafel\UncookedWafelTray.cs" />
     <Compile Include="Desserts\Stroopwafel\WafelMix.cs" />
     <Compile Include="Desserts\Stroopwafel\StroopMix.cs" />
-    <Compile Include="Systems\SpillOnFail.cs" />
+    <Compile Include="Systems\AddLargeCards.cs" />
+    <Compile Include="Systems\CombineOnSelf.cs" />
+    <Compile Include="Systems\OverfillSpills.cs" />
     <Compile Include="Systems\DualLimitedProviderSwitch.cs" />
     <Compile Include="Systems\GrantNecessaryKettles.cs" />
     <Compile Include="Systems\InvertPlacement.cs" />
+    <Compile Include="Systems\RefillProviderAfterDuration.cs" />
     <Compile Include="Systems\ResetDualLimitedNight.cs" />
+    <Compile Include="Systems\UpdateRefillDuration.cs" />
     <Compile Include="Views\DualLimitedSourceView.cs" />
     <Compile Include="Views\ItemProcessView.cs" />
     <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Desserts\Mocha\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y

@@ -24,7 +24,7 @@
         {
             GetGDO<Process>(ProcessReferences.Cook),
             GetCastedGDO<Process, RequiresMugProcess>(),
-            GetCastedGDO<Process, SteepProcess>(),
+            //GetCastedGDO<Process, SteepProcess>(),
         };
         public override Dictionary<Locale, string> Recipe => new()
         {

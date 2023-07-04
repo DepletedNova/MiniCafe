@@ -34,7 +34,7 @@
             GetGDO<Item>(ItemReferences.Plate),
             GetGDO<Item>(ItemReferences.Flour),
             GetGDO<Item>(ItemReferences.Sugar),
-            GetCastedGDO<Item, Milk>(),
+            GetGDO<Item>(MilkItem),
             GetCastedGDO<Item, Sprinkles>(),
         };
         public override List<string> StartingNameSet => new()

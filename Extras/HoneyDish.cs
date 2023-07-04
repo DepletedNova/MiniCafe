@@ -3,10 +3,10 @@
     internal class HoneyDish : CustomDish
     {
         public override string UniqueNameID => "honey";
-        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Lemon Slice Plate");
-        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Lemon Slice Plate");
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Lemon Slice");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Lemon Slice");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
-        public override bool IsUnlockable => false;
+        public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
         public override int MinimumFranchiseTier => 0;

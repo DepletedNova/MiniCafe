@@ -14,6 +14,17 @@ namespace MiniCafe.Mains
         public override List<Item> SplitDepletedItems => new() { GetCastedGDO<Item, PlainDonut>() };
         public override float SplitSpeed => 1.5f;
 
+        public override List<Item.ItemProcess> Processes => new()
+        {
+            new()
+            {
+                Result = GetCastedGDO<Item, BurntDonuts>(),
+                Duration = 10,
+                IsBad = true,
+                Process = GetGDO<Process>(ProcessReferences.Cook)
+            }
+        };
+
         public override void OnRegister(Item gdo)
         {
             Prefab.ApplyMaterialToChildCafe("Tray", "Metal");

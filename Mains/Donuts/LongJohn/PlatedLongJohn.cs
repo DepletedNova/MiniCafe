@@ -63,7 +63,7 @@ namespace MiniCafe.Mains
             new()
             {
                 Max = 1,
-                Min = 0,
+                Min = 1,
                 RequiresUnlock = true,
                 Items = new()
                 {

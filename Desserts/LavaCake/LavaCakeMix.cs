@@ -12,7 +12,7 @@
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 6.5f,
+                Duration = 3.5f,
                 Result = GetCastedGDO<Item, LavaCake>()
             }
         };

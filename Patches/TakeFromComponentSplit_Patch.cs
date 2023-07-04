@@ -7,7 +7,7 @@ namespace MiniCafe.Patches
     {
         [HarmonyPatch(nameof(TakeFromComponentSplit.SendTransfer))]
         [HarmonyPrefix]
-        internal static bool SendTransfer_Prefix(Entity transfer, Entity acceptance, EntityContext ctx, ref TakeFromComponentSplit __instance)
+        internal static bool SendTransfer_Prefix(Entity transfer, Entity acceptance, EntityContext ctx)
         {
             if (!ctx.Require<CItemTransferProposal>(transfer, out var proposal) ||
                 !ctx.Require<CItemHolder>(proposal.Source, out var holder) ||

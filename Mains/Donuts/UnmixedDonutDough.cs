@@ -31,7 +31,7 @@ namespace MiniCafe.Mains
             },
             new()
             {
-                Item = GetCastedGDO<Item, MilkIngredient>(),
+                Item = GetGDO<Item>(MilkItem),
                 Text = "Mi"
             },
         };
@@ -43,7 +43,7 @@ namespace MiniCafe.Mains
                 {
                     GetGDO<Item>(ItemReferences.Flour),
                     GetGDO<Item>(ItemReferences.Sugar),
-                    GetCastedGDO<Item, MilkIngredient>()
+                    GetGDO<Item>(MilkItem)
                 },
                 Max = 3,
                 Min = 3,
@@ -77,7 +77,7 @@ namespace MiniCafe.Mains
                 new()
                 {
                     GameObject = gameObject.GetChild("Milk"),
-                    Item = GetCastedGDO<Item, MilkIngredient>()
+                    Item = GetGDO<Item>(MilkItem)
                 },
             };
         }

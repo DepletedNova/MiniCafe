@@ -8,6 +8,7 @@
         public override bool IsMergeableSide => true;
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
+        public override int RewardOverride => 2;
         public override List<Item.ItemProcess> Processes => new()
         {
             new()

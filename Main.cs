@@ -1,9 +1,7 @@
-﻿global using IngredientLib;
-global using IngredientLib.Ingredient.Items;
+﻿global using IngredientLib.Ingredient.Items;
 global using Kitchen;
 global using KitchenData;
 global using KitchenLib;
-global using KitchenLib.Colorblind;
 global using KitchenLib.Customs;
 global using KitchenLib.Event;
 global using KitchenLib.References;
@@ -14,9 +12,8 @@ global using MiniCafe.Appliances;
 global using MiniCafe.Components;
 global using MiniCafe.Extras;
 global using MiniCafe.Items;
-global using MiniCafe.Mains.Coffee;
-global using MiniCafe.Mains.Tea;
 global using MiniCafe.Mains;
+global using MiniCafe.Mains.Tea;
 global using MiniCafe.Processes;
 global using MiniCafe.Views;
 global using System.Collections.Generic;
@@ -32,13 +29,15 @@ global using static MiniCafe.Helper;
 using ApplianceLib.Api;
 using KitchenLib.Registry;
 using MiniCafe.Appliances.Spills;
+using MiniCafe.Coffee;
+using MiniCafe.Desserts;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "1.7.3";
+        public const string VERSION = "2.0.0";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -46,15 +45,16 @@ namespace MiniCafe
 
         internal static bool PaperPlatesInstalled => ModRegistery.Registered.Any(modPair => modPair.Value.ModID == "paperPlates");
 
+        internal static readonly RestaurantStatus OVERFILLING_STATUS = (RestaurantStatus)VariousUtils.GetID("OverfillingStatus");
+        internal static readonly RestaurantStatus LARGE_MUG_STATUS = (RestaurantStatus)VariousUtils.GetID("LargeMugStatus");
+
         internal void AddMaterials()
         {
-            AddMaterial(CreateTransparent("Glass", 0xF6FEFF, 0.6f));
-
-            AddMaterial(CreateFlat("Light Coffee Cup", 0xDAC7AB));
+            AddMaterial(CreateFlat("Light Coffee Cup", 0xF2CD9B));
 
             // Coffee
             AddMaterial(CreateFlat("Coffee Blend", 0xAF8967));
-            AddMaterial(CreateFlat("Coffee Foam", 0xE0C2A8));
+            AddMaterial(CreateFlat("Coffee Foam", 0xE3D7C2));
 
             AddMaterial(CreateFlat("Americano", 0x895238));
 
@@ -82,16 +82,18 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Lava Cake Dark", 0x633100));
         }
 
-        internal static string DirtyMugKey = "DirtyMugs";
-        private void UpdateMugTransfer()
+        internal static string DirtyMugKey = "MiniCafe-DirtyMugs";
+        private void UpdateDirtyMugTransfer()
         {
             RestrictedItemTransfers.AllowItem(DirtyMugKey, GetCastedGDO<Item, BigMugDirty>());
             RestrictedItemTransfers.AllowItem(DirtyMugKey, GetCastedGDO<Item, SmallMugDirty>());
         }
 
-        internal static string EmptyMugKey = "BaristaEmptyMugs";
-        internal static string FilledMugKey = "BaristaFilledMugs";
-        private void UpdateBaristaTransfer(GameData gameData)
+        internal static string GenericMugKey = "MiniCafe-MugItems";
+
+        internal static string EmptyMugKey = "MiniCafe-EmptyMugs";
+        internal static string FilledMugKey = "MiniCafe-FilledMugs";
+        private void UpdateGenericMugTransfers(GameData gameData)
         {
             RestrictedItemTransfers.AllowProcessableItems(EmptyMugKey, ProcessReferences.FillCoffee);
 
@@ -102,41 +104,76 @@ namespace MiniCafe
                     if (process.Process.ID == ProcessReferences.FillCoffee)
                     {
                         RestrictedItemTransfers.AllowItem(FilledMugKey, process.Result);
+                        break;
                     }
                 }
             }
         }
 
-        private void UpdateCoffeeMachine()
+        private void UpdateCoffee()
         {
             // Coffee Machine
-            var coffeeMachine = GetExistingGDO(ApplianceReferences.CoffeeMachine) as Appliance;
+            var coffeeMachine = GetGDO<Appliance>(ApplianceReferences.CoffeeMachine);
             coffeeMachine.Upgrades.Add(GetCastedGDO<Appliance, BaristaMachine>());
-            coffeeMachine.Processes.Add(new()
-            {
-                IsAutomatic = true,
-                Process = GetCastedGDO<Process, SteamProcess>(),
-                Speed = 1f,
-                Validity = ProcessValidity.Generic
-            });
             coffeeMachine.Properties = new()
             {
                 new CItemHolder(),
-                new CSpillsOnFail()
+                GetCItemProvider(ItemReferences.CoffeeCup, 0, 0, false, false, true, false, false, false, false),
+                new COverfills
                 {
                     ID = GetCustomGameDataObject<CoffeeSpill1>().ID
                 }
             };
+
+            // Base Coffee Card
+            var coffeeCard = GetGDO<Dish>(CoffeeBaseDish);
+            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, CroissantCoffeeDish>());
+            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, SconeCoffeeDish>());
+            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, CannoliCoffeeDish>());
+
+            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, AmericanoDish>());
+
+            // Coffeeshop Mode
+            var coffeeshop = GetGDO<UnlockCard>(CoffeeshopMode);
+            var globalEffect = coffeeshop.Effects[0] as GlobalEffect;
+            globalEffect.EffectType = new CTableModifier
+            {
+                PatienceModifiers = new PatienceValues
+                {
+                    Eating = 2.85f,
+                    Thinking = -0.75f,
+                    Service = -0.5f,
+                    WaitForFood = -0.4f,
+                    GetFoodDelivered = 1f,
+                    SkipWaitPhase = true,
+                },
+                OrderingModifiers = new OrderingValues
+                {
+                    StarterModifier = 100,
+                    DessertModifier = 100,
+                    MessFactor = -0.75f
+                },
+                DecorationModifiers = DecorationValues.Neutral
+            };
+
+            // Update Tea
+            var teaCard = GetGDO<Dish>(TeaDish);
+            teaCard.Requires = new();
+            teaCard.BlockedBy = new() { GetCastedGDO<Dish, EarlGreyDish>() };
         }
 
-        private void UpdateMilk()
+        private void ApplyVisualOverrides()
         {
-            GetCastedGDO<Item, MilkIngredient>().DerivedProcesses.Add(new()
-            {
-                Duration = 2.6f,
-                Process = GetCastedGDO<Process, SteamProcess>(),
-                Result = GetCastedGDO<Item, SteamedMilk>()
-            });;
+            OverrideCoffeeVisuals(ExtraCoffee);
+            OverrideCoffeeVisuals(SlowBrew);
+            OverrideCoffeeVisuals(MilkExtra);
+            OverrideCoffeeVisuals(SugarExtra);
+        }
+
+        private void OverrideCoffeeVisuals(int id)
+        {
+            UnlockOverrides.AddIconOverride(id, "<sprite name=\"fill_coffee\">");
+            UnlockOverrides.AddColourOverride(id, ColorFromHex(0x6D5140));
         }
 
         private void UpdateLemon()
@@ -149,33 +186,19 @@ namespace MiniCafe
             lemon.SplitSubItem = GetCastedGDO<Item, LemonSlice>();
         }
 
-        private void UpdateAppliances(GameData gameData)
+        private void UpdatePizzaCrust() => GetGDO<ItemGroup>(ItemReferences.PizzaCrust).DerivedProcesses.Add(new()
         {
-            foreach (var appliance in gameData.Get<Appliance>())
-            {
-                #region Steeping
-                var hasProvider = appliance.GetProperty<CItemProvider>(out var cProvider);
-                var isHob = appliance.ID == ApplianceReferences.HobSafe;
-                if ((appliance.GetProperty<CItemHolder>(out var _) && hasProvider && cProvider.AutoPlaceOnHolder && cProvider.Maximum == 1) || 
-                    appliance.Name.ToLower().Contains("counter") || isHob || 
-                    appliance.GetProperty(out CAutomatedInteractor _) || appliance.GetProperty(out CConveyTeleport _))
-                {
-                    appliance.Processes.Add(new()
-                    {
-                        Process = GetCastedGDO<Process, SteepProcess>(),
-                        IsAutomatic = true,
-                        Speed = isHob ? 0.75f : 1f,
-                        Validity = ProcessValidity.Generic
-                    });
-                }
-                #endregion
-            }
-        }
+            Process = GetGDO<Process>(ProcessReferences.Knead),
+            Duration = 1.3f,
+            Result = GetCastedGDO<Item, UncookedCannoliTray>()
+        });
 
         private void AddIcons()
         {
             Bundle.LoadAllAssets<Texture2D>();
             Bundle.LoadAllAssets<Sprite>();
+
+            ApplyVisualOverrides();
 
             var icons = Bundle.LoadAsset<TMP_SpriteAsset>("Icon Asset");
             TMP_Settings.defaultSpriteAsset.fallbackSpriteAssets.Add(icons);
@@ -195,13 +218,12 @@ namespace MiniCafe
 
             Events.BuildGameDataEvent += (s, args) =>
             {
-                UpdateCoffeeMachine();
-                UpdateMilk();
                 UpdateLemon();
+                UpdateCoffee();
+                UpdatePizzaCrust();
 
-                UpdateAppliances(args.gamedata);
-                UpdateMugTransfer();
-                UpdateBaristaTransfer(args.gamedata);
+                UpdateDirtyMugTransfer();
+                UpdateGenericMugTransfers(args.gamedata);
 
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };

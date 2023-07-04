@@ -11,15 +11,6 @@
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override Appliance DedicatedProvider => GetCastedGDO<Appliance, MugCabinet>();
         public override string ColourBlindTag => "S";
-        public override List<Item.ItemProcess> Processes => new()
-        {
-            new()
-            {
-                Duration = 3.25f,
-                Process = GetGDO<Process>(ProcessReferences.FillCoffee),
-                Result = GetCastedGDO<Item, SmallEspresso>()
-            }
-        };
 
         public override void Convert(GameData gameData, out GameDataObject gdo)
         {

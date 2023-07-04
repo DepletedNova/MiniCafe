@@ -7,7 +7,7 @@
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("slice", "Lemon", "Lemon Inner", "White Fruit");
+            Prefab.ApplyMaterialToChildCafe("slice", "Lemon", "Lemon Inner");
         }
     }
 }

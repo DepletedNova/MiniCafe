@@ -12,7 +12,7 @@
             new()
             {
                 Result = GetCastedGDO<Item, HibiscusSteeped>(),
-                Process = GetCastedGDO<Process, SteepProcess>(),
+                Process = GetGDO<Process>(SteepProcess),
                 RequiresWrapper = true
             }
         };

@@ -1,4 +1,6 @@
-﻿namespace MiniCafe.Mains.Tea
+﻿using ApplianceLib.Api;
+
+namespace MiniCafe.Mains.Tea
 {
     internal class PlatedSmallEarlGrey : CustomItemGroup<PlatedSmallEarlGrey.View>
     {
@@ -68,6 +70,8 @@
             Prefab.ApplyMaterialToChildCafe("Lemon", "Lemon", "Lemon Inner", "White Fruit");
             Prefab.ApplyMaterialToChildCafe("Honey", "Door Glass", "Honey", "Wood 1");
             Prefab.ApplyMaterialToChildCafe("Napkin", "Clothing Soft Pink");
+
+            RestrictedItemTransfers.AllowItem(Main.GenericMugKey, gdo);
         }
 
         internal class View : AccessedItemGroupView

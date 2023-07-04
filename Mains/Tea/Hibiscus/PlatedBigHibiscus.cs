@@ -1,4 +1,6 @@
-﻿namespace MiniCafe.Mains.Tea
+﻿using ApplianceLib.Api;
+
+namespace MiniCafe.Mains.Tea
 {
     internal class PlatedBigHibiscus : CustomItemGroup<PlatedBigHibiscus.View>
     {
@@ -66,6 +68,8 @@
 
             Prefab.ApplyMaterialToChildCafe("Lemon", "Lemon", "Lemon Inner", "White Fruit");
             Prefab.ApplyMaterialToChildCafe("Honey", "Door Glass", "Honey", "Wood 1");
+
+            RestrictedItemTransfers.AllowItem(Main.GenericMugKey, gdo);
         }
 
         internal class View : AccessedItemGroupView

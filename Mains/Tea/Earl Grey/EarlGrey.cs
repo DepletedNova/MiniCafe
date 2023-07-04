@@ -13,7 +13,7 @@
             new()
             {
                 Result = GetCastedGDO<Item, EarlGreySteeped>(),
-                Process = GetCastedGDO<Process, SteepProcess>(),
+                Process = GetGDO<Process>(SteepProcess),
                 RequiresWrapper = true
             }
         };

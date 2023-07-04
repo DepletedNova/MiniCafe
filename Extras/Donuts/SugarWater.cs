@@ -11,7 +11,7 @@
         {
             new()
             {
-                Duration = 4.5f,
+                Duration = 4f,
                 Process = GetGDO<Process>(ProcessReferences.Cook),
                 Result = GetCastedGDO<Item, CookedSugarWater>()
             }
