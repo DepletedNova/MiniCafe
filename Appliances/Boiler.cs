@@ -19,7 +19,7 @@ namespace MiniCafe.Appliances
         public override List<IApplianceProperty> Properties => new()
         {
             new CItemHolder(),
-            GetCItemProvider(GetCustomGameDataObject<BoiledWater>().ID, 6, 6, true, false, true, false, false, false, false),
+            GetCItemProvider(GetCustomGameDataObject<BoiledWater>().ID, 4, 4, true, false, true, false, false, false, false),
             new CCombinesOnSelf(),
             new CRefillOnEmpty(),
             new CDisplayDuration

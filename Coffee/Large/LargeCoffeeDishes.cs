@@ -15,7 +15,6 @@
         public override string UniqueNameID => "large_coffee_dish";
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
-        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.None;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override bool IsUnlockable => false;
 
@@ -61,7 +60,6 @@
         public override string UniqueNameID => "large_iced_coffee_dish";
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
-        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.None;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override bool IsUnlockable => false;
 
@@ -107,7 +105,6 @@
         public override string UniqueNameID => "large_latte_dish";
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
-        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.None;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override bool IsUnlockable => false;
 
@@ -153,7 +150,6 @@
         public override string UniqueNameID => "large_americano_dish";
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
-        public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.None;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override bool IsUnlockable => false;
 

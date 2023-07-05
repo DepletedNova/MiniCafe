@@ -148,6 +148,7 @@
     <Compile Include="Components\CDualLimitedProvider.cs" />
     <Compile Include="Components\CInvertedPlacement.cs" />
     <Compile Include="Components\CRefillOnEmpty.cs" />
+    <Compile Include="Components\CSpillsOnFail.cs" />
     <Compile Include="Cosmetics\VisorHat.cs" />
     <Compile Include="Desserts\Cannoli\Cannoli.cs" />
     <Compile Include="Desserts\Cannoli\CannoliTray.cs" />

@@ -42,7 +42,7 @@
             new()
             {
                 Item = GetCastedGDO<Item, Scone>(),
-                Phase = MenuPhase.Starter,
+                Phase = MenuPhase.Dessert,
                 Weight = 1f
             }
         };

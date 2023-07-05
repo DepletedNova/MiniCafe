@@ -5,7 +5,7 @@
         public override string UniqueNameID => "overfill_card";
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Imperfect Brewing", "Cups have a 50% chance to overfill!", ""))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Imperfect Brewing", "Cups have a 50% chance to overfill!", "Gets a bit messy!"))
         };
         public override List<UnlockEffect> Effects => new()
         {

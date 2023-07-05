@@ -43,13 +43,14 @@ namespace MiniCafe.Coffee
             GetGDO<Item>(ItemReferences.Cheese),
             GetGDO<Item>(ItemReferences.Flour),
             GetGDO<Item>(ItemReferences.Oil),
+            GetGDO<Item>(ItemReferences.Water)
         };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()
             {
                 Item = GetCastedGDO<Item, Cannoli>(),
-                Phase = MenuPhase.Starter,
+                Phase = MenuPhase.Dessert,
                 Weight = 1f
             }
         };

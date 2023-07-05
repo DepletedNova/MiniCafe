@@ -35,13 +35,14 @@
         {
             GetGDO<Item>(ItemReferences.Flour),
             GetCastedGDO<Item, ButterBlock>(),
+            GetGDO<Item>(ItemReferences.Water)
         };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()
             {
                 Item = GetCastedGDO<Item, Croissant>(),
-                Phase = MenuPhase.Starter,
+                Phase = MenuPhase.Dessert,
                 Weight = 1f
             }
         };

@@ -3,11 +3,10 @@
     public class LargeMugsCard : CustomUnlockCard
     {
         public override string UniqueNameID => "large_mugs_card";
-        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.None;
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Large;
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Large Mugs", "Adds larger mugs for every coffee", "That's a lot of coffee"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Large Mugs", "Automatically adds larger mug cards for every coffee variant", "That's a lot of coffee!"))
         };
         public override List<UnlockEffect> Effects => new()
         {

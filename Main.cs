@@ -37,7 +37,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.0.0";
+        public const string VERSION = "2.0.3";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -126,35 +126,12 @@ namespace MiniCafe
             };
 
             // Base Coffee Card
-            var coffeeCard = GetGDO<Dish>(CoffeeBaseDish);
-            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, CroissantCoffeeDish>());
-            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, SconeCoffeeDish>());
-            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, CannoliCoffeeDish>());
+            var coffeeMode = GetGDO<Dish>(CoffeeshopMode);
+            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, CroissantCoffeeDish>());
+            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, SconeCoffeeDish>());
+            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, CannoliCoffeeDish>());
 
-            coffeeCard.AllowedFoods.Add(GetCastedGDO<Unlock, AmericanoDish>());
-
-            // Coffeeshop Mode
-            var coffeeshop = GetGDO<UnlockCard>(CoffeeshopMode);
-            var globalEffect = coffeeshop.Effects[0] as GlobalEffect;
-            globalEffect.EffectType = new CTableModifier
-            {
-                PatienceModifiers = new PatienceValues
-                {
-                    Eating = 2.85f,
-                    Thinking = -0.75f,
-                    Service = -0.5f,
-                    WaitForFood = -0.4f,
-                    GetFoodDelivered = 1f,
-                    SkipWaitPhase = true,
-                },
-                OrderingModifiers = new OrderingValues
-                {
-                    StarterModifier = 100,
-                    DessertModifier = 100,
-                    MessFactor = -0.75f
-                },
-                DecorationModifiers = DecorationValues.Neutral
-            };
+            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, AmericanoDish>());
 
             // Update Tea
             var teaCard = GetGDO<Dish>(TeaDish);

@@ -34,12 +34,11 @@ namespace MiniCafe.Appliances
             },
             new CTakesDuration {
                 Mode = InteractionMode.Items,
-                Total = 4.5f,
             },
             new CAppliesProcessToFlexible
             {
                 ProcessTimeMultiplier = 0.9f,
-                ProcessType = FlexibleProcessType.Average
+                ProcessType = FlexibleProcessType.Average,
             },
             new CFlexibleContainer
             {
@@ -55,7 +54,6 @@ namespace MiniCafe.Appliances
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.FillCoffee),
-                Speed = 2f,
                 IsAutomatic = true,
                 Validity = ProcessValidity.Generic
             }
