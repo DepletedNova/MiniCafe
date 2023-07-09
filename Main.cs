@@ -37,7 +37,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.0.3";
+        public const string VERSION = "2.0.4";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -126,7 +126,7 @@ namespace MiniCafe
             };
 
             // Base Coffee Card
-            var coffeeMode = GetGDO<Dish>(CoffeeshopMode);
+            var coffeeMode = GetGDO<UnlockCard>(CoffeeshopMode);
             coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, CroissantCoffeeDish>());
             coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, SconeCoffeeDish>());
             coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, CannoliCoffeeDish>());

@@ -55,7 +55,8 @@ namespace MiniCafe.Appliances
             {
                 Process = GetGDO<Process>(ProcessReferences.FillCoffee),
                 IsAutomatic = true,
-                Validity = ProcessValidity.Generic
+                Validity = ProcessValidity.Generic,
+                Speed = 1f
             }
         };
 

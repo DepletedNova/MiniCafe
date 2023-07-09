@@ -25,7 +25,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Crack an egg and then add flour. Knead this once and then add whipping cream. Knead once more and then cook. Portion and serve with any main if ordered!." }
+            { Locale.English, "Crack an egg and then add flour. Knead this once and then add whipping cream. Cook and portion and serve with any main if ordered!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

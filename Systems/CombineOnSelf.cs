@@ -1,7 +1,5 @@
 ﻿namespace MiniCafe.Systems
 {
-    [UpdateAfter(typeof(GrabItems))]
-    [UpdateBefore(typeof(InteractionGroup))]
     public class CombineOnSelf : GenericSystemBase, IModSystem
     {
         private EntityContext ctx;

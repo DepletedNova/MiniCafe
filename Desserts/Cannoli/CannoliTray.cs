@@ -7,7 +7,7 @@
         public override ItemStorage ItemStorageFlags => ItemStorage.Small;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
-        public override int SplitCount => 9;
+        public override int SplitCount => 5;
         public override Item SplitSubItem => GetCastedGDO<Item, Cannoli>();
         public override List<Item> SplitDepletedItems => new() { GetCastedGDO<Item, Cannoli>() };
 
@@ -40,7 +40,7 @@
                 child.ApplyMaterialToChildCafe("Filling", "Coffee Cup");
                 child.ApplyMaterialToChildCafe("Chocolate", "Chocolate");
 
-                if (items.Count < 9)
+                if (items.Count < gdo.SplitCount)
                     items.Add(child);
             }
 

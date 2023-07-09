@@ -1,6 +1,5 @@
 ﻿namespace MiniCafe.Systems
 {
-    [UpdateAfter(typeof(GrantNecessaryAppliances))]
     internal class GrantNecessaryKettles : NightSystem, IModSystem
     {
         private EntityQuery Unlocks;

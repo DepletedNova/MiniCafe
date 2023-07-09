@@ -11,9 +11,9 @@
         {
             new()
             {
-                Process = GetGDO<Process>(ProcessReferences.Knead),
-                Duration = 1.3f,
-                Result = GetCastedGDO<Item, UncookedScones>()
+                Process = GetGDO<Process>(ProcessReferences.Cook),
+                Duration = 3.5f,
+                Result = GetCastedGDO<Item, SconePlatter>()
             }
         };
 
