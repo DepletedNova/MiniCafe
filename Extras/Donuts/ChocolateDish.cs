@@ -35,7 +35,7 @@ namespace MiniCafe.Extras
             GetGDO<Item>(ItemReferences.Pot),
             GetGDO<Item>(ItemReferences.Sugar),
             GetCastedGDO<Item, Chocolate>(),
-            GetCastedGDO<Item, Milk>()
+            GetGDO<Item>(MilkItem),
         };
         public override HashSet<Process> RequiredProcesses => new()
         {

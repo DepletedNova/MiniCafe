@@ -37,7 +37,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.0.4";
+        public const string VERSION = "2.0.8";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -135,7 +135,6 @@ namespace MiniCafe
 
             // Update Tea
             var teaCard = GetGDO<Dish>(TeaDish);
-            teaCard.Requires = new();
             teaCard.BlockedBy = new() { GetCastedGDO<Dish, EarlGreyDish>() };
         }
 

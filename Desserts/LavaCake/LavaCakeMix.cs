@@ -12,7 +12,7 @@
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 3.5f,
+                Duration = 3f,
                 Result = GetCastedGDO<Item, LavaCake>()
             }
         };
@@ -21,22 +21,13 @@
         {
             new()
             {
-                Max = 1,
-                Min = 1,
-                IsMandatory = true,
-                Items = new()
-                {
-                    GetGDO<Item>(ItemReferences.EggCracked)
-                }
-            },
-            new()
-            {
-                Max = 2,
-                Min = 2,
+                Max = 3,
+                Min = 3,
                 Items = new()
                 {
                     GetCastedGDO<Item, ChocolateShavings>(),
-                    GetCastedGDO<Item, Butter>()
+                    GetCastedGDO<Item, Butter>(),
+                    GetGDO<Item>(ItemReferences.EggCracked)
                 }
             }
         };
@@ -65,6 +56,16 @@
                 {
                     Item = GetCastedGDO<Item, Butter>(),
                     GameObject = gameObject.GetChild("Butter")
+                },
+                new()
+                {
+                    Item = GetGDO<Item>(ItemReferences.EggCracked),
+                    Objects = new()
+                    {
+                        gameObject.GetChild("Whites"),
+                        gameObject.GetChild("Yolk")
+                    },
+                    DrawAll = true
                 }
             };
         }

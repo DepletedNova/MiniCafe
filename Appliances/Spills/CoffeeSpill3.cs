@@ -4,7 +4,10 @@
     {
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Coffee Spill 3");
         public override string UniqueNameID => "coffee_spill_3";
-        public override List<(Locale, ApplianceInfo)> InfoList => new();
+        public override List<(Locale, ApplianceInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateApplianceInfo("Mess - Coffee 3", "", new(), new()))
+        };
         public override bool IsPurchasable => false;
         public override EntryAnimation EntryAnimation => EntryAnimation.Mess;
         public override ExitAnimation ExitAnimation => ExitAnimation.MessDestroy;

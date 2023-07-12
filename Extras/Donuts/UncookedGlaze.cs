@@ -28,7 +28,7 @@
                 Items = new()
                 {
                     GetGDO<Item>(ItemReferences.Pot),
-                    GetCastedGDO<Item, MilkIngredient>()
+                    GetGDO<Item>(MilkItem),
                 }
             },
             new()
