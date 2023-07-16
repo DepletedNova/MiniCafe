@@ -2,7 +2,7 @@
 
 namespace MiniCafe.Extras
 {
-    internal class GanacheDish : CustomDish
+    internal class SprinklesDish : CustomDish
     {
         public override string UniqueNameID => "ganache_donut_dish";
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Donut");
@@ -15,7 +15,7 @@ namespace MiniCafe.Extras
         public override bool IsSpecificFranchiseTier => false;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override float SelectionBias => 0;
-        public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, JellyDish>() };
+        public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, DonutDish>() };
         public override List<Unlock> HardcodedBlockers => new();
 
         public override DishType Type => DishType.Extra;
@@ -24,28 +24,23 @@ namespace MiniCafe.Extras
 
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Cook chocolate, add whipping cream, and then add to filled doughnut if ordered." }
+            { Locale.English, "Add sprinkles to any plated doughnut if ordered!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Ganache", "Adds ganache as a doughnut filling", "Where's the jelly?"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Sprinkles", "Adds sprinkles as an addon", "Colorful!"))
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, WhippingCream>(),
-            GetCastedGDO<Item, Chocolate>(),
-        };
-        public override HashSet<Process> RequiredProcesses => new()
-        {
-            GetGDO<Process>(ProcessReferences.Cook)
+            GetCastedGDO<Item, Sprinkles>(),
         };
 
         public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
         {
             new()
             {
-                MenuItem = GetCastedGDO<ItemGroup, PlatedJelly>(),
-                Ingredient = GetCastedGDO<Item, Ganache>()
+                MenuItem = GetCastedGDO<ItemGroup, PlatedDonut>(),
+                Ingredient = GetCastedGDO<Item, Sprinkles>()
             }
         };
     }

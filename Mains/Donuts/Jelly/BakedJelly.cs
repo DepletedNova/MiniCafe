@@ -9,11 +9,6 @@ namespace MiniCafe.Mains
         public override ItemStorage ItemStorageFlags => ItemStorage.Small;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
-        public override int SplitCount => 2;
-        public override Item SplitSubItem => GetCastedGDO<Item, PlainJelly>();
-        public override List<Item> SplitDepletedItems => new() { GetCastedGDO<Item, PlainJelly>() };
-        public override float SplitSpeed => 1.5f;
-
         public override List<Item.ItemProcess> Processes => new()
         {
             new()

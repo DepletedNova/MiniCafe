@@ -163,7 +163,7 @@
     <Compile Include="Desserts\LavaCake\LavaCakeMix.cs" />
     <Compile Include="Desserts\Stroopwafel\StroopwafelTray.cs" />
     <Compile Include="Extensions\CPositionExtensions.cs" />
-    <Compile Include="Extras\Donuts\GanacheDish.cs" />
+    <Compile Include="Extras\Donuts\SprinklesDish.cs" />
     <Compile Include="Extras\Donuts\CremeIngredient.cs" />
     <Compile Include="Extras\Donuts\Creme.cs" />
     <Compile Include="Extras\Donuts\GlazeDish.cs" />
@@ -181,14 +181,14 @@
     <Compile Include="Items\BoiledWater.cs" />
     <Compile Include="Mains\Donuts\Basic\BurntDonuts.cs" />
     <Compile Include="Mains\Donuts\Basic\Donut.cs" />
-    <Compile Include="Mains\Donuts\Basic\PlatedDonut.cs" />
+    <Compile Include="Mains\Donuts\Jelly\FilledJelly.cs" />
+    <Compile Include="Mains\Donuts\PlatedDonut.cs" />
     <Compile Include="Mains\Donuts\Basic\PlainDonut.cs" />
     <Compile Include="Mains\Donuts\Basic\BakedDonuts.cs" />
     <Compile Include="Mains\Donuts\Basic\UnbakedDonuts.cs" />
     <Compile Include="Mains\Donuts\DonutDish.cs" />
     <Compile Include="Mains\Donuts\Jelly\BurntJelly.cs" />
     <Compile Include="Mains\Donuts\Jelly\Jelly.cs" />
-    <Compile Include="Mains\Donuts\Jelly\PlatedJelly.cs" />
     <Compile Include="Mains\Donuts\JellyDish.cs" />
     <Compile Include="Mains\Donuts\LongJohnDish.cs" />
     <Compile Include="Mains\Donuts\Jelly\PlainJelly.cs" />
@@ -198,7 +198,6 @@
     <Compile Include="Mains\Donuts\LongJohn\LongJohn.cs" />
     <Compile Include="Mains\Donuts\LongJohn\PlainLongJohn.cs" />
     <Compile Include="Mains\Donuts\LongJohn\BakedLongJohns.cs" />
-    <Compile Include="Mains\Donuts\LongJohn\PlatedLongJohn.cs" />
     <Compile Include="Mains\Donuts\LongJohn\UnbakedLongJohns.cs" />
     <Compile Include="Mains\Donuts\UnmixedDonutDough.cs" />
     <Compile Include="Mains\Tea\Hibiscus\GroundHibiscus.cs" />

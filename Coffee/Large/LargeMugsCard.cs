@@ -15,10 +15,7 @@
                 Status = Main.LARGE_MUG_STATUS
             }
         };
-        public override List<Unlock> HardcodedRequirements => new()
-        {
-            GetGDO<Unlock>(CoffeeshopMode)
-        };
+        public override List<Unlock> HardcodedRequirements => new() { GetGDO<Unlock>(CoffeeBaseDish) };
 
         public override string IconOverride => "<sprite name=\"fill_coffee\">";
         public override Color ColourOverride => ColorFromHex(0x6D5140);

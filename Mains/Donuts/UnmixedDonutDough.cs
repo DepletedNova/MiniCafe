@@ -15,25 +15,26 @@ namespace MiniCafe.Mains
                 Process = GetGDO<Process>(ProcessReferences.Knead),
                 Duration = 1.3f,
                 Result = GetCastedGDO<Item, UnbakedJelly>()
+            },
+            new()
+            {
+                Process = GetGDO<Process>(ProcessReferences.Cook),
+                Duration = 3.5f,
+                Result = GetCastedGDO<Item, SconePlatter>()
             }
         };
         public override List<ItemGroupView.ColourBlindLabel> Labels => new()
         {
             new()
             {
-                Item = GetGDO<Item>(ItemReferences.Sugar),
-                Text = "Su"
-            },
-            new()
-            {
-                Item = GetGDO<Item>(ItemReferences.Flour),
-                Text = "Fl"
+                Item = GetCastedGDO<Item, SweetDough>(),
+                Text = "SD"
             },
             new()
             {
                 Item = GetGDO<Item>(MilkItem),
-                Text = "Mi"
-            },
+                Text = "M"
+            }
         };
         public override List<ItemGroup.ItemSet> Sets => new()
         {
@@ -41,20 +42,18 @@ namespace MiniCafe.Mains
             {
                 Items = new()
                 {
-                    GetGDO<Item>(ItemReferences.Flour),
-                    GetGDO<Item>(ItemReferences.Sugar),
+                    GetCastedGDO<Item, SweetDough>(),
                     GetGDO<Item>(MilkItem)
                 },
-                Max = 3,
-                Min = 3,
+                Max = 2,
+                Min = 2,
             }
         };
 
         public override void OnRegister(ItemGroup gdo)
         {
             Prefab.ApplyMaterialToChildCafe("Bowl", "Metal - Brass");
-            Prefab.ApplyMaterialToChildCafe("Sugar", "Sugar");
-            Prefab.ApplyMaterialToChildCafe("Flour", "Flour");
+            Prefab.ApplyMaterialToChildCafe("Dough", "Raw Pastry");
             Prefab.ApplyMaterialToChildCafe("Milk", "Plastic - White");
 
             Prefab.GetComponent<View>().Setup(gdo);
@@ -66,13 +65,8 @@ namespace MiniCafe.Mains
             {
                 new()
                 {
-                    GameObject = gameObject.GetChild("Sugar"),
-                    Item = GetGDO<Item>(ItemReferences.Sugar)
-                },
-                new()
-                {
-                    GameObject = gameObject.GetChild("Flour"),
-                    Item = GetGDO<Item>(ItemReferences.Flour)
+                    GameObject = gameObject.GetChild("Dough"),
+                    Item = GetCastedGDO<Item, SweetDough>(),
                 },
                 new()
                 {

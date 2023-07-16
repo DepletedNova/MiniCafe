@@ -19,40 +19,26 @@
         public override DishType Type => DishType.Main;
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add milk, flour, and sugar together and then knead and cook. Add sugar and water, cook, add butter, and then mix. " +
-                "Portion doughnut and combine it with the filling that is ordered before serving." }
+            { Locale.English, "Doughnut: Add flour and knead or add water and then add both sugar and a cracked egg. Knead this, add milk, then chop and cook.\n " +
+                "\nCustard: Add sugar, a cracked egg, and whipping cream together, knead and then add to a cooked doughnut tray. Portion, plate, and serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Filled Doughnuts", "Adds filled doughnuts as a main dish", "Can't be jelly with only creme, right?"))
-        };
-        public override HashSet<Process> RequiredProcesses => new()
-        {
-            GetGDO<Process>(ProcessReferences.Cook)
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Custard Filled Doughnuts", "Adds custard filled doughnuts as a main dish", "No jelly?"))
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetGDO<Item>(ItemReferences.Water),
-            GetCastedGDO<Item, ButterBlock>(),
-        };
-
-        public override List<Dish.MenuItem> ResultingMenuItems => new()
-        {
-            new()
-            {
-                Item = GetCastedGDO<Item, PlatedJelly>(),
-                DynamicMenuType = DynamicMenuType.Static,
-                Phase = MenuPhase.Main,
-                Weight = 1
-            }
+            GetGDO<Item>(ItemReferences.Sugar),
+            GetGDO<Item>(ItemReferences.Egg),
+            GetCastedGDO<Item, WhippingCream>(),
         };
 
         public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
         {
             new()
             {
-                Ingredient = GetCastedGDO<Item, CremeIngredient>(),
-                MenuItem = GetCastedGDO<ItemGroup, PlatedJelly>()
+                Ingredient = GetCastedGDO<Item, PlainJelly>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedDonut>()
             }
         };
     }

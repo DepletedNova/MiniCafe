@@ -34,15 +34,15 @@
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetCastedGDO<Item, Cinnamon>(),
-            GetCastedGDO<Item, ButterBlock>(),
             GetGDO<Item>(ItemReferences.Flour),
+            GetGDO<Item>(ItemReferences.Egg),
+            GetGDO<Item>(MilkItem),
             GetGDO<Item>(ItemReferences.Sugar),
             GetCastedGDO<Item, Syrup>()
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Wafel: Add cinnamon, flour together and then add a slice of butter. Cook to make a tray of wafels. " +
-                "\nStroop: Add syrup and sugar together before cooking to create the stroop. Add the stroop to the tray, portion, and then serve." }
+            { Locale.English, "Add flour, a cracked egg, milk, and cinnamon and then cook. Add sugar and syrup together and cook this and add to the wafel tray. Portion and serve." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

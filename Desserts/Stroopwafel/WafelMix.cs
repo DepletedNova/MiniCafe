@@ -2,7 +2,7 @@
 
 namespace MiniCafe.Sides
 {
-    internal class WafelMix : CustomItemGroup<WafelMix.View>
+    internal class WafelMix : CustomItemGroup
     {
         public override string UniqueNameID => "wafel_mix";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Wafel Mix");
@@ -21,13 +21,8 @@ namespace MiniCafe.Sides
         {
             new()
             {
-                Item = GetCastedGDO<Item, Butter>(),
-                Text = "Bu"
-            },
-            new()
-            {
-                Item = GetGDO<Item>(ItemReferences.Flour),
-                Text = "Fl"
+                Item = GetCastedGDO<Item, ThinBatter>(),
+                Text = "Ba"
             },
             new()
             {
@@ -41,45 +36,20 @@ namespace MiniCafe.Sides
             {
                 Items = new()
                 {
-                    GetGDO<Item>(ItemReferences.Flour),
+                    GetCastedGDO<Item, ThinBatter>(),
                     GetCastedGDO<Item, Cinnamon>(),
-                    GetCastedGDO<Item, Butter>()
                 },
-                Max = 3,
-                Min = 3,
+                Max = 2,
+                Min = 2,
             }
         };
 
         public override void OnRegister(ItemGroup gdo)
         {
             Prefab.ApplyMaterialToChildCafe("Bowl", "Metal");
-            Prefab.ApplyMaterialToChildCafe("Butter", "Butter");
-            Prefab.ApplyMaterialToChildCafe("Flour", "Flour");
+            Prefab.ApplyMaterialToChildCafe("Batter", "Flour", "Raw Pastry");
             Prefab.ApplyMaterialToChildCafe("Cinnamon", "Cinnamon");
 
-            Prefab.GetComponent<View>().Setup(gdo);
-        }
-
-        public class View : AccessedItemGroupView
-        {
-            protected override List<ComponentGroup> groups => new()
-            {
-                new()
-                {
-                    GameObject = gameObject.GetChild("Butter"),
-                    Item = GetCastedGDO<Item, Butter>()
-                },
-                new()
-                {
-                    GameObject = gameObject.GetChild("Flour"),
-                    Item = GetGDO<Item>(ItemReferences.Flour)
-                },
-                new()
-                {
-                    GameObject = gameObject.GetChild("Cinnamon"),
-                    Item = GetCastedGDO<Item, Cinnamon>()
-                },
-            };
         }
     }
 }

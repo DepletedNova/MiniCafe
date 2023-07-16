@@ -19,24 +19,19 @@
         public override DishType Type => DishType.Main;
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add milk, flour, and sugar together and then knead. Chop this twice and then cook. Portion, plate, and then serve. Add sprinkles if ordered." }
+            { Locale.English, "Add flour and knead or add water and then add both sugar and a cracked egg. Knead this, add milk, then chop thrice and cook. Portion, plate, and add sprinkles if ordered." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
             (Locale.English, LocalisationUtils.CreateUnlockInfo("Long Johns", "Adds long johns as a main dish", "Long doughnuts!"))
         };
-        public override HashSet<Process> RequiredProcesses => new()
-        {
-            GetGDO<Process>(ProcessReferences.Cook)
-        };
-        public override List<Dish.MenuItem> ResultingMenuItems => new()
+
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
         {
             new()
             {
-                Item = GetCastedGDO<Item, PlatedLongJohn>(),
-                DynamicMenuType = DynamicMenuType.Static,
-                Phase = MenuPhase.Main,
-                Weight = 1
+                Ingredient = GetCastedGDO<Item, PlainLongJohn>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedDonut>()
             }
         };
     }

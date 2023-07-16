@@ -19,7 +19,7 @@
         public override bool DestroyAfterModUninstall => false;
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add milk, flour, and sugar together and then knead. Chop this once and then cook. Portion, plate, and then serve. Add sprinkles if ordered." }
+            { Locale.English, "Add flour and knead or add water and then add both sugar and a cracked egg. Knead this, add milk, then chop twice and cook. Portion, plate, and add sprinkles if ordered." }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -27,15 +27,17 @@
         };
         public override HashSet<Process> RequiredProcesses => new()
         {
-            GetGDO<Process>(ProcessReferences.Cook)
+            GetGDO<Process>(ProcessReferences.Cook),
+            GetGDO<Process>(ProcessReferences.Knead),
+            GetGDO<Process>(ProcessReferences.Chop)
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetGDO<Item>(ItemReferences.Plate),
             GetGDO<Item>(ItemReferences.Flour),
+            GetGDO<Item>(ItemReferences.Egg),
             GetGDO<Item>(ItemReferences.Sugar),
             GetGDO<Item>(MilkItem),
-            GetCastedGDO<Item, Sprinkles>(),
         };
         public override List<string> StartingNameSet => new()
         {
@@ -44,7 +46,6 @@
             "A Sprinkle in Time",
             "Sprinkled with Love",
             "Hole-y Moley!",
-            "The Downfall of Humanity",
             "Jam Packed!"
         };
 
@@ -56,6 +57,15 @@
                 DynamicMenuType = DynamicMenuType.Static,
                 Phase = MenuPhase.Main,
                 Weight = 1
+            }
+        };
+
+        public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => new()
+        {
+            new()
+            {
+                Ingredient = GetCastedGDO<Item, PlainDonut>(),
+                MenuItem = GetCastedGDO<ItemGroup, PlatedDonut>()
             }
         };
 

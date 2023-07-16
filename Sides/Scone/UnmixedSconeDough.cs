@@ -1,6 +1,6 @@
 ﻿namespace MiniCafe.Extras
 {
-    public class UnmixedSconeDough : CustomItemGroup
+    public class UnmixedSconeDough : CustomItemGroup, IWontRegister
     {
         public override string UniqueNameID => "unmixed_scone";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Unmixed Scone Dough");

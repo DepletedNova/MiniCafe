@@ -33,16 +33,17 @@
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetCastedGDO<Item, Chocolate>(),
-            GetCastedGDO<Item, ButterBlock>(),
-            GetGDO<Item>(ItemReferences.Egg)
+            GetGDO<Item>(ItemReferences.Egg),
+            GetGDO<Item>(ItemReferences.Flour),
+            GetGDO<Item>(MilkItem)
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Crack an egg, add twice chopped chocolate, add a slice of butter, and then cook and serve. Lava Cakes can be shared between 2 customers." }
+            { Locale.English, "Add flour, a cracked egg, milk, and then twice chopped chocolate and then cook. This can be shared between two people!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Lava Cake", "Adds Lava Cake as a dessert", "Lava?"))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Lava Cake", "Adds Lava Cake as a dessert", "Flows like lava!"))
         };
     }
 }

@@ -15,7 +15,7 @@ namespace MiniCafe.Coffee
         public override bool IsSpecificFranchiseTier => false;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override float SelectionBias => 0;
-        public override List<Unlock> HardcodedRequirements => new() { GetGDO<Unlock>(CoffeeBaseDish) };
+        public override List<Unlock> HardcodedRequirements => new() { GetGDO<Unlock>(CoffeeshopMode) };
         public override DishType Type => DishType.Extra;
 
         public override bool RequiredNoDishItem => true;

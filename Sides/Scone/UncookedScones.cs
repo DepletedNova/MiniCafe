@@ -1,6 +1,6 @@
 ﻿namespace MiniCafe.Extras
 {
-    public class UncookedScones : CustomItem
+    public class UncookedScones : CustomItem, IWontRegister
     {
         public override string UniqueNameID => "uncooked_scones";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Uncooked Scones");

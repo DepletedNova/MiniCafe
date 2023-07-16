@@ -1,6 +1,6 @@
 ﻿namespace MiniCafe.Desserts
 {
-    internal class LavaCakeMix : CustomItemGroup<LavaCakeMix.View>
+    internal class LavaCakeMix : CustomItemGroup
     {
         public override string UniqueNameID => "lava_cake_mix";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake Mix");
@@ -12,7 +12,7 @@
             new()
             {
                 Process = GetGDO<Process>(ProcessReferences.Cook),
-                Duration = 3f,
+                Duration = 2f,
                 Result = GetCastedGDO<Item, LavaCake>()
             }
         };
@@ -21,53 +21,21 @@
         {
             new()
             {
-                Max = 3,
-                Min = 3,
+                Max = 2,
+                Min = 2,
                 Items = new()
                 {
                     GetCastedGDO<Item, ChocolateShavings>(),
-                    GetCastedGDO<Item, Butter>(),
-                    GetGDO<Item>(ItemReferences.EggCracked)
+                    GetCastedGDO<Item, ThinBatter>(),
                 }
             }
         };
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.GetComponent<View>().Setup(gdo);
-
             Prefab.ApplyMaterialToChildCafe("Bowl", "Metal Dark");
-            Prefab.ApplyMaterialToChildCafe("Whites", "Egg - White");
-            Prefab.ApplyMaterialToChildCafe("Yolk", "Egg - Yolk");
-            Prefab.ApplyMaterialToChildCafe("Butter", "Butter");
-            Prefab.ApplyMaterialToChildCafe("Chocolate", "Chocolate");
-        }
-
-        internal class View : AccessedItemGroupView
-        {
-            protected override List<ComponentGroup> groups => new()
-            {
-                new()
-                {
-                    Item = GetCastedGDO<Item, ChocolateShavings>(),
-                    GameObject = gameObject.GetChild("Chocolate")
-                },
-                new()
-                {
-                    Item = GetCastedGDO<Item, Butter>(),
-                    GameObject = gameObject.GetChild("Butter")
-                },
-                new()
-                {
-                    Item = GetGDO<Item>(ItemReferences.EggCracked),
-                    Objects = new()
-                    {
-                        gameObject.GetChild("Whites"),
-                        gameObject.GetChild("Yolk")
-                    },
-                    DrawAll = true
-                }
-            };
+            Prefab.ApplyMaterialToChildCafe("Fill", "Flour", "Raw Pastry");
+            Prefab.ApplyMaterialToChildren("Chocolate", "Chocolate");
         }
     }
 }

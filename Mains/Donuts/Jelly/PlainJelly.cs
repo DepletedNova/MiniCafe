@@ -12,6 +12,7 @@ namespace MiniCafe.Mains
         public override void OnRegister(Item gdo)
         {
             Prefab.ApplyMaterialToChildCafe("donut", "Bread - Inside Cooked");
+            Prefab.ApplyMaterialToChildCafe("filling", "Plastic - Light Yellow");
         }
     }
 }
