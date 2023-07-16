@@ -23,5 +23,8 @@ namespace MiniCafe
         internal const int FrothedMilk = -1313420767;
         internal const int IceItem = -442824475;
         internal const int MilkItem = 329108931;
+
+        internal const int LatteItem = 184647209;
+        internal const int IcedCoffeeItem = -1388933833;
     }
 }

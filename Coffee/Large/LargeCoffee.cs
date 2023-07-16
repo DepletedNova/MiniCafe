@@ -10,6 +10,8 @@ namespace MiniCafe.Coffee.Large
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override int RewardOverride => 2;
 
+        public override string ColourBlindTag => "LBl";
+
         public override void OnRegister(Item gdo)
         {
             Prefab.ApplyMaterialToChildCafe("cup", "Light Coffee Cup");

@@ -10,6 +10,8 @@ namespace MiniCafe.Coffee.Large
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override Appliance DedicatedProvider => GetCastedGDO<Appliance, LargeCoffeeMachine>();
 
+        public override string ColourBlindTag => "L";
+
         public override List<Item.ItemProcess> Processes => new()
         {
             new()

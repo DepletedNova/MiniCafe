@@ -10,6 +10,15 @@ namespace MiniCafe.Coffee
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override int RewardOverride => 2;
 
+        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+        {
+            new()
+            {
+                Text = "SAm",
+                Item = GetCastedGDO<Item, BoiledWater>(),
+            }
+        };
+
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()

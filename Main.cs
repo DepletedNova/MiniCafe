@@ -37,7 +37,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.1.0";
+        public const string VERSION = "2.1.1";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -125,17 +125,55 @@ namespace MiniCafe
                 }
             };
 
-            // Base Coffee Card
-            var coffeeMode = GetGDO<UnlockCard>(CoffeeshopMode);
-            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, CroissantCoffeeDish>());
-            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, SconeCoffeeDish>());
-            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, CannoliCoffeeDish>());
-
-            coffeeMode.AllowedFoods.Add(GetCastedGDO<Unlock, AmericanoDish>());
-
             // Update Tea
             var teaCard = GetGDO<Dish>(TeaDish);
             teaCard.BlockedBy = new() { GetCastedGDO<Dish, EarlGreyDish>() };
+
+            // Transfer & add AllowedDishes
+            var coffeeBase = GetGDO<Dish>(CoffeeBaseDish);
+            var coffeeMode = GetGDO<UnlockCard>(CoffeeshopMode);
+
+            if (!coffeeBase.AllowedFoods.IsNullOrEmpty())
+            {
+                coffeeBase.BlocksAllOtherFood = false;
+                coffeeMode.BlocksAllOtherFood = true;
+
+                foreach (Unlock food in coffeeBase.AllowedFoods)
+                    AddAllowed(coffeeMode, food);
+            }
+
+            // Base Coffee Card
+            AddAllowed(coffeeMode, GetCastedGDO<Unlock, CroissantCoffeeDish>());
+            AddAllowed(coffeeMode, GetCastedGDO<Unlock, SconeCoffeeDish>());
+            AddAllowed(coffeeMode, GetCastedGDO<Unlock, CannoliCoffeeDish>());
+
+            AddAllowed(coffeeMode, GetCastedGDO<Unlock, AmericanoDish>());
+
+            // Add Colourblind to normal coffees
+            AddColourBlind(ItemReferences.CoffeeCup, "S");
+            AddColourBlind(ItemReferences.CoffeeCupCoffee, "SBl");
+            AddColourBlind(LatteItem, "SLa");
+            AddColourBlind(IcedCoffeeItem, "SIc");
+
+        }
+
+        private void AddAllowed(UnlockCard AddTo, Unlock Add)
+        {
+            if (!AddTo.AllowedFoods.Contains(Add))
+                AddTo.AllowedFoods.Add(Add);
+        }
+
+        private void AddColourBlind(int itemID, string tag)
+        {
+            Item Item = GetGDO<Item>(itemID);
+            Item CB_Parent = GetGDO<Item>(ItemReferences.PieMeatCooked);
+            if (CB_Parent != null && Item != null)
+            {
+                GameObject colourBlind = Object.Instantiate(CB_Parent.Prefab.GetChild("Colour Blind"));
+                colourBlind.name = "Colour Blind";
+                colourBlind.transform.SetParent(Item.Prefab.transform, false);
+                colourBlind.GetChild("Title").GetComponent<TMP_Text>().text = tag;
+            }
         }
 
         private void ApplyVisualOverrides()
@@ -192,6 +230,9 @@ namespace MiniCafe
 
             Events.BuildGameDataEvent += (s, args) =>
             {
+                if (!args.firstBuild)
+                    return;
+
                 UpdateLemon();
                 UpdateCoffee();
                 UpdatePizzaCrust();
