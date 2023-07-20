@@ -13,8 +13,7 @@
         public override bool IsSpecificFranchiseTier => false;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override float SelectionBias => 0;
-        //public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EspressoDish>() };
-        //public override List<Unlock> HardcodedBlockers => new() { GetCastedGDO<Unlock, SconeTeaDish>() };
+
         public override DishType Type => DishType.Side;
 
         public override bool RequiredNoDishItem => true;
@@ -36,9 +35,10 @@
         {
             GetGDO<Item>(ItemReferences.Flour),
             GetGDO<Item>(ItemReferences.Egg),
-            GetCastedGDO<Item, WhippingCream>(),
+            GetGDO<Item>(ItemReferences.Sugar),
+            GetGDO<Item>(MilkItem),
         };
-        //public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => ExtraHelper.GetUnlocks(GetCastedGDO<Item, Scone>());
+
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()

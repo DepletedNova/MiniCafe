@@ -25,7 +25,7 @@
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Crack an egg and then add flour. Knead this once and then add whipping cream. Cook and portion and serve with any main if ordered!" }
+            { Locale.English, "Add flour and knead or add water and then add both sugar and a cracked egg. Knead this, add milk, and then cook. Portion and serve!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -35,7 +35,8 @@
         {
             GetGDO<Item>(ItemReferences.Flour),
             GetGDO<Item>(ItemReferences.Egg),
-            GetCastedGDO<Item, WhippingCream>(),
+            GetGDO<Item>(ItemReferences.Sugar),
+            GetGDO<Item>(MilkItem),
         };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {

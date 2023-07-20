@@ -37,7 +37,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.1.1";
+        public const string VERSION = "2.1.4";
 
         public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -230,12 +230,9 @@ namespace MiniCafe
 
             Events.BuildGameDataEvent += (s, args) =>
             {
-                if (!args.firstBuild)
-                    return;
-
                 UpdateLemon();
                 UpdateCoffee();
-                UpdatePizzaCrust();
+                UpdatePizzaCrust(); 
 
                 UpdateDirtyMugTransfer();
                 UpdateGenericMugTransfers(args.gamedata);
