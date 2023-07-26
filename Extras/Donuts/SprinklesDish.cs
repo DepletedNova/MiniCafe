@@ -40,7 +40,7 @@ namespace MiniCafe.Extras
             new()
             {
                 MenuItem = GetCastedGDO<ItemGroup, PlatedDonut>(),
-                Ingredient = GetCastedGDO<Item, Sprinkles>()
+                Ingredient = GetCastedGDO<Item, SprinklesIngredient>()
             }
         };
     }

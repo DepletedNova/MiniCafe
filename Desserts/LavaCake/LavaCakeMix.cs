@@ -21,13 +21,24 @@
         {
             new()
             {
-                Max = 2,
-                Min = 2,
+                Items = new()
+                {
+                    GetGDO<Item>(ItemReferences.Flour),
+                    GetGDO<Item>(ItemReferences.EggCracked),
+                    GetGDO<Item>(329108931),
+                },
+                IsMandatory = true,
+                Max = 3,
+                Min = 3
+            },
+            new()
+            {
                 Items = new()
                 {
                     GetCastedGDO<Item, ChocolateShavings>(),
-                    GetCastedGDO<Item, ThinBatter>(),
-                }
+                },
+                Max = 1,
+                Min = 1,
             }
         };
 

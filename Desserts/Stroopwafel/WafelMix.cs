@@ -17,30 +17,28 @@ namespace MiniCafe.Sides
                 Result = GetCastedGDO<Item, WafelTray>()
             }
         };
-        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
-        {
-            new()
-            {
-                Item = GetCastedGDO<Item, ThinBatter>(),
-                Text = "Ba"
-            },
-            new()
-            {
-                Item = GetCastedGDO<Item, Cinnamon>(),
-                Text = "Ci"
-            },
-        };
         public override List<ItemGroup.ItemSet> Sets => new()
         {
             new()
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, ThinBatter>(),
+                    GetGDO<Item>(ItemReferences.Flour),
+                    GetGDO<Item>(ItemReferences.EggCracked),
+                    GetGDO<Item>(329108931),
+                },
+                IsMandatory = true,
+                Max = 3,
+                Min = 3
+            },
+            new()
+            {
+                Items = new()
+                {
                     GetCastedGDO<Item, Cinnamon>(),
                 },
-                Max = 2,
-                Min = 2,
+                Max = 1,
+                Min = 1,
             }
         };
 
