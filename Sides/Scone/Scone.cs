@@ -1,4 +1,10 @@
-﻿namespace MiniCafe.Extras
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Extras
 {
     public class Scone : CustomItem
     {
@@ -12,7 +18,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Scone", "Bread - Inside Cooked", "Chocolate");
+            Prefab.ApplyMaterialToChild("Scone", "Bread - Inside Cooked", "Chocolate");
         }
     }
 }

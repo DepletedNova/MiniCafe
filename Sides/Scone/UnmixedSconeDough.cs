@@ -1,4 +1,15 @@
-﻿namespace MiniCafe.Extras
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Extras
 {
     public class UnmixedSconeDough : CustomItemGroup, IWontRegister
     {
@@ -33,9 +44,9 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal Dark");
-            Prefab.ApplyMaterialToChildCafe("Dough", "Egg Dough");
-            Prefab.ApplyMaterialToChildCafe("Whipping", "Coffee Cup");
+            Prefab.ApplyMaterialToChild("Bowl", "Metal Dark");
+            Prefab.ApplyMaterialToChild("Dough", "Egg Dough");
+            Prefab.ApplyMaterialToChild("Whipping", "Coffee Cup");
         }
     }
 }

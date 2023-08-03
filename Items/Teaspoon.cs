@@ -1,4 +1,12 @@
-﻿namespace MiniCafe.Extras
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Appliances;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Extras
 {
     public class Teaspoon : CustomItem
     {
@@ -10,7 +18,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("spoon", "Metal");
+            Prefab.ApplyMaterialToChild("spoon", "Metal");
         }
     }
 }

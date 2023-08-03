@@ -1,4 +1,7 @@
-﻿namespace MiniCafe.Components
+﻿using KitchenData;
+using KitchenMods;
+
+namespace MiniCafe.Components
 {
     public struct CInvertedPlacement : IApplianceProperty, IModComponent { }
 }

@@ -1,4 +1,15 @@
-﻿namespace MiniCafe.Extras
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Extras
 {
     public class UnrolledCroissant : CustomItemGroup
     {
@@ -33,8 +44,8 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Dough", "Raw Pastry");
-            Prefab.ApplyMaterialToChildCafe("Butter", "Butter");
+            Prefab.ApplyMaterialToChild("Dough", "Raw Pastry");
+            Prefab.ApplyMaterialToChild("Butter", "Butter");
         }
     }
 }

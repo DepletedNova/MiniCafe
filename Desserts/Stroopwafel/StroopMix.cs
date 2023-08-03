@@ -1,4 +1,15 @@
-﻿namespace MiniCafe.Sides
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Sides
 {
     public class StroopMix : CustomItemGroup
     {
@@ -31,9 +42,9 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal");
-            Prefab.ApplyMaterialToChildCafe("Syrup", "Sugar");
-            Prefab.ApplyMaterialToChildCafe("Sugar", "Cooked Batter");
+            Prefab.ApplyMaterialToChild("Bowl", "Metal");
+            Prefab.ApplyMaterialToChild("Syrup", "Sugar");
+            Prefab.ApplyMaterialToChild("Sugar", "Cooked Batter");
         }
     }
 }

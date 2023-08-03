@@ -1,4 +1,15 @@
-﻿namespace MiniCafe.Desserts
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Desserts
 {
     internal class LavaCakeMix : CustomItemGroup
     {
@@ -44,8 +55,8 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal Dark");
-            Prefab.ApplyMaterialToChildCafe("Fill", "Flour", "Raw Pastry");
+            Prefab.ApplyMaterialToChild("Bowl", "Metal Dark");
+            Prefab.ApplyMaterialToChild("Fill", "Flour", "Raw Pastry");
             Prefab.ApplyMaterialToChildren("Chocolate", "Chocolate");
         }
     }

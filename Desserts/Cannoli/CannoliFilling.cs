@@ -1,4 +1,10 @@
-﻿namespace MiniCafe.Desserts
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Desserts
 {
     public class CannoliFilling : CustomItem
     {
@@ -9,8 +15,8 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal");
-            Prefab.ApplyMaterialToChildCafe("Fill", "Coffee Cup");
+            Prefab.ApplyMaterialToChild("Bowl", "Metal");
+            Prefab.ApplyMaterialToChild("Fill", "Coffee Cup");
             Prefab.ApplyMaterialToChildren("Chocolate", "Chocolate");
         }
     }

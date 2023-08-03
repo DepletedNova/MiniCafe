@@ -1,4 +1,12 @@
-﻿namespace MiniCafe.Items
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Appliances;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Items
 {
     public class BigMug : CustomItem
     {
@@ -26,6 +34,6 @@
                 gdo.IsIndisposable = false;
         }
 
-        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterialCafe("Coffee Cup", "Sack - Blue");
+        public static void ApplyMugMaterials(GameObject mug) => mug.ApplyMaterial("Coffee Cup", "Sack - Blue");
     }
 }

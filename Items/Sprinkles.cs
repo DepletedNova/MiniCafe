@@ -1,4 +1,12 @@
-﻿namespace MiniCafe.Items
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Appliances;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Items
 {
     public class Sprinkles : CustomItem
     {
@@ -16,7 +24,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Can", "Clothing Pink", "Plastic - White", "Hob Black", "Plastic - Blue");
+            Prefab.ApplyMaterialToChild("Can", "Clothing Pink", "Plastic - White", "Hob Black", "Plastic - Blue");
         }
     }
 }

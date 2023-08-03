@@ -1,4 +1,12 @@
-﻿namespace MiniCafe.Coffee.Large
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Coffee.Large
 {
     public class LargeMugsCard : CustomUnlockCard
     {
@@ -16,9 +24,6 @@
             }
         };
         public override List<Unlock> HardcodedRequirements => new() { GetGDO<Unlock>(CoffeeBaseDish) };
-
-        public override string IconOverride => "<sprite name=\"fill_coffee\">";
-        public override Color ColourOverride => ColorFromHex(0x6D5140);
 
         public override void AttachDependentProperties(GameData GD, GameDataObject GDO)
         {

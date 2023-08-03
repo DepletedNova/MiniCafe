@@ -1,4 +1,15 @@
-﻿namespace MiniCafe.Appliances
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Items;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.KitchenPropertiesUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Appliances
 {
     public class SprinklesProvider : CustomAppliance
     {
@@ -35,11 +46,11 @@
             whipped.ApplyMaterialToChildren("Can", "Clothing Pink", "Plastic - White", "Hob Black", "Plastic - Blue");
 
             var stand = Prefab.GetChild("Stand/Model");
-            stand.ApplyMaterialToChildCafe("Body", "Wood 4 - Painted");
-            stand.ApplyMaterialToChildCafe("Doors", "Wood 4 - Painted");
-            stand.ApplyMaterialToChildCafe("Handles", "Metal - Brass");
-            stand.ApplyMaterialToChildCafe("Sides", "Wood - Default");
-            stand.ApplyMaterialToChildCafe("Top", "Wood - Default");
+            stand.ApplyMaterialToChild("Body", "Wood 4 - Painted");
+            stand.ApplyMaterialToChild("Doors", "Wood 4 - Painted");
+            stand.ApplyMaterialToChild("Handles", "Metal - Brass");
+            stand.ApplyMaterialToChild("Sides", "Wood - Default");
+            stand.ApplyMaterialToChild("Top", "Wood - Default");
         }
     }
 }

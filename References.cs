@@ -2,29 +2,29 @@
 
 namespace MiniCafe
 {
-    internal class References
+    public class References
     {
         // Processes
-        internal const int SteepProcess = 1393363605;
+        public const int SteepProcess = 1393363605;
 
         // Cards
-        internal const int CoffeeshopMode = 746549422;
-        internal const int CoffeeBaseDish = 16318784;
-        internal const int ExtraCoffee = 251686519;
-        internal const int SlowBrew = 2079359756;
-        internal const int MilkExtra = -740215310;
-        internal const int SugarExtra = -696561631;
-        internal const int LatteDish = -141282934;
-        internal const int IcedDish = 2133632711;
-        internal const int CakeStand = 1103885337;
-        internal const int TeaDish = 1398671754;
+        public const int CoffeeshopMode = 746549422;
+        public const int CoffeeBaseDish = 16318784;
+        public const int ExtraCoffee = 251686519;
+        public const int SlowBrew = 2079359756;
+        public const int MilkExtra = -740215310;
+        public const int SugarExtra = -696561631;
+        public const int LatteDish = -141282934;
+        public const int IcedDish = 2133632711;
+        public const int CakeStand = 1103885337;
+        public const int TeaDish = 1398671754;
 
         // Items
-        internal const int FrothedMilk = -1313420767;
-        internal const int IceItem = -442824475;
-        internal const int MilkItem = 329108931;
+        public const int FrothedMilk = -1313420767;
+        public const int IceItem = -442824475;
+        public const int MilkItem = 329108931;
 
-        internal const int LatteItem = 184647209;
-        internal const int IcedCoffeeItem = -1388933833;
+        public const int LatteItem = 184647209;
+        public const int IcedCoffeeItem = -1388933833;
     }
 }

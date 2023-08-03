@@ -1,47 +1,39 @@
-﻿global using IngredientLib.Ingredient.Items;
-global using Kitchen;
-global using KitchenData;
-global using KitchenLib;
-global using KitchenLib.Customs;
-global using KitchenLib.Event;
-global using KitchenLib.References;
-global using KitchenLib.Utils;
-global using KitchenMods;
-global using MessagePack;
-global using MiniCafe.Appliances;
-global using MiniCafe.Components;
-global using MiniCafe.Extras;
-global using MiniCafe.Items;
-global using MiniCafe.Mains;
-global using MiniCafe.Mains.Tea;
-global using MiniCafe.Processes;
-global using MiniCafe.Views;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Reflection;
-global using TMPro;
-global using Unity.Collections;
-global using Unity.Entities;
-global using UnityEngine;
-global using static KitchenLib.Utils.GDOUtils;
-global using static KitchenLib.Utils.KitchenPropertiesUtils;
-global using static MiniCafe.Helper;
-using ApplianceLib.Api;
+﻿using ApplianceLib.Api;
+using IngredientLib.Ingredient.Items;
+using Kitchen;
+using KitchenData;
+using KitchenLib;
+using KitchenLib.Customs;
+using KitchenLib.Event;
+using KitchenLib.References;
 using KitchenLib.Registry;
+using KitchenLib.Utils;
+using KitchenMods;
+using MiniCafe.Appliances;
 using MiniCafe.Appliances.Spills;
 using MiniCafe.Coffee;
+using MiniCafe.Components;
 using MiniCafe.Desserts;
+using MiniCafe.Items;
+using System.Linq;
+using System.Reflection;
+using TMPro;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.KitchenPropertiesUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.2.2";
+        public const string VERSION = "2.4.0";
 
-        public Main() : base(GUID, "Mini Cafe", "Depleted Supernova#1957", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
+        public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
-        internal static AssetBundle Bundle;
+        public static AssetBundle Bundle;
 
         internal static bool PaperPlatesInstalled => ModRegistery.Registered.Any(modPair => modPair.Value.ModID == "paperPlates");
 
@@ -82,17 +74,17 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Lava Cake Dark", 0x633100));
         }
 
-        internal static string DirtyMugKey = "MiniCafe-DirtyMugs";
+        public static string DirtyMugKey = "MiniCafe-DirtyMugs";
         private void UpdateDirtyMugTransfer()
         {
             RestrictedItemTransfers.AllowItem(DirtyMugKey, GetCastedGDO<Item, BigMugDirty>());
             RestrictedItemTransfers.AllowItem(DirtyMugKey, GetCastedGDO<Item, SmallMugDirty>());
         }
 
-        internal static string GenericMugKey = "MiniCafe-MugItems";
+        public static string GenericMugKey = "MiniCafe-MugItems";
 
-        internal static string EmptyMugKey = "MiniCafe-EmptyMugs";
-        internal static string FilledMugKey = "MiniCafe-FilledMugs";
+        public static string EmptyMugKey = "MiniCafe-EmptyMugs";
+        public static string FilledMugKey = "MiniCafe-FilledMugs";
         private void UpdateGenericMugTransfers(GameData gameData)
         {
             RestrictedItemTransfers.AllowProcessableItems(EmptyMugKey, ProcessReferences.FillCoffee);
@@ -124,10 +116,6 @@ namespace MiniCafe
                     ID = GetCustomGameDataObject<CoffeeSpill1>().ID
                 }
             };
-
-            // Update Tea
-            var teaCard = GetGDO<Dish>(TeaDish);
-            teaCard.BlockedBy = new() { GetCastedGDO<Dish, EarlGreyDish>() };
 
             // Transfer & add AllowedDishes
             var coffeeBase = GetGDO<Dish>(CoffeeBaseDish);
@@ -176,20 +164,6 @@ namespace MiniCafe
             }
         }
 
-        private void ApplyVisualOverrides()
-        {
-            OverrideCoffeeVisuals(ExtraCoffee);
-            OverrideCoffeeVisuals(SlowBrew);
-            OverrideCoffeeVisuals(MilkExtra);
-            OverrideCoffeeVisuals(SugarExtra);
-        }
-
-        private void OverrideCoffeeVisuals(int id)
-        {
-            UnlockOverrides.AddIconOverride(id, "<sprite name=\"fill_coffee\">");
-            UnlockOverrides.AddColourOverride(id, ColorFromHex(0x6D5140));
-        }
-
         private void UpdateLemon()
         {
             var lemon = GetCastedGDO<Item, ChoppedLemon>();
@@ -236,8 +210,6 @@ namespace MiniCafe
 
                 UpdateDirtyMugTransfer();
                 UpdateGenericMugTransfers(args.gamedata);
-
-                ApplyVisualOverrides();
 
                 args.gamedata.ProcessesView.Initialise(args.gamedata);
             };

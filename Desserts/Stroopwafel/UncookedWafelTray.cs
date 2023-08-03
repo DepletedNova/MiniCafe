@@ -1,4 +1,14 @@
-﻿namespace MiniCafe.Sides
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Sides
 {
     internal class UncookedWafelTray : CustomItem
     {
@@ -18,7 +28,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Tray", "Metal");
+            Prefab.ApplyMaterialToChild("Tray", "Metal");
             Prefab.ApplyMaterialToChildren("Ball", "Raw Pastry");
         }
     }

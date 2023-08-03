@@ -1,4 +1,12 @@
-﻿namespace MiniCafe.Coffee
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Coffee
 {
     public class OverfillingCard : CustomUnlockCard
     {
@@ -18,8 +26,5 @@
         {
             GetGDO<Unlock>(CoffeeshopMode)
         };
-
-        public override string IconOverride => "<sprite name=\"fill_coffee\">";
-        public override Color ColourOverride => ColorFromHex(0x6D5140);
     }
 }

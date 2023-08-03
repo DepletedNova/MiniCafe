@@ -1,4 +1,14 @@
-﻿namespace MiniCafe.Extras
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Extras
 {
     public class UncookedScones : CustomItem, IWontRegister
     {

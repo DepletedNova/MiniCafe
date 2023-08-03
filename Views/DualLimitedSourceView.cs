@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Kitchen;
+using KitchenLib.Utils;
+using KitchenMods;
+using MessagePack;
+using MiniCafe.Components;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Unity.Collections;
+using Unity.Entities;
+using UnityEngine;
 
 namespace MiniCafe.Views
 {

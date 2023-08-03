@@ -1,4 +1,10 @@
-﻿namespace MiniCafe.Sides
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Sides
 {
     public class Stroop : CustomItem
     {
@@ -10,8 +16,8 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal");
-            Prefab.ApplyMaterialToChildCafe("Fill", "Stroop");
+            Prefab.ApplyMaterialToChild("Bowl", "Metal");
+            Prefab.ApplyMaterialToChild("Fill", "Stroop");
         }
     }
 }

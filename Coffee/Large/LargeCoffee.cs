@@ -1,4 +1,8 @@
 ﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
 
 namespace MiniCafe.Coffee.Large
 {
@@ -14,8 +18,8 @@ namespace MiniCafe.Coffee.Large
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("cup", "Light Coffee Cup");
-            Prefab.ApplyMaterialToChildCafe("fill", "Coffee - Black");
+            Prefab.ApplyMaterialToChild("cup", "Light Coffee Cup");
+            Prefab.ApplyMaterialToChild("fill", "Coffee - Black");
         }
     }
 }

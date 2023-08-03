@@ -1,4 +1,13 @@
-﻿using KitchenData;
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Items;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
 
 namespace MiniCafe.Coffee.Large
 {
@@ -36,9 +45,9 @@ namespace MiniCafe.Coffee.Large
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("iced", "Coffee - Ice", "Coffee Glass");
-            Prefab.ApplyMaterialToChildCafe("ice", "Ice");
-            Prefab.ApplyMaterialToChildCafe("straw", "Plastic - Red", "Coffee Cup");
+            Prefab.ApplyMaterialToChild("iced", "Coffee - Ice", "Coffee Glass");
+            Prefab.ApplyMaterialToChild("ice", "Ice");
+            Prefab.ApplyMaterialToChild("straw", "Plastic - Red", "Coffee Cup");
         }
     }
 }

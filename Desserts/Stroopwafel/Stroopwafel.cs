@@ -1,4 +1,10 @@
-﻿namespace MiniCafe.Sides
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Sides
 {
     public class Stroopwafel : CustomItem
     {
@@ -9,8 +15,8 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("wafel", "Bread - Cooked", "Stroop");
-            Prefab.ApplyMaterialToChildCafe("plate", "Plate", "Plate - Ring");
+            Prefab.ApplyMaterialToChild("wafel", "Bread - Cooked", "Stroop");
+            Prefab.ApplyMaterialToChild("plate", "Plate", "Plate - Ring");
         }
     }
 }

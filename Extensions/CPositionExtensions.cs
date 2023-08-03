@@ -1,4 +1,6 @@
-﻿namespace MiniCafe.Extensions
+﻿using Kitchen;
+
+namespace MiniCafe.Extensions
 {
     public static class CPositionExtensions
     {

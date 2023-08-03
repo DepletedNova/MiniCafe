@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Desserts
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Desserts
 {
     public class CannoliTray : CustomItemGroup
     {
@@ -27,7 +36,7 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Tray", "Metal");
+            Prefab.ApplyMaterialToChild("Tray", "Metal");
 
             List<GameObject> items = new();
             for (int i = 0; i < Prefab.GetChildCount(); i++)
@@ -36,9 +45,9 @@
                 if (!child.name.Contains("Cannoli"))
                     continue;
 
-                child.ApplyMaterialCafe("Cooked Pastry");
-                child.ApplyMaterialToChildCafe("Filling", "Coffee Cup");
-                child.ApplyMaterialToChildCafe("Chocolate", "Chocolate");
+                child.ApplyMaterial("Cooked Pastry");
+                child.ApplyMaterialToChild("Filling", "Coffee Cup");
+                child.ApplyMaterialToChild("Chocolate", "Chocolate");
 
                 if (items.Count < gdo.SplitCount)
                     items.Add(child);

@@ -1,4 +1,14 @@
-﻿namespace MiniCafe.Desserts
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Desserts
 {
     public class CookedCannoliTray : CustomItem
     {
@@ -20,7 +30,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Tray", "Metal");
+            Prefab.ApplyMaterialToChild("Tray", "Metal");
             Prefab.ApplyMaterialToChildren("Cannoli", "Cooked Pastry");
         }
     }

@@ -1,4 +1,9 @@
-﻿namespace MiniCafe.Systems
+﻿using Kitchen;
+using KitchenMods;
+using MiniCafe.Components;
+using Unity.Entities;
+
+namespace MiniCafe.Systems
 {
     [UpdateInGroup(typeof(InteractionGroup))]
     public class DualLimitedProviderSwitch : ItemInteractionSystem, IModSystem

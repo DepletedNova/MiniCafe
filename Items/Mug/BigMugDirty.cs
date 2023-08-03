@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Items
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Items
 {
     public class BigMugDirty : CustomItem
     {
@@ -28,7 +37,7 @@
         public override void OnRegister(Item gdo)
         {
             BigMug.ApplyMugMaterials(Prefab.GetChild("mug"));
-            Prefab.ApplyMaterialToChildCafe("dirty_mug", "Plate - Dirty Food");
+            Prefab.ApplyMaterialToChild("dirty_mug", "Plate - Dirty Food");
 
             if (Main.PaperPlatesInstalled)
                 gdo.IsIndisposable = false;

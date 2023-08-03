@@ -1,4 +1,10 @@
-﻿namespace MiniCafe.Items
+﻿using KitchenData;
+using KitchenLib.Customs;
+using MiniCafe.Appliances;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+
+namespace MiniCafe.Items
 {
     public class BoiledWater : CustomItem
     {

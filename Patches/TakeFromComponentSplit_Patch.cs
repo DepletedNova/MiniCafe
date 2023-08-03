@@ -1,4 +1,7 @@
 ﻿using HarmonyLib;
+using Kitchen;
+using MiniCafe.Components;
+using Unity.Entities;
 
 namespace MiniCafe.Patches
 {

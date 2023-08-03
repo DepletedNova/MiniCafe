@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Desserts
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Desserts
 {
     internal class LavaCake : CustomItem
     {
@@ -21,8 +30,8 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("cake", "Lava Cake Light", "Lava Cake Dark");
-            Prefab.ApplyMaterialToChildCafe("plate", "Plate", "Plate - Ring");
+            Prefab.ApplyMaterialToChild("cake", "Lava Cake Light", "Lava Cake Dark");
+            Prefab.ApplyMaterialToChild("plate", "Plate", "Plate - Ring");
         }
     }
 }

@@ -1,5 +1,14 @@
 ﻿using ApplianceLib.Api;
+using KitchenData;
+using KitchenLib.Customs;
 using KitchenLib.Registry;
+using KitchenLib.Utils;
+using MiniCafe.Processes;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
 
 namespace MiniCafe.Appliances
 {
@@ -51,14 +60,14 @@ namespace MiniCafe.Appliances
             var parent = Prefab.GetChild("Block/Counter2");
             var paintedWood = GetMaterialArray("Wood 4 - Painted");
             var defaultWood = GetMaterialArray("Wood - Default");
-            parent.ApplyMaterialToChildCafe("Counter", paintedWood);
-            parent.ApplyMaterialToChildCafe("Counter Doors", paintedWood);
-            parent.ApplyMaterialToChildCafe("Counter Surface", defaultWood);
-            parent.ApplyMaterialToChildCafe("Counter Top", defaultWood);
-            parent.ApplyMaterialToChildCafe("Handles", "Knob");
+            parent.ApplyMaterialToChild("Counter", paintedWood);
+            parent.ApplyMaterialToChild("Counter Doors", paintedWood);
+            parent.ApplyMaterialToChild("Counter Surface", defaultWood);
+            parent.ApplyMaterialToChild("Counter Top", defaultWood);
+            parent.ApplyMaterialToChild("Handles", "Knob");
 
             var rack = Prefab.GetChild("Rack");
-            rack.ApplyMaterialToChildCafe("Rack", "Plastic");
+            rack.ApplyMaterialToChild("Rack", "Plastic");
 
             List<GameObject> items = new();
 

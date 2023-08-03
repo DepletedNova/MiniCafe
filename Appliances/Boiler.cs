@@ -1,5 +1,21 @@
-﻿using MiniCafe.Appliances.Spills;
-using MiniCafe.Coffee.Large;
+﻿using ApplianceLib.Api;
+using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using MiniCafe.Appliances.Spills;
+using MiniCafe.Components;
+using System.Collections.Generic;
+using UnityEngine;
+using MiniCafe.Processes;
+using MiniCafe.Items;
+using MiniCafe.Views;
+using MiniCafe.Appliances;
+using static KitchenLib.Utils.MaterialUtils;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.KitchenPropertiesUtils;
+using static MiniCafe.Helper;
 
 namespace MiniCafe.Appliances
 {
@@ -38,15 +54,15 @@ namespace MiniCafe.Appliances
             Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
 
             var counter = Prefab.GetChild("Counter");
-            counter.ApplyMaterialCafe("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
-            counter.ApplyMaterialToChildCafe("Handle", "Knob");
-            counter.ApplyMaterialToChildCafe("Countertop", "Wood - Default");
+            counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
+            counter.ApplyMaterialToChild("Handle", "Knob");
+            counter.ApplyMaterialToChild("Countertop", "Wood - Default");
 
             var boiler = Prefab.GetChild("Boiler");
-            boiler.ApplyMaterialToChildCafe("Dispenser", "Metal", "Plastic - Black", "Metal Black");
-            boiler.ApplyMaterialToChildCafe("Pipe", "Metal Very Dark");
-            boiler.ApplyMaterialToChildCafe("Boiler", "Metal- Shiny Blue");
-            boiler.ApplyMaterialToChildCafe("Heat", "Metal", "Hob Black");
+            boiler.ApplyMaterialToChild("Dispenser", "Metal", "Plastic - Black", "Metal Black");
+            boiler.ApplyMaterialToChild("Pipe", "Metal Very Dark");
+            boiler.ApplyMaterialToChild("Boiler", "Metal- Shiny Blue");
+            boiler.ApplyMaterialToChild("Heat", "Metal", "Hob Black");
 
             Prefab.ApplyMaterialToChild("Empty", "Milk Glass");
             var water = Prefab.GetChild("Water");

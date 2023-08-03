@@ -1,4 +1,11 @@
-﻿namespace MiniCafe.Systems
+﻿using Kitchen;
+using KitchenData;
+using KitchenMods;
+using MiniCafe.Components;
+using Unity.Collections;
+using Unity.Entities;
+
+namespace MiniCafe.Systems
 {
     public class CombineOnSelf : GenericSystemBase, IModSystem
     {

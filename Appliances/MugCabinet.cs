@@ -1,4 +1,18 @@
-﻿namespace MiniCafe.Appliances
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Components;
+using MiniCafe.Items;
+using MiniCafe.Processes;
+using MiniCafe.Views;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.KitchenPropertiesUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Appliances
 {
     // Appliance
     public class MugCabinet : CustomAppliance
@@ -85,19 +99,19 @@
             GameObject parent = Prefab.GetChild("Block/Counter2");
             var paintedWood = GetMaterialArray("Wood 4 - Painted");
             var defaultWood = GetMaterialArray("Wood - Default");
-            parent.ApplyMaterialToChildCafe("Counter", paintedWood);
-            parent.ApplyMaterialToChildCafe("Counter Doors", paintedWood);
-            parent.ApplyMaterialToChildCafe("Counter Surface", defaultWood);
-            parent.ApplyMaterialToChildCafe("Counter Top", defaultWood);
-            parent.ApplyMaterialToChildCafe("Handles", "Knob");
+            parent.ApplyMaterialToChild("Counter", paintedWood);
+            parent.ApplyMaterialToChild("Counter Doors", paintedWood);
+            parent.ApplyMaterialToChild("Counter Surface", defaultWood);
+            parent.ApplyMaterialToChild("Counter Top", defaultWood);
+            parent.ApplyMaterialToChild("Handles", "Knob");
 
             for (int i = 0; i < smallMugs.GetChildCount(); i++)
                 SmallMug.ApplyMugMaterials(smallMugs.GetChild(i));
             for (int i = 0; i < bigMugs.GetChildCount(); i++)
                 BigMug.ApplyMugMaterials(bigMugs.GetChild(i));
 
-            cabinet.ApplyMaterialToChildCafe("cabinet", "Wood");
-            cabinet.ApplyMaterialToChildCafe("door", "Door Glass", "Wood", "Metal");
+            cabinet.ApplyMaterialToChild("cabinet", "Wood");
+            cabinet.ApplyMaterialToChild("door", "Door Glass", "Wood", "Metal");
         }
     }
 }

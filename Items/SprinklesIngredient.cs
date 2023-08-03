@@ -1,4 +1,8 @@
-﻿namespace MiniCafe.Items
+﻿using KitchenData;
+using KitchenLib.Customs;
+using UnityEngine;
+
+namespace MiniCafe.Items
 {
     public class SprinklesIngredient : CustomItem
     {

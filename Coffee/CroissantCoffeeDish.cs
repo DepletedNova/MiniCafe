@@ -1,4 +1,15 @@
-﻿namespace MiniCafe.Coffee
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using MiniCafe.Extras;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Coffee
 {
     public class CroissantCoffeeDish : CustomDish
     {

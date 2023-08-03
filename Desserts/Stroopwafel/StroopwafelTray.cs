@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Sides
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Sides
 {
     internal class StroopwafelTray : CustomItemGroup
     {
@@ -36,7 +45,7 @@
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Tray", "Metal");
+            Prefab.ApplyMaterialToChild("Tray", "Metal");
 
             List<GameObject> objects = new();
             for (int i = 0; i < Prefab.GetChildCount(); i++)
@@ -45,7 +54,7 @@
                 if (!child.name.Contains("Cookie"))
                     continue;
 
-                child.ApplyMaterialCafe("Bread - Cooked", "Stroop");
+                child.ApplyMaterial("Bread - Cooked", "Stroop");
 
                 if (objects.Count < gdo.SplitCount)
                     objects.Add(child);

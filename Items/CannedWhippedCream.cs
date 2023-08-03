@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Items
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Appliances;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Items
 {
     public class CannedWhippedCream : CustomItem
     {
@@ -16,7 +25,7 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Can", "Metal", "Plastic - White", "Plastic - Red");
+            Prefab.ApplyMaterialToChild("Can", "Metal", "Plastic - White", "Plastic - Red");
         }
     }
 }

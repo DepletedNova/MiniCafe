@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Views
+﻿using Kitchen;
+using KitchenLib.Utils;
+using KitchenMods;
+using MessagePack;
+using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Entities;
+using UnityEngine;
+
+namespace MiniCafe.Views
 {
     public class LocalLimitedItemSourceView : UpdatableObjectView<LocalLimitedItemSourceView.ViewData>
     {

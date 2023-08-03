@@ -1,4 +1,13 @@
-﻿using UnityEngine;
+﻿using IngredientLib.Ingredient.Items;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
 
 namespace MiniCafe.Sides
 {
@@ -44,9 +53,9 @@ namespace MiniCafe.Sides
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Bowl", "Metal");
-            Prefab.ApplyMaterialToChildCafe("Batter", "Flour", "Raw Pastry");
-            Prefab.ApplyMaterialToChildCafe("Cinnamon", "Cinnamon");
+            Prefab.ApplyMaterialToChild("Bowl", "Metal");
+            Prefab.ApplyMaterialToChild("Batter", "Flour", "Raw Pastry");
+            Prefab.ApplyMaterialToChild("Cinnamon", "Cinnamon");
 
         }
     }

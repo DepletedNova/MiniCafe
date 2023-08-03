@@ -1,4 +1,13 @@
-﻿namespace MiniCafe.Extras
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Extras
 {
     public class SconePlatter : CustomItem
     {
@@ -12,13 +21,13 @@
 
         public override void OnRegister(Item gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("Platter", "Plate", "Plate - Ring", "Plastic - Blue");
+            Prefab.ApplyMaterialToChild("Platter", "Plate", "Plate - Ring", "Plastic - Blue");
             var scones = Prefab.GetChild("Scones");
             var sconeList = new List<GameObject>();
             for (int i = 0; i < scones.GetChildCount(); i++)
             {
                 var scone = scones.GetChild(i);
-                scone.ApplyMaterialCafe("Bread - Inside Cooked", "Chocolate");
+                scone.ApplyMaterial("Bread - Inside Cooked", "Chocolate");
                 if (i > 0)
                     sconeList.Add(scone);
             }

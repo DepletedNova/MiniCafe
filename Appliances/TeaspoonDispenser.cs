@@ -1,4 +1,16 @@
-﻿namespace MiniCafe.Appliances
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using MiniCafe.Components;
+using MiniCafe.Extras;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.KitchenPropertiesUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Appliances
 {
     public class TeaspoonDispenser : CustomAppliance
     {
@@ -47,13 +59,13 @@
             Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
 
             var counter = Prefab.GetChild("Counter");
-            counter.ApplyMaterialCafe("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
-            counter.ApplyMaterialToChildCafe("Handle", "Knob");
-            counter.ApplyMaterialToChildCafe("Countertop", "Wood - Default");
+            counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
+            counter.ApplyMaterialToChild("Handle", "Knob");
+            counter.ApplyMaterialToChild("Countertop", "Wood - Default");
 
-            Prefab.ApplyMaterialToChildCafe("Pusher", "Plastic - Blue");
+            Prefab.ApplyMaterialToChild("Pusher", "Plastic - Blue");
 
-            Prefab.ApplyMaterialToChildCafe("Dispenser", "Plastic - Red", "Plastic - Black", "Hob Black");
+            Prefab.ApplyMaterialToChild("Dispenser", "Plastic - Red", "Plastic - Black", "Hob Black");
         }
     }
 }

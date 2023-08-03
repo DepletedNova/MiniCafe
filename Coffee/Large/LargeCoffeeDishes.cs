@@ -1,4 +1,12 @@
-﻿namespace MiniCafe.Coffee.Large
+﻿using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static MiniCafe.Helper;
+
+namespace MiniCafe.Coffee.Large
 {
     public static class LargeDishRegistry
     {

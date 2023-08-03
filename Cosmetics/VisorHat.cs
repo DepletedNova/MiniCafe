@@ -1,4 +1,11 @@
-﻿namespace MiniCafe.Cosmetics
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.Utils;
+using UnityEngine;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Cosmetics
 {
     internal class VisorHat : CustomPlayerCosmetic
     {

@@ -1,4 +1,14 @@
-﻿namespace MiniCafe.Appliances.Spills
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.MaterialUtils;
+
+namespace MiniCafe.Appliances.Spills
 {
     public class CoffeeSpill2 : CustomAppliance
     {
@@ -43,7 +53,7 @@
 
         public override void OnRegister(Appliance gdo)
         {
-            Prefab.ApplyMaterialToChildCafe("spill", "Coffee - Black");
+            Prefab.ApplyMaterialToChild("spill", "Coffee - Black");
         }
     }
 }

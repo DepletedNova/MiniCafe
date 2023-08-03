@@ -1,5 +1,17 @@
-﻿using MiniCafe.Appliances.Spills;
+﻿using Kitchen;
+using KitchenData;
+using KitchenLib.Customs;
+using KitchenLib.References;
+using KitchenLib.Utils;
+using MiniCafe.Appliances.Spills;
 using MiniCafe.Coffee.Large;
+using MiniCafe.Components;
+using System.Collections.Generic;
+using UnityEngine;
+using static KitchenLib.Utils.GDOUtils;
+using static KitchenLib.Utils.KitchenPropertiesUtils;
+using static KitchenLib.Utils.MaterialUtils;
+using static MiniCafe.Helper;
 
 namespace MiniCafe.Appliances
 {
@@ -47,14 +59,14 @@ namespace MiniCafe.Appliances
             Prefab.AddComponent<HoldPointContainer>().HoldPoint = Prefab.transform.Find("HoldPoint");
 
             var machine = Prefab.GetChild("CoffeeMachine");
-            machine.ApplyMaterialToChildCafe("Machine", "Metal", "Plastic - Red", "Plastic - Black");
-            machine.ApplyMaterialToChildCafe("Spout", "Metal Very Dark");
-            machine.ApplyMaterialToChildCafe("Steam", "Metal Black");
+            machine.ApplyMaterialToChild("Machine", "Metal", "Plastic - Red", "Plastic - Black");
+            machine.ApplyMaterialToChild("Spout", "Metal Very Dark");
+            machine.ApplyMaterialToChild("Steam", "Metal Black");
 
             var counter = Prefab.GetChild("Counter");
-            counter.ApplyMaterialCafe("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
-            counter.ApplyMaterialToChildCafe("Handle", "Knob");
-            counter.ApplyMaterialToChildCafe("Countertop", "Wood - Default");
+            counter.ApplyMaterial("Wood - Default", "Wood 4 - Painted", "Wood 4 - Painted");
+            counter.ApplyMaterialToChild("Handle", "Knob");
+            counter.ApplyMaterialToChild("Countertop", "Wood - Default");
 
             Prefab.GetChild("Cups").ApplyMaterialToChildren("Mug", "Light Coffee Cup");
         }
