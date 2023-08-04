@@ -15,10 +15,13 @@ using MiniCafe.Coffee;
 using MiniCafe.Components;
 using MiniCafe.Desserts;
 using MiniCafe.Items;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TMPro;
+using Unity.Entities;
 using UnityEngine;
+using static Kitchen.ItemGroupView;
 using static KitchenLib.Utils.GDOUtils;
 using static KitchenLib.Utils.KitchenPropertiesUtils;
 using static KitchenLib.Utils.MaterialUtils;
@@ -74,6 +77,7 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Lava Cake Dark", 0x633100));
         }
 
+        #region Transfers
         public static string DirtyMugKey = "MiniCafe-DirtyMugs";
         private void UpdateDirtyMugTransfer()
         {
@@ -101,6 +105,7 @@ namespace MiniCafe
                 }
             }
         }
+        #endregion
 
         private void UpdateCoffee()
         {
@@ -181,6 +186,255 @@ namespace MiniCafe
             Result = GetCastedGDO<Item, UncookedCannoliTray>()
         });
 
+        #region Flavouring
+        // Pumpkin
+        private GameObject pumpkinCake;
+        private GameObject pumpkinCupcake;
+        private GameObject pumpkinDonut;
+        private GameObject pumpkinBakedCookie;
+        private GameObject pumpkinCookie;
+
+        private void AddFlavours()
+        {
+            // Pumpkin
+            pumpkinCake = Bundle.LoadAsset<GameObject>("Pumpkin Cake Slice");
+            pumpkinCake.ApplyMaterialToChild("Cake", "Cake", "Pumpkin");
+            pumpkinCake.ApplyMaterialToChild("Pumpkin/Body", "Plastic - Dark Green", "Plastic - Dark Green");
+            pumpkinCake.ApplyMaterialToChild("Pumpkin/Top", "Plastic - Dark Green", "Plastic - Dark Green");
+
+            pumpkinCupcake = Bundle.LoadAsset<GameObject>("Pumpkin Cupcake");
+            pumpkinCupcake.ApplyMaterialToChild("Icing", "Pumpkin");
+            pumpkinCupcake.ApplyMaterialToChild("Pumpkin/Body", "Plastic - Dark Green", "Plastic - Dark Green");
+            pumpkinCupcake.ApplyMaterialToChild("Pumpkin/Top", "Plastic - Dark Green", "Plastic - Dark Green");
+
+            pumpkinDonut = Bundle.LoadAsset<GameObject>("Pumpkin Donut");
+            pumpkinDonut.ApplyMaterialToChild("Icing", "Pumpkin");
+            pumpkinDonut.ApplyMaterialToChild("Stem", "Plastic - Dark Green");
+
+            pumpkinBakedCookie = Bundle.LoadAsset<GameObject>("Pumpkin Baked Cookie");
+            pumpkinBakedCookie.ApplyMaterialToChild("Cookie", "Pumpkin");
+            pumpkinBakedCookie.ApplyMaterialToChild("Face", "Plastic - Black");
+
+            pumpkinCookie = Bundle.LoadAsset<GameObject>("Pumpkin Cookie");
+            pumpkinCookie.ApplyMaterialToChild("Cookie", "Pumpkin - Flesh");
+            pumpkinCookie.ApplyMaterialToChild("Face", "Plastic - Black");
+
+            AddFlavour(GetGDO<Item>(ItemReferences.PumpkinPieces), new(0, -0.06f, 0), new(), "Pu", pumpkinCake, pumpkinCupcake, pumpkinDonut, pumpkinBakedCookie, pumpkinCookie);
+        }
+
+        private void AddFlavour(Item item, Vector3 PosOffset, Quaternion RotOffset, string ColourblindTag,
+            GameObject cakePrefab, GameObject cupcakePrefab, GameObject donutPrefab, GameObject bakedCookiePrefab, GameObject cookiePrefab)
+        {
+            var mixingBowl = GetGDO<ItemGroup>(-705806008);
+            var mixingView = mixingBowl.Prefab.GetComponent<ItemGroupView>();
+
+            var cookieTray = GetGDO<ItemGroup>(-491299234);
+            var bakedCookies = GetGDO<ItemGroup>(-502245988);
+            var cookie = GetGDO<Item>(333230026);
+
+            var donut = GetGDO<ItemGroup>(-1312823003);
+
+            var cupcake = GetGDO<ItemGroup>(1366309564);
+
+            var cakeTin = GetGDO<ItemGroup>(-1354941517);
+            var cakeSlice = GetGDO<Item>(-1532306603);
+
+            if (mixingBowl.DerivedSets[0].Items.Any(p => p == item))
+                return;
+
+            // Update GDO
+            #region Mixing Bowl
+            var mixingPrior = new List<Item>(mixingBowl.DerivedSets[0].Items) { item };
+            mixingBowl.DerivedSets[0] = new()
+            {
+                Items = mixingPrior,
+                Max = 1,
+                Min = 1,
+                IsMandatory = true
+            };
+            #endregion
+            #region Cookies
+            var cookiePrior = new List<Item>(cookieTray.DerivedSets[1].Items) { item };
+            cookieTray.DerivedSets[1] = new()
+            {
+                Items = cookiePrior,
+                Max = 1,
+                Min = 1,
+                IsMandatory = true
+            };
+            #endregion
+            #region Donut
+            var donutPrior = new List<Item>(donut.DerivedSets[1].Items) { item };
+            donut.DerivedSets[1] = new()
+            {
+                Items = donutPrior,
+                Max = 1,
+                Min = 1,
+                IsMandatory = true
+            };
+            #endregion
+            #region Cupcake
+            var cupcakePrior = new List<Item>(cupcake.DerivedSets[1].Items) { item };
+            cupcake.DerivedSets[1] = new()
+            {
+                Items = cupcakePrior,
+                Max = 1,
+                Min = 1,
+                IsMandatory = true
+            };
+            #endregion
+            #region Cake
+            var cakePrior = new List<Item>(cakeTin.DerivedSets[1].Items) { item };
+            cakeTin.DerivedSets[1] = new()
+            {
+                Items = cakePrior,
+                Max = 1,
+                Min = 1,
+                IsMandatory = true
+            };
+            #endregion
+
+            if (mixingView.ComponentGroups.Any(c => c.Item == item))
+                return;
+
+            // Add prefabs
+            var componentLabels = ReflectionUtils.GetField<ItemGroupView>("ComponentLabels");
+            #region Mixing Bowl
+            var itemPrefab = Object.Instantiate(item.Prefab);
+            itemPrefab.transform.SetParent(mixingBowl.Prefab.transform.Find("Flavours"), false);
+            itemPrefab.transform.localPosition = PosOffset;
+            itemPrefab.transform.localRotation = RotOffset;
+            itemPrefab.transform.localScale = Vector3.one / itemPrefab.transform.parent.localScale.x;
+            #endregion
+            #region Cookies
+            // Unbaked
+            for (int i = 0; i < cookieTray.Prefab.GetChildCount(); i++)
+            {
+                var child = cookieTray.Prefab.GetChild(i);
+                if (child.name.Contains("Tray"))
+                    continue;
+
+                SetupCookie(item, ColourblindTag, child, cookiePrefab);
+            }
+            // Baked
+            for (int i = 0; i < bakedCookies.Prefab.GetChildCount(); i++)
+            {
+                var child = bakedCookies.Prefab.GetChild(i);
+                if (child.name.Contains("Tray"))
+                    continue;
+
+                SetupCookie(item, ColourblindTag, child, bakedCookiePrefab);
+            }
+            // Cookie
+            SetupCookie(item, ColourblindTag, cookie.Prefab, bakedCookiePrefab);
+            #endregion
+            #region Donut
+            var donutPref = Object.Instantiate(donutPrefab);
+            donutPref.transform.SetParent(donut.Prefab.transform.Find("Flavours"), false);
+            donutPref.transform.localScale = Vector3.one / donutPref.transform.parent.localScale.x;
+            #endregion
+            #region Cupcake
+            var cupcakePref = Object.Instantiate(cupcakePrefab);
+            cupcakePref.transform.SetParent(cupcake.Prefab.transform, false);
+            #endregion
+            #region Cake
+            for (int i = 0; i < cakeTin.Prefab.GetChild("Cake").GetChildCount(); i++)
+            {
+                var child = cakeTin.Prefab.GetChild("Cake").GetChild(i);
+                if (!child.name.Contains("Cake"))
+                    continue;
+
+                SetupCake(item, ColourblindTag, child, cakePrefab);
+            }
+
+            SetupCake(item, ColourblindTag, cakeSlice.Prefab, cakePrefab);
+            #endregion
+
+            // Update ItemGroupViews
+            #region Mixing Bowl
+            mixingView.ComponentGroups.Add(new()
+            {
+                GameObject = itemPrefab,
+                Item = item
+            });
+            #endregion
+            #region Donut
+            var donutView = donut.Prefab.GetComponent<ItemGroupView>();
+            donutView.ComponentGroups.Add(new()
+            {
+                GameObject = donutPref,
+                Item = item
+            });
+            List<ColourBlindLabel> donutLabels = (List<ColourBlindLabel>)componentLabels.GetValue(donutView);
+            donutLabels.Add(new()
+            {
+                Item = item,
+                Text = ColourblindTag
+            });
+            componentLabels.SetValue(donutView, donutLabels);
+            #endregion
+            #region Cupcake
+            var cupcakeView = cupcake.Prefab.GetComponent<ItemGroupView>();
+            cupcakeView.ComponentGroups.Add(new()
+            {
+                GameObject = cupcakePref,
+                Item = item
+            });
+            List<ColourBlindLabel> cupcakeLabels = (List<ColourBlindLabel>)componentLabels.GetValue(cupcakeView);
+            cupcakeLabels.Add(new()
+            {
+                Item = item,
+                Text = ColourblindTag
+            });
+            componentLabels.SetValue(cupcakeView, cupcakeLabels);
+            #endregion
+        }
+
+        private void SetupCookie(Item item, string tag, GameObject baseObject, GameObject toInstantiate)
+        {
+            var componentLabels = ReflectionUtils.GetField<ItemGroupView>("ComponentLabels");
+            var prefab = Object.Instantiate(toInstantiate);
+            prefab.transform.SetParent(baseObject.transform.Find("Flavours"), false);
+            prefab.transform.localScale = Vector3.one / prefab.transform.parent.localScale.x;
+
+            var cookieView = baseObject.GetComponent<ItemGroupView>();
+            cookieView.ComponentGroups.Add(new()
+            {
+                Item = item,
+                GameObject = prefab
+            });
+            List<ColourBlindLabel> labels = (List<ColourBlindLabel>)componentLabels.GetValue(cookieView);
+            labels.Add(new()
+            {
+                Item = item,
+                Text = tag
+            });
+            componentLabels.SetValue(cookieView, labels);
+        }
+
+        private void SetupCake(Item item, string tag, GameObject baseObject, GameObject toInstantiate)
+        {
+            var componentLabels = ReflectionUtils.GetField<ItemGroupView>("ComponentLabels");
+            var prefab = Object.Instantiate(toInstantiate);
+            prefab.transform.SetParent(baseObject.transform, false);
+            prefab.transform.localScale = Vector3.one;
+
+            var cakeView = baseObject.GetComponent<ItemGroupView>();
+            cakeView.ComponentGroups.Add(new()
+            {
+                Item = item,
+                GameObject = prefab
+            });
+            List<ColourBlindLabel> labels = (List<ColourBlindLabel>)componentLabels.GetValue(cakeView);
+            labels.Add(new()
+            {
+                Item = item,
+                Text = tag
+            });
+            componentLabels.SetValue(cakeView, labels);
+        }
+        #endregion
+
         private void AddIcons()
         {
             Bundle.LoadAllAssets<Texture2D>();
@@ -206,7 +460,8 @@ namespace MiniCafe
             {
                 UpdateLemon();
                 UpdateCoffee();
-                UpdatePizzaCrust(); 
+                UpdatePizzaCrust();
+                AddFlavours();
 
                 UpdateDirtyMugTransfer();
                 UpdateGenericMugTransfers(args.gamedata);

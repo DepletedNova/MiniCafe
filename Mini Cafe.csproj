@@ -127,6 +127,8 @@
     <Compile Include="Appliances\TeaspoonDispenser.cs" />
     <Compile Include="Appliances\SprinklesProvider.cs" />
     <Compile Include="Appliances\WhippedCreamProvider.cs" />
+    <Compile Include="Bakery\Pumpkin\CakeFlavourPumpkin.cs" />
+    <Compile Include="Bakery\Pumpkin\PumpkinFlavour.cs" />
     <Compile Include="Coffee\Americano.cs" />
     <Compile Include="Coffee\AmericanoDish.cs" />
     <Compile Include="Coffee\CannoliCoffeeDish.cs" />
