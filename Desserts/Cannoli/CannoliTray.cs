@@ -20,20 +20,6 @@ namespace MiniCafe.Desserts
         public override Item SplitSubItem => GetCastedGDO<Item, Cannoli>();
         public override List<Item> SplitDepletedItems => new() { GetCastedGDO<Item, Cannoli>() };
 
-        public override List<ItemGroup.ItemSet> Sets => new()
-        {
-            new()
-            {
-                Items = new()
-                {
-                    GetCastedGDO<Item, CookedCannoliTray>(),
-                    GetCastedGDO<Item, CannoliFilling>()
-                },
-                Min = 2,
-                Max = 2
-            }
-        };
-
         public override void OnRegister(ItemGroup gdo)
         {
             Prefab.ApplyMaterialToChild("Tray", "Metal");

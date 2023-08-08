@@ -19,12 +19,7 @@ namespace MiniCafe.Extras
         public override bool IsUnlockable => true;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
-        public override int MinimumFranchiseTier => 0;
-        public override bool IsSpecificFranchiseTier => false;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
-        public override float SelectionBias => 0;
-        //public override List<Unlock> HardcodedRequirements => new() { GetCastedGDO<Unlock, EspressoDish>() };
-        //public override List<Unlock> HardcodedBlockers => new() { GetCastedGDO<Unlock, CroissantTeaDish>() };
         public override DishType Type => DishType.Side;
 
         public override bool RequiredNoDishItem => true;
@@ -47,7 +42,6 @@ namespace MiniCafe.Extras
             GetGDO<Item>(ItemReferences.Flour),
             GetCastedGDO<Item, ButterBlock>(),
         };
-        //public override HashSet<Dish.IngredientUnlock> IngredientsUnlocks => ExtraHelper.GetUnlocks(GetCastedGDO<Item, Croissant>());
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
             new()

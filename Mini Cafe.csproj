@@ -127,6 +127,8 @@
     <Compile Include="Appliances\TeaspoonDispenser.cs" />
     <Compile Include="Appliances\SprinklesProvider.cs" />
     <Compile Include="Appliances\WhippedCreamProvider.cs" />
+    <Compile Include="Bakery\Cherry\CakeFlavourCherry.cs" />
+    <Compile Include="Bakery\Cherry\CherryFlavour.cs" />
     <Compile Include="Bakery\Pumpkin\CakeFlavourPumpkin.cs" />
     <Compile Include="Bakery\Pumpkin\PumpkinFlavour.cs" />
     <Compile Include="Coffee\Americano.cs" />
@@ -148,13 +150,13 @@
     <Compile Include="Components\CRefillOnEmpty.cs" />
     <Compile Include="Components\CSpillsOnFail.cs" />
     <Compile Include="Cosmetics\VisorHat.cs" />
+    <Compile Include="Desserts\Cannoli\BurnedCannoliPot.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliShellPot.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliDoughPot.cs" />
+    <Compile Include="Desserts\Cannoli\CannoliShell.cs" />
     <Compile Include="Desserts\Cannoli\Cannoli.cs" />
     <Compile Include="Desserts\Cannoli\CannoliTray.cs" />
-    <Compile Include="Desserts\Cannoli\BurntCannoliTray.cs" />
-    <Compile Include="Desserts\Cannoli\CookedCannoliTray.cs" />
     <Compile Include="Desserts\Cannoli\CannoliDish.cs" />
-    <Compile Include="Desserts\Cannoli\UncookedCannoliTray.cs" />
-    <Compile Include="Desserts\Cannoli\CannoliFillingMix.cs" />
     <Compile Include="Desserts\Cannoli\CannoliFilling.cs" />
     <Compile Include="Desserts\LavaCake\LavaCake.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeDish.cs" />
@@ -209,9 +211,7 @@
     <Compile Include="Views\ItemProcessView.cs" />
     <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Desserts\Mocha\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y

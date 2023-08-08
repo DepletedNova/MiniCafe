@@ -1,4 +1,9 @@
-﻿using ApplianceLib.Api;
+﻿global using static KitchenLib.Utils.MaterialUtils;
+global using static Kitchen.ItemGroupView;
+global using static KitchenLib.Utils.GDOUtils;
+global using static MiniCafe.Helper;
+global using static KitchenLib.Utils.KitchenPropertiesUtils;
+using ApplianceLib.Api;
 using IngredientLib.Ingredient.Items;
 using Kitchen;
 using KitchenData;
@@ -21,18 +26,13 @@ using System.Reflection;
 using TMPro;
 using Unity.Entities;
 using UnityEngine;
-using static Kitchen.ItemGroupView;
-using static KitchenLib.Utils.GDOUtils;
-using static KitchenLib.Utils.KitchenPropertiesUtils;
-using static KitchenLib.Utils.MaterialUtils;
-using static MiniCafe.Helper;
 
 namespace MiniCafe
 {
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.4.0";
+        public const string VERSION = "2.5.0";
 
         public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -75,6 +75,9 @@ namespace MiniCafe
             // Desserts
             AddMaterial(CreateFlat("Lava Cake Light", 0xA05000));
             AddMaterial(CreateFlat("Lava Cake Dark", 0x633100));
+
+            // Bakery
+            AddMaterial(CreateFlat("Cherry Cake", 0xC46373));
         }
 
         #region Transfers
@@ -179,12 +182,12 @@ namespace MiniCafe
             lemon.SplitSubItem = GetCastedGDO<Item, LemonSlice>();
         }
 
-        private void UpdatePizzaCrust() => GetGDO<ItemGroup>(ItemReferences.PizzaCrust).DerivedProcesses.Add(new()
+        private void UpdateBakery()
         {
-            Process = GetGDO<Process>(ProcessReferences.Knead),
-            Duration = 1.3f,
-            Result = GetCastedGDO<Item, UncookedCannoliTray>()
-        });
+            // Had no properties for some reason (lemon tree)
+            GetGDO<Appliance>(1470180731).Properties = new() { GetUnlimitedCItemProvider(2094624730) };
+
+        }
 
         #region Flavouring
         // Pumpkin
@@ -194,13 +197,18 @@ namespace MiniCafe
         private GameObject pumpkinBakedCookie;
         private GameObject pumpkinCookie;
 
+        // Cherry
+        private GameObject cherryCake;
+        private GameObject cherryCupcake;
+        private GameObject cherryDonut;
+        private GameObject cherryCookie;
+
         private void AddFlavours()
         {
             // Pumpkin
             pumpkinCake = Bundle.LoadAsset<GameObject>("Pumpkin Cake Slice");
             pumpkinCake.ApplyMaterialToChild("Cake", "Cake", "Pumpkin");
-            pumpkinCake.ApplyMaterialToChild("Pumpkin/Body", "Plastic - Dark Green", "Plastic - Dark Green");
-            pumpkinCake.ApplyMaterialToChild("Pumpkin/Top", "Plastic - Dark Green", "Plastic - Dark Green");
+            pumpkinCake.ApplyMaterialToChild("Face", "Plastic - Black");
 
             pumpkinCupcake = Bundle.LoadAsset<GameObject>("Pumpkin Cupcake");
             pumpkinCupcake.ApplyMaterialToChild("Icing", "Pumpkin");
@@ -220,11 +228,34 @@ namespace MiniCafe
             pumpkinCookie.ApplyMaterialToChild("Face", "Plastic - Black");
 
             AddFlavour(GetGDO<Item>(ItemReferences.PumpkinPieces), new(0, -0.06f, 0), new(), "Pu", pumpkinCake, pumpkinCupcake, pumpkinDonut, pumpkinBakedCookie, pumpkinCookie);
+
+            // Cherry
+            cherryCake = Bundle.LoadAsset<GameObject>("Cherry Cake Slice");
+            cherryCake.ApplyMaterialToChild("Cake", "Cake", "Cherry Cake");
+            cherryCake.ApplyMaterialToChild("Cherry", "Cherry", "Wood - Dark");
+
+            cherryCupcake = Bundle.LoadAsset<GameObject>("Cherry Cupcake");
+            cherryCupcake.ApplyMaterialToChild("Icing", "Cherry Cake");
+            cherryCupcake.ApplyMaterialToChild("Cherry", "Cherry", "Wood - Dark");
+
+            cherryDonut = Bundle.LoadAsset<GameObject>("Cherry Donut");
+            cherryDonut.ApplyMaterialToChild("Icing", "Cherry Cake");
+            cherryDonut.ApplyMaterialToChild("Cherry", "Cherry", "Wood - Dark");
+
+            cherryCookie = Bundle.LoadAsset<GameObject>("Cherry Cookie");
+            cherryCookie.ApplyMaterialToChild("Cherry", "Cherry", "Wood - Dark");
+
+            AddFlavour(GetGDO<Item>(ItemReferences.Cherry), new(0, -0.06f, 0), new(), "Che", cherryCake, cherryCupcake, cherryDonut, cherryCookie, cherryCookie);
         }
 
         private void AddFlavour(Item item, Vector3 PosOffset, Quaternion RotOffset, string ColourblindTag,
             GameObject cakePrefab, GameObject cupcakePrefab, GameObject donutPrefab, GameObject bakedCookiePrefab, GameObject cookiePrefab)
         {
+            var addCookie = cookiePrefab != null && bakedCookiePrefab != null;
+            var addDonut = donutPrefab != null;
+            var addCupcake = cupcakePrefab != null;
+            var addCake = cakePrefab != null;
+
             var mixingBowl = GetGDO<ItemGroup>(-705806008);
             var mixingView = mixingBowl.Prefab.GetComponent<ItemGroupView>();
 
@@ -254,44 +285,56 @@ namespace MiniCafe
             };
             #endregion
             #region Cookies
-            var cookiePrior = new List<Item>(cookieTray.DerivedSets[1].Items) { item };
-            cookieTray.DerivedSets[1] = new()
+            if (addCookie)
             {
-                Items = cookiePrior,
-                Max = 1,
-                Min = 1,
-                IsMandatory = true
-            };
+                var cookiePrior = new List<Item>(cookieTray.DerivedSets[1].Items) { item };
+                cookieTray.DerivedSets[1] = new()
+                {
+                    Items = cookiePrior,
+                    Max = 1,
+                    Min = 1,
+                    IsMandatory = true
+                };
+            }
             #endregion
             #region Donut
-            var donutPrior = new List<Item>(donut.DerivedSets[1].Items) { item };
-            donut.DerivedSets[1] = new()
+            if (addDonut)
             {
-                Items = donutPrior,
-                Max = 1,
-                Min = 1,
-                IsMandatory = true
-            };
+                var donutPrior = new List<Item>(donut.DerivedSets[1].Items) { item };
+                donut.DerivedSets[1] = new()
+                {
+                    Items = donutPrior,
+                    Max = 1,
+                    Min = 1,
+                    IsMandatory = true
+                };
+            }
             #endregion
             #region Cupcake
-            var cupcakePrior = new List<Item>(cupcake.DerivedSets[1].Items) { item };
-            cupcake.DerivedSets[1] = new()
+            if (addCupcake)
             {
-                Items = cupcakePrior,
-                Max = 1,
-                Min = 1,
-                IsMandatory = true
-            };
+                var cupcakePrior = new List<Item>(cupcake.DerivedSets[1].Items) { item };
+                cupcake.DerivedSets[1] = new()
+                {
+                    Items = cupcakePrior,
+                    Max = 1,
+                    Min = 1,
+                    IsMandatory = true
+                };
+            }
             #endregion
             #region Cake
-            var cakePrior = new List<Item>(cakeTin.DerivedSets[1].Items) { item };
-            cakeTin.DerivedSets[1] = new()
+            if (addCake)
             {
-                Items = cakePrior,
-                Max = 1,
-                Min = 1,
-                IsMandatory = true
-            };
+                var cakePrior = new List<Item>(cakeTin.DerivedSets[1].Items) { item };
+                cakeTin.DerivedSets[1] = new()
+                {
+                    Items = cakePrior,
+                    Max = 1,
+                    Min = 1,
+                    IsMandatory = true
+                };
+            }
             #endregion
 
             if (mixingView.ComponentGroups.Any(c => c.Item == item))
@@ -307,47 +350,57 @@ namespace MiniCafe
             itemPrefab.transform.localScale = Vector3.one / itemPrefab.transform.parent.localScale.x;
             #endregion
             #region Cookies
-            // Unbaked
-            for (int i = 0; i < cookieTray.Prefab.GetChildCount(); i++)
+            if (addCookie)
             {
-                var child = cookieTray.Prefab.GetChild(i);
-                if (child.name.Contains("Tray"))
-                    continue;
+                // Unbaked
+                for (int i = 0; i < cookieTray.Prefab.GetChildCount(); i++)
+                {
+                    var child = cookieTray.Prefab.GetChild(i);
+                    if (child.name.Contains("Tray"))
+                        continue;
 
-                SetupCookie(item, ColourblindTag, child, cookiePrefab);
-            }
-            // Baked
-            for (int i = 0; i < bakedCookies.Prefab.GetChildCount(); i++)
-            {
-                var child = bakedCookies.Prefab.GetChild(i);
-                if (child.name.Contains("Tray"))
-                    continue;
+                    SetupCookie(item, ColourblindTag, child, cookiePrefab);
+                }
+                // Baked
+                for (int i = 0; i < bakedCookies.Prefab.GetChildCount(); i++)
+                {
+                    var child = bakedCookies.Prefab.GetChild(i);
+                    if (child.name.Contains("Tray"))
+                        continue;
 
-                SetupCookie(item, ColourblindTag, child, bakedCookiePrefab);
+                    SetupCookie(item, ColourblindTag, child, bakedCookiePrefab);
+                }
+                // Cookie
+                SetupCookie(item, ColourblindTag, cookie.Prefab, bakedCookiePrefab);
             }
-            // Cookie
-            SetupCookie(item, ColourblindTag, cookie.Prefab, bakedCookiePrefab);
             #endregion
             #region Donut
             var donutPref = Object.Instantiate(donutPrefab);
-            donutPref.transform.SetParent(donut.Prefab.transform.Find("Flavours"), false);
-            donutPref.transform.localScale = Vector3.one / donutPref.transform.parent.localScale.x;
+            if (addDonut)
+            {
+                donutPref.transform.SetParent(donut.Prefab.transform.Find("Flavours"), false);
+                donutPref.transform.localScale = Vector3.one / donutPref.transform.parent.localScale.x;
+            }
             #endregion
             #region Cupcake
             var cupcakePref = Object.Instantiate(cupcakePrefab);
-            cupcakePref.transform.SetParent(cupcake.Prefab.transform, false);
+            if (addCupcake)
+                cupcakePref.transform.SetParent(cupcake.Prefab.transform, false);
             #endregion
             #region Cake
-            for (int i = 0; i < cakeTin.Prefab.GetChild("Cake").GetChildCount(); i++)
+            if (addCake)
             {
-                var child = cakeTin.Prefab.GetChild("Cake").GetChild(i);
-                if (!child.name.Contains("Cake"))
-                    continue;
+                for (int i = 0; i < cakeTin.Prefab.GetChild("Cake").GetChildCount(); i++)
+                {
+                    var child = cakeTin.Prefab.GetChild("Cake").GetChild(i);
+                    if (!child.name.Contains("Cake"))
+                        continue;
 
-                SetupCake(item, ColourblindTag, child, cakePrefab);
+                    SetupCake(item, ColourblindTag, child, cakePrefab);
+                }
+
+                SetupCake(item, ColourblindTag, cakeSlice.Prefab, cakePrefab);
             }
-
-            SetupCake(item, ColourblindTag, cakeSlice.Prefab, cakePrefab);
             #endregion
 
             // Update ItemGroupViews
@@ -359,34 +412,40 @@ namespace MiniCafe
             });
             #endregion
             #region Donut
-            var donutView = donut.Prefab.GetComponent<ItemGroupView>();
-            donutView.ComponentGroups.Add(new()
+            if (addDonut)
             {
-                GameObject = donutPref,
-                Item = item
-            });
-            List<ColourBlindLabel> donutLabels = (List<ColourBlindLabel>)componentLabels.GetValue(donutView);
-            donutLabels.Add(new()
-            {
-                Item = item,
-                Text = ColourblindTag
-            });
-            componentLabels.SetValue(donutView, donutLabels);
+                var donutView = donut.Prefab.GetComponent<ItemGroupView>();
+                donutView.ComponentGroups.Add(new()
+                {
+                    GameObject = donutPref,
+                    Item = item
+                });
+                List<ColourBlindLabel> donutLabels = (List<ColourBlindLabel>)componentLabels.GetValue(donutView);
+                donutLabels.Add(new()
+                {
+                    Item = item,
+                    Text = ColourblindTag
+                });
+                componentLabels.SetValue(donutView, donutLabels);
+            }
             #endregion
             #region Cupcake
-            var cupcakeView = cupcake.Prefab.GetComponent<ItemGroupView>();
-            cupcakeView.ComponentGroups.Add(new()
+            if (addCupcake)
             {
-                GameObject = cupcakePref,
-                Item = item
-            });
-            List<ColourBlindLabel> cupcakeLabels = (List<ColourBlindLabel>)componentLabels.GetValue(cupcakeView);
-            cupcakeLabels.Add(new()
-            {
-                Item = item,
-                Text = ColourblindTag
-            });
-            componentLabels.SetValue(cupcakeView, cupcakeLabels);
+                var cupcakeView = cupcake.Prefab.GetComponent<ItemGroupView>();
+                cupcakeView.ComponentGroups.Add(new()
+                {
+                    GameObject = cupcakePref,
+                    Item = item
+                });
+                List<ColourBlindLabel> cupcakeLabels = (List<ColourBlindLabel>)componentLabels.GetValue(cupcakeView);
+                cupcakeLabels.Add(new()
+                {
+                    Item = item,
+                    Text = ColourblindTag
+                });
+                componentLabels.SetValue(cupcakeView, cupcakeLabels);
+            }
             #endregion
         }
 
@@ -460,7 +519,6 @@ namespace MiniCafe
             {
                 UpdateLemon();
                 UpdateCoffee();
-                UpdatePizzaCrust();
                 AddFlavours();
 
                 UpdateDirtyMugTransfer();

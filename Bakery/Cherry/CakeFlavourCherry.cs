@@ -8,9 +8,9 @@ using static MiniCafe.Helper;
 
 namespace MiniCafe.Bakery
 {
-    public class CakeFlavourPumpkin : CustomDish
+    public class CakeFlavourCherry : CustomDish
     {
-        public override string UniqueNameID => "Cake Flavour - Pumpkin";
+        public override string UniqueNameID => "Cake Flavour - Cherry";
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
         public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
         public override DishType Type => DishType.Dessert;
@@ -20,11 +20,11 @@ namespace MiniCafe.Bakery
 
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Chop pumpkin and use guts in a pastry recipe" }
+            { Locale.English, "Take and use cherries in a pastry recipe" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Pastry Flavour - Pumpkin", "Adds pumpkin as a pastry flavour", ""))
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Pastry Flavour - Cherry", "Adds cherry as a pastry flavour", ""))
         };
 
         public override List<Unlock> HardcodedRequirements => new()
@@ -35,24 +35,19 @@ namespace MiniCafe.Bakery
         {
             new()
             {
-                Item = GetCastedGDO<Item, PumpkinFlavour>(),
+                Item = GetCastedGDO<Item, CherryFlavour>(),
                 Weight = 1,
                 Phase = MenuPhase.Dessert
             }
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetGDO<Item>(ItemReferences.Pumpkin)
-        };
-        public override HashSet<Process> RequiredProcesses => new()
-        {
-            GetGDO<Process>(ProcessReferences.Chop)
+            GetGDO<Item>(ItemReferences.Cherry)
         };
 
         public override void OnRegister(Dish gdo)
         {
             gdo.HideInfoPanel = true;
-            gdo.Difficulty = 2;
         }
     }
 }

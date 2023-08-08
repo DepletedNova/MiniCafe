@@ -49,7 +49,7 @@ namespace MiniCafe.Desserts
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add flour, a cracked egg, and milk. After this add double chopped chocolate and then cook. This can be shared between two people!" }
+            { Locale.English, "Add flour, a cracked egg, and milk. After this add chopped chocolate and then cook. This can be shared between two people!" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

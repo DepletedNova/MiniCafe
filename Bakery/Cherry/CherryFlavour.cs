@@ -8,10 +8,10 @@ using static MiniCafe.Helper;
 
 namespace MiniCafe.Bakery
 {
-    public class PumpkinFlavour : CustomItem
+    public class CherryFlavour : CustomItem
     {
-        public override string UniqueNameID => "Pumpkin Flavour";
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Pumpkin - Flavour Icon");
+        public override string UniqueNameID => "Cherry Flavour";
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Cherry - Flavour Icon");
 
         public override void OnRegister(Item gdo)
         {
@@ -25,7 +25,7 @@ namespace MiniCafe.Bakery
 
             gdo.NeedsIngredients = new()
             {
-                GetGDO<Item>(ItemReferences.PumpkinPieces)
+                GetGDO<Item>(ItemReferences.Cherry)
             };
         }
 
@@ -35,8 +35,7 @@ namespace MiniCafe.Bakery
             for (int i = 0; i < cake.GetChildCount(); i++)
                 cake.GetChild(i).ApplyMaterial("Batter - Cooked", "Batter - Cooked");
 
-            prefab.ApplyMaterialToChild("Pumpkin/Body", "Pumpkin", "Pumpkin");
-            prefab.ApplyMaterialToChild("Pumpkin/Top", "Pumpkin", "Pumpkin - Stem");
+            prefab.ApplyMaterialToChildren("Cherries", "Cherry", "Wood - Dark");
         }
     }
 }
