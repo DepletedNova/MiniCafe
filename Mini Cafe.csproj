@@ -175,7 +175,6 @@
     <Compile Include="Sides\Scone\UnmixedSconeDough.cs" />
     <Compile Include="Items\Sprinkles.cs" />
     <Compile Include="Items\SprinklesIngredient.cs" />
-    <Compile Include="Items\LemonSlice.cs" />
     <Compile Include="Patches\TakeFromComponentSplit_Patch.cs" />
     <Compile Include="Processes\RequiresMugProcess.cs" />
     <Compile Include="Coffee\CroissantCoffeeDish.cs" />

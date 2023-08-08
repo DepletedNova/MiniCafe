@@ -32,7 +32,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.5.0";
+        public const string VERSION = "2.5.1";
 
         public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -172,21 +172,10 @@ namespace MiniCafe
             }
         }
 
-        private void UpdateLemon()
-        {
-            var lemon = GetCastedGDO<Item, ChoppedLemon>();
-            lemon.SplitCount = 1;
-            lemon.AllowSplitMerging = true;
-            lemon.PreventExplicitSplit = true;
-            lemon.SplitDepletedItems = new() { GetCastedGDO<Item, LemonSlice>() };
-            lemon.SplitSubItem = GetCastedGDO<Item, LemonSlice>();
-        }
-
         private void UpdateBakery()
         {
             // Had no properties for some reason (lemon tree)
             GetGDO<Appliance>(1470180731).Properties = new() { GetUnlimitedCItemProvider(2094624730) };
-
         }
 
         #region Flavouring
@@ -517,9 +506,9 @@ namespace MiniCafe
 
             Events.BuildGameDataEvent += (s, args) =>
             {
-                UpdateLemon();
                 UpdateCoffee();
                 AddFlavours();
+                UpdateBakery();
 
                 UpdateDirtyMugTransfer();
                 UpdateGenericMugTransfers(args.gamedata);
