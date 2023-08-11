@@ -164,6 +164,7 @@
     <Compile Include="Desserts\Stroopwafel\StroopwafelTray.cs" />
     <Compile Include="Extensions\CPositionExtensions.cs" />
     <Compile Include="Items\BoiledWater.cs" />
+    <Compile Include="Items\UnmixedDonutDough.cs" />
     <Compile Include="Processes\BoilWaterProcess.cs" />
     <Compile Include="References.cs" />
     <Compile Include="Sides\Croissant\CroissantDish.cs" />
