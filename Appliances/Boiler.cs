@@ -1,4 +1,5 @@
 ﻿using ApplianceLib.Api;
+using IngredientLib.Ingredient.Items;
 using Kitchen;
 using KitchenData;
 using KitchenLib.Customs;

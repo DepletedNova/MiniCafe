@@ -163,7 +163,6 @@
     <Compile Include="Desserts\LavaCake\LavaCakeMix.cs" />
     <Compile Include="Desserts\Stroopwafel\StroopwafelTray.cs" />
     <Compile Include="Extensions\CPositionExtensions.cs" />
-    <Compile Include="Items\BoiledWater.cs" />
     <Compile Include="Items\UnmixedDonutDough.cs" />
     <Compile Include="Processes\BoilWaterProcess.cs" />
     <Compile Include="References.cs" />
@@ -176,7 +175,6 @@
     <Compile Include="Sides\Scone\UnmixedSconeDough.cs" />
     <Compile Include="Items\Sprinkles.cs" />
     <Compile Include="Items\SprinklesIngredient.cs" />
-    <Compile Include="Patches\TakeFromComponentSplit_Patch.cs" />
     <Compile Include="Processes\RequiresMugProcess.cs" />
     <Compile Include="Coffee\CroissantCoffeeDish.cs" />
     <Compile Include="Extensions\SystemExtensions.cs" />
@@ -211,7 +209,9 @@
     <Compile Include="Views\ItemProcessView.cs" />
     <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Patches\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y

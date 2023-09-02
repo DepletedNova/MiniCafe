@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static KitchenLib.Utils.GDOUtils;
 using static MiniCafe.Helper;
+using IngredientLib.Ingredient.Items;
 
 namespace MiniCafe.Coffee
 {

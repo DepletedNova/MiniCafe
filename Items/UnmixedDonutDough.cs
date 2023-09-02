@@ -11,9 +11,9 @@ using static KitchenLib.Utils.GDOUtils;
 using static KitchenLib.Utils.MaterialUtils;
 using static MiniCafe.Helper;
 
-namespace MiniCafe.Mains
+namespace MiniCafe.Items
 {
-    internal class UnmixedDonutDough : CustomItemGroup<UnmixedDonutDough.View>
+    public class UnmixedDonutDough : CustomItemGroup<UnmixedDonutDough.View>
     {
         public override string UniqueNameID => "unmixed_donut_dough";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Unmixed Donut Dough");

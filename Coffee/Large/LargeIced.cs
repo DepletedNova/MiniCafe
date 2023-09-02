@@ -4,6 +4,7 @@ using KitchenLib.Customs;
 using KitchenLib.Utils;
 using MiniCafe.Items;
 using System.Collections.Generic;
+using IngredientLib.Ingredient.Items;
 using UnityEngine;
 using static KitchenLib.Utils.GDOUtils;
 using static KitchenLib.Utils.MaterialUtils;

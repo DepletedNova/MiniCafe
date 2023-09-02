@@ -1,5 +1,6 @@
 ﻿using Kitchen;
 using KitchenData;
+using IngredientLib.Ingredient.Items;
 using KitchenLib.Customs;
 using KitchenLib.References;
 using KitchenLib.Utils;
@@ -9,6 +10,7 @@ using UnityEngine;
 using static KitchenLib.Utils.GDOUtils;
 using static KitchenLib.Utils.MaterialUtils;
 using static MiniCafe.Helper;
+using IngredientLib.Ingredient.Items;
 
 namespace MiniCafe.Coffee
 {
