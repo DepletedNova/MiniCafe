@@ -8,6 +8,7 @@ using UnityEngine;
 using static KitchenLib.Utils.GDOUtils;
 using static MiniCafe.Helper;
 using IngredientLib.Ingredient.Items;
+using MiniCafe.Processes;
 
 namespace MiniCafe.Coffee
 {
@@ -41,7 +42,10 @@ namespace MiniCafe.Coffee
         public override HashSet<Item> MinimumIngredients => new()
         {
             GetGDO<Item>(ItemReferences.CoffeeCup),
-            GetCastedGDO<Item, BoiledWater>()
+        };
+        public override HashSet<Process> RequiredProcesses => new()
+        {
+            GetCastedGDO<Process, BoilWaterProcess>()
         };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {

@@ -33,6 +33,14 @@ namespace MiniCafe.Appliances
         public override ShoppingTags ShoppingTags => ShoppingTags.Cooking;
         public override bool SellOnlyAsDuplicate => true;
 
+        public override List<Appliance.ApplianceProcesses> Processes => new()
+        {
+            new()
+            {
+                Process = GetCastedGDO<Process, BoilWaterProcess>()
+            }
+        };
+
         public override List<IApplianceProperty> Properties => new()
         {
             new CItemHolder(),

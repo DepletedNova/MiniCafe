@@ -32,7 +32,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.5.4";
+        public const string VERSION = "2.5.6";
 
         public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -170,12 +170,6 @@ namespace MiniCafe
                 colourBlind.transform.SetParent(Item.Prefab.transform, false);
                 colourBlind.GetChild("Title").GetComponent<TMP_Text>().text = tag;
             }
-        }
-
-        private void UpdateBakery()
-        {
-            // Had no properties for some reason (lemon tree)
-            GetGDO<Appliance>(1470180731).Properties = new() { GetUnlimitedCItemProvider(2094624730) };
         }
 
         #region Flavouring
@@ -508,7 +502,6 @@ namespace MiniCafe
             {
                 UpdateCoffee();
                 AddFlavours();
-                UpdateBakery();
 
                 UpdateDirtyMugTransfer();
                 UpdateGenericMugTransfers(args.gamedata);

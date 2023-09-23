@@ -1,4 +1,5 @@
 ﻿using IngredientLib.Ingredient.Items;
+using Kitchen;
 using KitchenData;
 using KitchenLib.Customs;
 using KitchenLib.References;
@@ -11,7 +12,7 @@ using static MiniCafe.Helper;
 
 namespace MiniCafe.Desserts
 {
-    internal class LavaCakeMix : CustomItemGroup
+    internal class LavaCakeMix : CustomItemGroup<ItemGroupView>
     {
         public override string UniqueNameID => "lava_cake_mix";
         public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake Mix");
@@ -57,7 +58,16 @@ namespace MiniCafe.Desserts
         {
             Prefab.ApplyMaterialToChild("Bowl", "Metal Dark");
             Prefab.ApplyMaterialToChild("Fill", "Flour", "Raw Pastry");
-            Prefab.ApplyMaterialToChildren("Chocolate", "Chocolate");
+            Prefab.GetChild("Choco").ApplyMaterialToChildren("Chocolate", "Chocolate");
+
+            Prefab.TryAddComponent<ItemGroupView>().ComponentGroups = new()
+            {
+                new()
+                {
+                    GameObject = Prefab.GetChild("Choco"),
+                    Item = GetCastedGDO<Item, ChocolateShavings>(),
+                }
+            };
         }
     }
 }
