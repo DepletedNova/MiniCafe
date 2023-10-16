@@ -1,10 +1,9 @@
-﻿global using static KitchenLib.Utils.MaterialUtils;
-global using static Kitchen.ItemGroupView;
+﻿global using static Kitchen.ItemGroupView;
 global using static KitchenLib.Utils.GDOUtils;
-global using static MiniCafe.Helper;
 global using static KitchenLib.Utils.KitchenPropertiesUtils;
+global using static KitchenLib.Utils.MaterialUtils;
+global using static MiniCafe.Helper;
 using ApplianceLib.Api;
-using IngredientLib.Ingredient.Items;
 using Kitchen;
 using KitchenData;
 using KitchenLib;
@@ -18,13 +17,11 @@ using MiniCafe.Appliances;
 using MiniCafe.Appliances.Spills;
 using MiniCafe.Coffee;
 using MiniCafe.Components;
-using MiniCafe.Desserts;
 using MiniCafe.Items;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TMPro;
-using Unity.Entities;
 using UnityEngine;
 
 namespace MiniCafe
@@ -32,7 +29,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.5.6";
+        public const string VERSION = "2.5.8";
 
         public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 

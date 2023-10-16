@@ -38,7 +38,8 @@ namespace MiniCafe.Desserts
         };
         public override HashSet<Process> RequiredProcesses => new()
         {
-            GetGDO<Process>(ProcessReferences.Cook)
+            GetGDO<Process>(ProcessReferences.Cook),
+            GetGDO<Process>(ProcessReferences.Knead)
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
@@ -51,7 +52,7 @@ namespace MiniCafe.Desserts
         public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Take a pot and fill it with oil. Take flour, knead it, add oil and then add to pot before cooking. " +
-                "Add sugar and cheese together to create the filling and add such to portions from the pot." }
+                "Add sugar and cheese together to create the filling and add such to portions from the pot" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

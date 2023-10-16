@@ -36,9 +36,8 @@ namespace MiniCafe.Coffee
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Filling: Chop up chocolate & cheese, add those with sugar and knead. \n" +
-                "Shells: Add water to flour or knead flour and then add oil. Knead this again and then cook. \n" +
-                "Combine both, portion, and then serve." }
+            { Locale.English, "Take a pot and fill it with oil. Take flour, knead it, add oil and then add to pot before cooking. " +
+                "Add sugar and cheese together to create the filling and add such to portions from the pot" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
@@ -46,13 +45,11 @@ namespace MiniCafe.Coffee
         };
         public override HashSet<Item> MinimumIngredients => new()
         {
-            GetCastedGDO<Item, Chocolate>(),
-            //GetCastedGDO<Item, WhippingCream>(),
             GetGDO<Item>(ItemReferences.Sugar),
             GetGDO<Item>(ItemReferences.Cheese),
             GetGDO<Item>(ItemReferences.Flour),
             GetGDO<Item>(ItemReferences.Oil),
-            GetGDO<Item>(ItemReferences.Water)
+            GetGDO<Item>(ItemReferences.Pot),
         };
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
