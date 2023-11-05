@@ -46,16 +46,22 @@ namespace MiniCafe.Appliances
             new CItemHolder(),
             GetCItemProvider(GetCustomGameDataObject<BoiledWater>().ID, 4, 4, true, false, true, false, false, false, false),
             new CCombinesOnSelf(),
-            new CRefillOnEmpty(),
+            new CRefillOnEmpty()
+            {
+                MinimumProvided = 2
+            },
             new CDisplayDuration
             {
                 Process = GetCustomGameDataObject<BoilWaterProcess>().ID
             },
             new CTakesDuration
             {
-                Total = 2f,
+                Total = 2.5f,
                 Mode = InteractionMode.Items,
-            }
+            },
+            new CItemHolderPreventTransfer(),
+            new CItemProviderPreventTransfer(),
+            new CPreventTransferDuringDuration()
         };
 
         public override void OnRegister(Appliance appliance)

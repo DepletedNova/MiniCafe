@@ -131,11 +131,15 @@
     <Compile Include="Bakery\Cherry\CherryFlavour.cs" />
     <Compile Include="Bakery\Pumpkin\CakeFlavourPumpkin.cs" />
     <Compile Include="Bakery\Pumpkin\PumpkinFlavour.cs" />
+    <Compile Include="Coffee\PumpkinSpiceDish.cs" />
+    <Compile Include="Coffee\Large\LargePumpkinSpice.cs" />
+    <Compile Include="Coffee\PumpkinSpice.cs" />
     <Compile Include="Coffee\Americano.cs" />
     <Compile Include="Coffee\AmericanoDish.cs" />
     <Compile Include="Coffee\CannoliCoffeeDish.cs" />
     <Compile Include="Coffee\Large\LargeCoffeeDishes.cs" />
     <Compile Include="Coffee\Large\LargeAmericano.cs" />
+    <Compile Include="Coffee\Large\LargeAffogato.cs" />
     <Compile Include="Coffee\Large\LargeMugsCard.cs" />
     <Compile Include="Coffee\Large\LargeIced.cs" />
     <Compile Include="Coffee\Large\LargeLatte.cs" />
@@ -143,10 +147,12 @@
     <Compile Include="Coffee\Large\LargeCup.cs" />
     <Compile Include="Coffee\OverfillingCard.cs" />
     <Compile Include="Components\CCombinesOnSelf.cs" />
+    <Compile Include="Components\CItemProviderPreventTransfer.cs" />
     <Compile Include="Components\COverfills.cs" />
     <Compile Include="Components\CComponentSplitDepleted.cs" />
     <Compile Include="Components\CDualLimitedProvider.cs" />
     <Compile Include="Components\CInvertedPlacement.cs" />
+    <Compile Include="Components\CPreventTransferDuringDuration.cs" />
     <Compile Include="Components\CRefillOnEmpty.cs" />
     <Compile Include="Components\CSpillsOnFail.cs" />
     <Compile Include="Cosmetics\VisorHat.cs" />
@@ -163,7 +169,10 @@
     <Compile Include="Desserts\LavaCake\LavaCakeMix.cs" />
     <Compile Include="Desserts\Stroopwafel\StroopwafelTray.cs" />
     <Compile Include="Extensions\CPositionExtensions.cs" />
+    <Compile Include="Items\PumpkinSpice.cs" />
+    <Compile Include="Items\PumpkinSpiceIngredient.cs" />
     <Compile Include="Items\UnmixedDonutDough.cs" />
+    <Compile Include="Patches\TakeFromProviderPatch.cs" />
     <Compile Include="Processes\BoilWaterProcess.cs" />
     <Compile Include="References.cs" />
     <Compile Include="Sides\Croissant\CroissantDish.cs" />
@@ -202,6 +211,7 @@
     <Compile Include="Systems\OverfillSpills.cs" />
     <Compile Include="Systems\DualLimitedProviderSwitch.cs" />
     <Compile Include="Systems\InvertPlacement.cs" />
+    <Compile Include="Systems\PreventDurationTransfer.cs" />
     <Compile Include="Systems\RefillProviderAfterDuration.cs" />
     <Compile Include="Systems\ResetDualLimitedNight.cs" />
     <Compile Include="Systems\UpdateRefillDuration.cs" />
@@ -209,9 +219,7 @@
     <Compile Include="Views\ItemProcessView.cs" />
     <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Patches\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y

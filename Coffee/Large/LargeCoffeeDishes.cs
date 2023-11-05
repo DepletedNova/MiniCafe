@@ -1,10 +1,9 @@
 ﻿using KitchenData;
 using KitchenLib.Customs;
+using KitchenLib.References;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
-using static KitchenLib.Utils.GDOUtils;
-using static MiniCafe.Helper;
 
 namespace MiniCafe.Coffee.Large
 {
@@ -27,6 +26,8 @@ namespace MiniCafe.Coffee.Large
         public override bool IsUnlockable => false;
 
         public override bool RequiredNoDishItem => true;
+
+        public override bool HideInfoPanel => true;
 
         public override DishType Type => DishType.Dessert;
         public override List<Dish.MenuItem> ResultingMenuItems => new()
@@ -73,6 +74,8 @@ namespace MiniCafe.Coffee.Large
 
         public override bool RequiredNoDishItem => true;
 
+        public override bool HideInfoPanel => true;
+
         public override DishType Type => DishType.Dessert;
         public override List<Dish.MenuItem> ResultingMenuItems => new()
         {
@@ -108,6 +111,100 @@ namespace MiniCafe.Coffee.Large
         }
     }
 
+    public class LargeAffogatoDish : CustomDish
+    {
+        public override string UniqueNameID => "large_affogato_dish";
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
+        public override bool IsUnlockable => false;
+
+        public override bool RequiredNoDishItem => true;
+
+        public override bool HideInfoPanel => true;
+
+        public override DishType Type => DishType.Dessert;
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, LargeAffogato>(),
+                Phase = MenuPhase.Dessert,
+                Weight = 1f
+            }
+        };
+        public override HashSet<Item> MinimumIngredients => new()
+        {
+            GetCastedGDO<Item, LargeCup>(),
+        };
+        public override Dictionary<Locale, string> Recipe => new()
+        {
+            { Locale.English, "Prepare large black coffee, add vanilla ice cream and serve." }
+        };
+        public override List<(Locale, UnlockInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Large Affogato", "Adds large affogato as a coffee variant", ""))
+        };
+
+        public override List<Unlock> HardcodedRequirements => new()
+        {
+            GetCastedGDO<Unlock, LargeMugsCard>(),
+            GetGDO<Unlock>(UnlockReferences.Affogato),
+        };
+
+        public override void OnRegister(Dish gdo)
+        {
+            gdo.RegisterLarge(UnlockReferences.Affogato);
+        }
+    }
+
+    public class LargePumpkinSpiceDish : CustomDish
+    {
+        public override string UniqueNameID => "large_pumpkin_spice_dish";
+        public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
+        public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Large Coffee");
+        public override DishCustomerChange CustomerMultiplier => DishCustomerChange.SmallDecrease;
+        public override bool IsUnlockable => false;
+
+        public override bool RequiredNoDishItem => true;
+
+        public override bool HideInfoPanel => true;
+
+        public override DishType Type => DishType.Dessert;
+        public override List<Dish.MenuItem> ResultingMenuItems => new()
+        {
+            new()
+            {
+                Item = GetCastedGDO<Item, LargePumpkinSpice>(),
+                Phase = MenuPhase.Dessert,
+                Weight = 1f
+            }
+        };
+        public override HashSet<Item> MinimumIngredients => new()
+        {
+            GetCastedGDO<Item, LargeCup>(),
+        };
+        public override Dictionary<Locale, string> Recipe => new()
+        {
+            { Locale.English, "Prepare large latte. Dispose pumpkin seeds and chop up pumpkin before adding sugar. Add to latte." }
+        };
+        public override List<(Locale, UnlockInfo)> InfoList => new()
+        {
+            (Locale.English, LocalisationUtils.CreateUnlockInfo("Large Pumpkin Spice", "Adds large pumpkin spice latte as a coffee variant", ""))
+        };
+
+        public override List<Unlock> HardcodedRequirements => new()
+        {
+            GetCastedGDO<Unlock, LargeMugsCard>(),
+            GetCastedGDO<Unlock, PumpkinSpiceDish>(),
+        };
+
+        public override void OnRegister(Dish gdo)
+        {
+            gdo.RegisterLarge<PumpkinSpiceDish>();
+        }
+    }
+
     public class LargeLatteDish : CustomDish
     {
         public override string UniqueNameID => "large_latte_dish";
@@ -117,6 +214,8 @@ namespace MiniCafe.Coffee.Large
         public override bool IsUnlockable => false;
 
         public override bool RequiredNoDishItem => true;
+
+        public override bool HideInfoPanel => true;
 
         public override DishType Type => DishType.Dessert;
         public override List<Dish.MenuItem> ResultingMenuItems => new()
@@ -162,6 +261,8 @@ namespace MiniCafe.Coffee.Large
         public override bool IsUnlockable => false;
 
         public override bool RequiredNoDishItem => true;
+
+        public override bool HideInfoPanel => true;
 
         public override DishType Type => DishType.Dessert;
         public override List<Dish.MenuItem> ResultingMenuItems => new()

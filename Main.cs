@@ -29,7 +29,7 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.5.8";
+        public const string VERSION = "2.6.0";
 
         public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
@@ -49,6 +49,7 @@ namespace MiniCafe
             AddMaterial(CreateFlat("Coffee Foam", 0xE3D7C2));
 
             AddMaterial(CreateFlat("Americano", 0x895238));
+            AddMaterial(CreateFlat("Pumpkin Spice", 0x7E200D));
 
             // Tea
             AddMaterial(CreateFlat("Sage", 0x80B25C));

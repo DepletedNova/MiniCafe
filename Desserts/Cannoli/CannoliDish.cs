@@ -52,7 +52,7 @@ namespace MiniCafe.Desserts
         public override Dictionary<Locale, string> Recipe => new()
         {
             { Locale.English, "Take a pot and fill it with oil. Take flour, knead it, add oil and then add to pot before cooking. " +
-                "Add sugar and cheese together to create the filling and add such to portions from the pot" }
+                "Add sugar and once-chopped cheese together to create the filling and add such to portions from the pot" }
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {

@@ -56,7 +56,7 @@ namespace MiniCafe.Desserts
             prefab.ApplyMaterialToChild("Oil", "Frying Oil");
 
             prefab.GetChild("Shells").ApplyMaterialToChildren("", "Raw Pastry");
-            prefab.GetChild("Burned").ApplyMaterialToChildren("", "Burned Light");
+            prefab.GetChild("Burned").ApplyMaterialToChildren("", "Burned - Light");
 
             prefab.TryAddComponent<ItemGroupView>().ComponentGroups = new()
             {

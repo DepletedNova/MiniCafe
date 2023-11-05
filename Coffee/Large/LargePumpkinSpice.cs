@@ -1,27 +1,29 @@
-﻿using Kitchen;
+﻿using IngredientLib.Ingredient.Items;
+using Kitchen;
 using KitchenData;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
+using MiniCafe.Items;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MiniCafe.Coffee.Large
 {
-    internal class LargeIced : CustomItemGroup
+    internal class LargePumpkinSpice : CustomItemGroup
     {
-        public override string UniqueNameID => "large_iced_coffee";
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Large Iced");
+        public override string UniqueNameID => "large_pumpkin_spice";
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Large Pumpkin Spice");
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
-        public override int RewardOverride => 3;
+        public override int RewardOverride => 4;
         public override Factor EatingTime => 4f;
 
         public override List<ItemGroupView.ColourBlindLabel> Labels => new()
         {
             new()
             {
-                Text = "LIc",
-                Item = GetGDO<Item>(IceItem),
+                Text = "LAm",
+                Item = GetCastedGDO<Item, PumpkinSpiceIngredient>(),
             }
         };
 
@@ -31,8 +33,8 @@ namespace MiniCafe.Coffee.Large
             {
                 Items = new()
                 {
-                    GetCastedGDO<Item, LargeCoffee>(),
-                    GetGDO<Item>(IceItem)
+                    GetCastedGDO<Item, LargeLatte>(),
+                    GetCastedGDO<Item, PumpkinSpiceIngredient>()
                 },
                 Max = 2,
                 Min = 2,
@@ -42,9 +44,8 @@ namespace MiniCafe.Coffee.Large
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChild("iced", "Coffee - Ice", "Coffee Glass");
-            Prefab.ApplyMaterialToChild("ice", "Ice");
-            Prefab.ApplyMaterialToChild("straw", "Plastic - Red", "Coffee Cup");
+            Prefab.ApplyMaterialToChild("coffee", "Light Coffee Cup", "Pumpkin Spice", "Plastic - Black", "Pumpkin");
+            Prefab.ApplyMaterialToChild("straw", "Pumpkin", "Coffee Cup");
         }
     }
 }

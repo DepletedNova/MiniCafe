@@ -1,27 +1,27 @@
-﻿using Kitchen;
-using KitchenData;
+﻿using KitchenData;
 using KitchenLib.Customs;
+using KitchenLib.References;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MiniCafe.Coffee.Large
 {
-    internal class LargeIced : CustomItemGroup
+    internal class LargeAffogato : CustomItemGroup
     {
-        public override string UniqueNameID => "large_iced_coffee";
-        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Large Iced");
+        public override string UniqueNameID => "large_affogato";
+        public override GameObject Prefab => Main.Bundle.LoadAsset<GameObject>("Large Affogato");
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override int RewardOverride => 3;
         public override Factor EatingTime => 4f;
 
-        public override List<ItemGroupView.ColourBlindLabel> Labels => new()
+        public override List<ColourBlindLabel> Labels => new()
         {
             new()
             {
-                Text = "LIc",
-                Item = GetGDO<Item>(IceItem),
+                Text = "LAf",
+                Item = GetGDO<Item>(ItemReferences.IceCreamVanilla),
             }
         };
 
@@ -32,7 +32,7 @@ namespace MiniCafe.Coffee.Large
                 Items = new()
                 {
                     GetCastedGDO<Item, LargeCoffee>(),
-                    GetGDO<Item>(IceItem)
+                    GetGDO<Item>(ItemReferences.IceCreamVanilla)
                 },
                 Max = 2,
                 Min = 2,
@@ -42,9 +42,10 @@ namespace MiniCafe.Coffee.Large
 
         public override void OnRegister(ItemGroup gdo)
         {
-            Prefab.ApplyMaterialToChild("iced", "Coffee - Ice", "Coffee Glass");
-            Prefab.ApplyMaterialToChild("ice", "Ice");
-            Prefab.ApplyMaterialToChild("straw", "Plastic - Red", "Coffee Cup");
+            Prefab.ApplyMaterialToChild("cup", "Light Coffee Cup");
+            Prefab.ApplyMaterialToChild("fill", "Coffee - Black");
+            Prefab.ApplyMaterialToChild("spoon", "Metal");
+            Prefab.ApplyMaterialToChild("icecream", "Vanilla");
         }
     }
 }

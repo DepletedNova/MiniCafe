@@ -2,7 +2,6 @@
 using KitchenLib.Customs;
 using KitchenLib.Utils;
 using UnityEngine;
-using static KitchenLib.Utils.MaterialUtils;
 
 namespace MiniCafe.Coffee.Large
 {
@@ -13,6 +12,7 @@ namespace MiniCafe.Coffee.Large
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override int RewardOverride => 2;
+        public override Factor EatingTime => 4f;
 
         public override string ColourBlindTag => "LBl";
 

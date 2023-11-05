@@ -1,13 +1,10 @@
-﻿using Kitchen;
+﻿using IngredientLib.Ingredient.Items;
+using Kitchen;
 using KitchenData;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
-using MiniCafe.Items;
 using System.Collections.Generic;
 using UnityEngine;
-using static KitchenLib.Utils.GDOUtils;
-using static KitchenLib.Utils.MaterialUtils;
-using IngredientLib.Ingredient.Items;
 
 namespace MiniCafe.Coffee.Large
 {
@@ -18,6 +15,7 @@ namespace MiniCafe.Coffee.Large
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
         public override ItemCategory ItemCategory => ItemCategory.Generic;
         public override int RewardOverride => 3;
+        public override Factor EatingTime => 4f;
 
         public override List<ItemGroupView.ColourBlindLabel> Labels => new()
         {
