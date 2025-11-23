@@ -13,6 +13,9 @@
     <LangVersion>latest</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <AssetBundlePath>D:\Modding\PlateUp\Assets\Bundle Generation\Assets\Bundles/minicafe</AssetBundlePath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -115,6 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Appliances\Boiler.cs" />
+    <Compile Include="Desserts\Stroopwafel\Wafel.cs" />
+    <Compile Include="Appliances\WafelTraySource.cs" />
     <Compile Include="Appliances\LargeCoffeeMachine.cs" />
     <Compile Include="Appliances\Spills\CoffeeSpill3.cs" />
     <Compile Include="Appliances\Spills\CoffeeSpill2.cs" />
@@ -167,7 +172,8 @@
     <Compile Include="Desserts\LavaCake\LavaCake.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeDish.cs" />
     <Compile Include="Desserts\LavaCake\LavaCakeMix.cs" />
-    <Compile Include="Desserts\Stroopwafel\StroopwafelTray.cs" />
+    <Compile Include="Desserts\Stroopwafel\BurntWafelTray.cs" />
+    <Compile Include="Desserts\Stroopwafel\EmptyWafelTray.cs" />
     <Compile Include="Extensions\CPositionExtensions.cs" />
     <Compile Include="Items\PumpkinSpice.cs" />
     <Compile Include="Items\PumpkinSpiceIngredient.cs" />
@@ -201,11 +207,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Desserts\Stroopwafel\StroopwafelDish.cs" />
     <Compile Include="Desserts\Stroopwafel\Stroopwafel.cs" />
-    <Compile Include="Desserts\Stroopwafel\Stroop.cs" />
-    <Compile Include="Desserts\Stroopwafel\WafelTray.cs" />
+    <Compile Include="Removed\Stroop.cs" />
+    <Compile Include="Desserts\Stroopwafel\CookedWafelTray.cs" />
     <Compile Include="Desserts\Stroopwafel\UncookedWafelTray.cs" />
     <Compile Include="Desserts\Stroopwafel\WafelMix.cs" />
-    <Compile Include="Desserts\Stroopwafel\StroopMix.cs" />
+    <Compile Include="Removed\StroopMix.cs" />
     <Compile Include="Systems\AddLargeCards.cs" />
     <Compile Include="Systems\CombineOnSelf.cs" />
     <Compile Include="Systems\OverfillSpills.cs" />
@@ -219,13 +225,19 @@
     <Compile Include="Views\ItemProcessView.cs" />
     <Compile Include="Views\LocalLimitedItemSourceView.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y
-copy "C:\PlateUp\Assets\Bundle Generation\Assets\Bundles\minicafe" "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content" /y
-cd "C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods\Mini Cafe\content"
-del "minicafe.assets"
-ren "minicafe" "minicafe.assets"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Yariazen.PlateUp.ModBuildUtilities.1.13.0\build\Yariazen.PlateUp.ModBuildUtilities.targets" Condition="Exists('..\packages\Yariazen.PlateUp.ModBuildUtilities.1.13.0\build\Yariazen.PlateUp.ModBuildUtilities.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Yariazen.PlateUp.ModBuildUtilities.1.13.0\build\Yariazen.PlateUp.ModBuildUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Yariazen.PlateUp.ModBuildUtilities.1.13.0\build\Yariazen.PlateUp.ModBuildUtilities.targets'))" />
+  </Target>
 </Project>

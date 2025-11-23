@@ -48,7 +48,8 @@ namespace MiniCafe.Appliances
             new CCombinesOnSelf(),
             new CRefillOnEmpty()
             {
-                MinimumProvided = 2
+                MinimumProvided = 1,
+                FillIncrement = 2
             },
             new CDisplayDuration
             {
@@ -56,7 +57,7 @@ namespace MiniCafe.Appliances
             },
             new CTakesDuration
             {
-                Total = 2.5f,
+                Total = 4f,
                 Mode = InteractionMode.Items,
             },
             new CItemHolderPreventTransfer(),

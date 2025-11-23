@@ -45,18 +45,18 @@ namespace MiniCafe.Sides
         {
             GetCastedGDO<Item, Cinnamon>(),
             GetGDO<Item>(ItemReferences.Flour),
-            GetGDO<Item>(ItemReferences.Egg),
-            GetGDO<Item>(MilkItem),
-            GetGDO<Item>(ItemReferences.Sugar),
-            GetCastedGDO<Item, Syrup>()
+            GetCastedGDO<Item, Syrup>(),
+            GetCastedGDO<Item, EmptyWafelTray>(),
         };
         public override Dictionary<Locale, string> Recipe => new()
         {
-            { Locale.English, "Add flour, a cracked egg, milk, and cinnamon and then cook. Add sugar and syrup together and cook this and add to the wafel tray. Portion and serve." }
+            { Locale.Default, "Knead flour into dough and add cinnamon. Place in the dedicated wafel tray and cook. After portioning, add syrup before serving!" },
+            { Locale.English, "Knead flour into dough and add cinnamon. Place in the dedicated wafel tray and cook. After portioning, add syrup before serving!" },
         };
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Stroopwafels", "Adds stroopwafels as a dessert", "A tasty Dutch treat!"))
+            (Locale.Default, LocalisationBuilder.NewBuilder<UnlockInfo>().SetName("Stroopwafels").SetDescription("Adds stroopwafels as a desert").SetFlavourText("A tasty Dutch treat!")),
+            (Locale.English, LocalisationBuilder.NewBuilder<UnlockInfo>().SetName("Stroopwafels").SetDescription("Adds stroopwafels as a desert").SetFlavourText("A tasty Dutch treat!"))
         };
     }
 }

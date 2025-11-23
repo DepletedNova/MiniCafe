@@ -29,17 +29,17 @@ namespace MiniCafe
     public class Main : BaseMod
     {
         public const string GUID = "nova.minicafe";
-        public const string VERSION = "2.6.0";
+        public const string VERSION = "2.7.0";
 
-        public Main() : base(GUID, "Mini Cafe", "Zoey Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
+        public Main() : base(GUID, "Mini Cafe", "Athena Davis", VERSION, ">=1.0.0", Assembly.GetExecutingAssembly()) { }
 
         public static AssetBundle Bundle;
 
-        internal static bool PaperPlatesInstalled => ModRegistery.Registered.Any(modPair => modPair.Value.ModID == "paperPlates");
+        internal static bool PaperPlatesInstalled => ModRegistery.Registered.Any(modPair => modPair.Value.ModID.ToLower().Contains("paperplates"));
 
         internal static readonly RestaurantStatus OVERFILLING_STATUS = (RestaurantStatus)VariousUtils.GetID("OverfillingStatus");
         internal static readonly RestaurantStatus LARGE_MUG_STATUS = (RestaurantStatus)VariousUtils.GetID("LargeMugStatus");
-
+        
         internal void AddMaterials()
         {
             AddMaterial(CreateFlat("Light Coffee Cup", 0xF2CD9B));

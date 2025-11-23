@@ -3,12 +3,9 @@ using KitchenData;
 using KitchenLib.Customs;
 using KitchenLib.References;
 using KitchenLib.Utils;
-using MiniCafe.Appliances;
 using MiniCafe.Items;
 using System.Collections.Generic;
 using UnityEngine;
-using static KitchenLib.Utils.GDOUtils;
-using static KitchenLib.Utils.MaterialUtils;
 
 namespace MiniCafe.Extras
 {

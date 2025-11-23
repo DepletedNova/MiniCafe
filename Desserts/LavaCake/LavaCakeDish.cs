@@ -1,12 +1,8 @@
-﻿using IngredientLib.Ingredient.Items;
-using KitchenData;
+﻿using KitchenData;
 using KitchenLib.Customs;
-using KitchenLib.References;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
-using static KitchenLib.Utils.GDOUtils;
-using static MiniCafe.Helper;
 
 namespace MiniCafe.Desserts
 {
@@ -16,7 +12,7 @@ namespace MiniCafe.Desserts
         public override GameObject DisplayPrefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake");
         public override GameObject IconPrefab => Main.Bundle.LoadAsset<GameObject>("Lava Cake");
         public override Unlock.RewardLevel ExpReward => Unlock.RewardLevel.Medium;
-        public override bool IsUnlockable => true;
+        public override bool IsUnlockable => false;
         public override UnlockGroup UnlockGroup => UnlockGroup.Dish;
         public override CardType CardType => CardType.Default;
         public override int MinimumFranchiseTier => 0;
@@ -27,33 +23,13 @@ namespace MiniCafe.Desserts
         public override bool RequiredNoDishItem => true;
 
         public override DishType Type => DishType.Dessert;
-        public override List<Dish.MenuItem> ResultingMenuItems => new()
-        {
-            new()
-            {
-                Item = GetCastedGDO<Item, LavaCake>(),
-                Phase = MenuPhase.Dessert,
-                Weight = 1f
-            }
-        };
-        public override HashSet<Process> RequiredProcesses => new()
-        {
-            GetGDO<Process>(ProcessReferences.Cook)
-        };
-        public override HashSet<Item> MinimumIngredients => new()
-        {
-            GetCastedGDO<Item, Chocolate>(),
-            GetGDO<Item>(ItemReferences.Egg),
-            GetGDO<Item>(ItemReferences.Flour),
-            GetGDO<Item>(MilkItem)
-        };
-        public override Dictionary<Locale, string> Recipe => new()
-        {
-            { Locale.English, "Add flour, a cracked egg, and milk. After this add chopped chocolate and then cook. This can be shared between two people!" }
-        };
+        public override List<Dish.MenuItem> ResultingMenuItems => new();
+        public override HashSet<Process> RequiredProcesses => new();
+        public override HashSet<Item> MinimumIngredients => new();
+        public override Dictionary<Locale, string> Recipe => new();
         public override List<(Locale, UnlockInfo)> InfoList => new()
         {
-            (Locale.English, LocalisationUtils.CreateUnlockInfo("Lava Cake", "Adds Lava Cake as a dessert", "Flows like lava!"))
+            (Locale.English, LocalisationBuilder.NewBuilder<UnlockInfo>().SetName("Lava Cake").SetDescription("Outdated"))
         };
     }
 }

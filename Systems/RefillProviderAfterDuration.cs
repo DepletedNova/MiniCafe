@@ -4,6 +4,7 @@ using KitchenMods;
 using MiniCafe.Components;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace MiniCafe.Systems
 {
@@ -31,16 +32,16 @@ namespace MiniCafe.Systems
                 if (!(cDuration.Remaining <= 0f && cDuration.Active))
                     continue;
 
+                var cRefill = GetComponent<CRefillOnEmpty>(entity);
+
                 var cProvider = GetComponent<CItemProvider>(entity);
-                cProvider.Available++;
+                cProvider.Available = math.min(cProvider.Maximum, cProvider.Available + math.max(cRefill.FillIncrement, 1));
                 Set(entity, cProvider);
 
-                if (cProvider.Available >= cProvider.Maximum)
+                if (cProvider.Available >= cProvider.Maximum && cRefill.Active)
                 {
-                    Set(entity, new CRefillOnEmpty
-                    {
-                        Active = false
-                    });
+                    cRefill.Active = false;
+                    Set(entity, cRefill);
                 }
             }
         }
